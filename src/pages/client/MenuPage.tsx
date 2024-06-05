@@ -1,5 +1,5 @@
-import CardMenuList from '../components/CardMenuList';
-import { CategoryDishes } from '../data/data';
+import CardMenuList from '../../components/CardMenuList';
+import { CategoryDishes } from '../../data/data';
 
 export default function MenuPage() {
     return (

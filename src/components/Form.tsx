@@ -1,17 +1,17 @@
 export const Form = () => {
     return (
-        <div className='flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8'>
+        <div className='flex min-h-full flex-1 flex-col justify-center p-8 lg:px-8'>
             <div className='sm:mx-auto sm:w-full sm:max-w-sm '>
                 <img
                     src='./logo.svg'
                     alt='logo'
-                    className='mx-auto h-10 w-auto'
+                    className='mx-auto h-15 w-auto'
                 />
-                <h2 className='mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900'>
+                <h2 className='mt-4 text-center text-base md:text-2xl font-bold leading-9 tracking-tight text-gray-900'>
                     Inicia sesión con tu cuenta
                 </h2>
             </div>
-            <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm'>
+            <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-md'>
                 <form className='space-y-6'>
                     <div>
                         <label
@@ -66,10 +66,10 @@ export const Form = () => {
                     </div>
                 </form>
 
-                <p className='mt-10 text-center text-sm text-gray-500'>
-                   ¿No tienes cuenta?{' '}
+                <p className='mt-8 text-center text-sm text-gray-500'>
+                    ¿No tienes cuenta?{' '}
                     <a href='#' className='font-semibold leading-6 text-black'>
-                       Registrate y se parte de nosotros.
+                        Registrate y se parte de nosotros.
                     </a>
                 </p>
             </div>

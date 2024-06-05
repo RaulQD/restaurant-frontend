@@ -6,7 +6,7 @@ export default function PopularDishes() {
     const navigate = useNavigate();
     const redirecToMenu = () => {
         // Redirect to menu page
-        navigate('/menu');
+        navigate('/nuestros-platos');
         setTimeout(() => {
             window.scrollTo(0, 0);
         }, 100);

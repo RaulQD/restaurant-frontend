@@ -1,4 +1,4 @@
-import PopularDishes from '../components/PopularDishes';
+import PopularDishes from '../../components/PopularDishes';
 
 export default function HomePage() {
     return (

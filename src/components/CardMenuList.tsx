@@ -12,7 +12,7 @@ export default function CardMenuList() {
             </div>
             <div className='p-3 flex flex-col gap-2 '>
                 <div className='flex justify-between items-center'>
-                    <h3 className='font-bold font-poppins'>
+                    <h3 className='font-bold'>
                         Tallarines verdes con bistec
                     </h3>
                     <BiHeart className='text-red-700' />
