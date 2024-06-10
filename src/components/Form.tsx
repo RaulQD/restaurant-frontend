@@ -1,6 +1,16 @@
+import { useNavigate } from 'react-router-dom';
+
 export const Form = () => {
+    const navigate = useNavigate();
+    const redirectTo = () => {
+        // redirect to the SignUp page
+        navigate('/registration');
+        setTimeout(() => {
+            window.scrollTo(0, 0);
+        }, 1000);
+    };
     return (
-        <div className='flex min-h-full flex-1 flex-col justify-center p-8 lg:px-8'>
+        <div className='flex min-h-full flex-1 flex-col justify-center px-8 pt-5 pb-10'>
             <div className='sm:mx-auto sm:w-full sm:max-w-sm '>
                 <img
                     src='./logo.svg'
@@ -25,7 +35,6 @@ export const Form = () => {
                                 name='email'
                                 type='email'
                                 autoComplete='email'
-                                required
                                 className='block w-full rounded-md border p-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6 '
                             />
                         </div>
@@ -44,8 +53,7 @@ export const Form = () => {
                                 id='password'
                                 name='password'
                                 type='password'
-                                autoComplete='current-password'
-                                required
+                                autoComplete='off'
                                 className='block w-full rounded-md p-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6 border border-gray-300'
                             />
                         </div>
@@ -68,9 +76,12 @@ export const Form = () => {
 
                 <p className='mt-8 text-center text-sm text-gray-500'>
                     ¿No tienes cuenta?{' '}
-                    <a href='#' className='font-semibold leading-6 text-black'>
+                    <button
+                        type='button'
+                        className='font-semibold leading-6 text-black hover:underline'
+                        onClick={redirectTo}>
                         Registrate y se parte de nosotros.
-                    </a>
+                    </button>
                 </p>
             </div>
         </div>
