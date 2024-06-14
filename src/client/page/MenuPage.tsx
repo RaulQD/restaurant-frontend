@@ -1,4 +1,4 @@
-import CardMenuList from '../../components/CardMenuList';
+import CardMenuList from '../components/CardMenuList';
 import { CategoryDishes } from '../../data/data';
 
 export default function MenuPage() {

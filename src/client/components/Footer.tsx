@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { navLinks } from '../data/data';
+import { navLinks } from '../../data/data';
 import { BiLogoFacebook, BiLogoInstagram, BiLogoTiktok } from 'react-icons/bi';
 
 export default function Footer() {

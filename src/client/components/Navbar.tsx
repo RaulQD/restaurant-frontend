@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { BiMenu, BiUser, BiX } from 'react-icons/bi';
 import { NavLink } from 'react-router-dom';
-import { navLinks } from '../data/data';
+import { navLinks } from '../../data/data';
 import OrderList from './OrderList';
 import { CiShoppingBasket } from 'react-icons/ci';
 

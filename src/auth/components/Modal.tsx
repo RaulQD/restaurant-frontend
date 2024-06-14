@@ -1,5 +1,5 @@
 import { BiX } from 'react-icons/bi';
-import Login from '../pages/auth/Login';
+import Login from '../pages/Login';
 
 export const Modal = () => {
     return (

@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import Header from '../components/Header';
-import { Modal } from '../components/Modal';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
+import { Modal } from '../../auth/components/Modal';
 
 export default function Layout() {
     const handleRouteChange = () => {
@@ -15,7 +15,7 @@ export default function Layout() {
             <main>
                 <Outlet />
             </main>
-            {/* <Modal /> */}
+            <Modal />
             <Footer />
         </>
     );

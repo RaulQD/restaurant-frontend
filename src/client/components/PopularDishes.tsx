@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { dishes } from '../data/data';
+import { dishes } from '../../data/data';
 import CardList from './CardList';
 
 export default function PopularDishes() {

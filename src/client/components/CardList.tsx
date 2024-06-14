@@ -1,5 +1,5 @@
 import { BiHeart, BiSolidPlusCircle } from 'react-icons/bi';
-import { Dishes } from '../types';
+import { Dishes } from '../../types';
 
 type CardListProps = {
     dish: Dishes;
