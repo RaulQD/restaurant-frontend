@@ -5,6 +5,14 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    extend: {
+      colors: {
+        secondary: {
+          100: '#1F1F25',
+          900: '#131517'
+        }
+      }
+    },
     container: {
       padding: {
         DEFAULT: '1rem',

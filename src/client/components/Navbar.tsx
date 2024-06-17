@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { navLinks } from '../../data/data';
 import OrderList from './OrderList';
 import { CiShoppingBasket } from 'react-icons/ci';
+import Logo from '../../assets/logo-icon.svg';
 
 type NavbarProps = {
     handleRouteChange: () => void;
@@ -75,11 +76,7 @@ export default function Navbar({ handleRouteChange }: NavbarProps) {
                         />
                     </div>
                     <div className='flex justify-center items-center gap-2'>
-                        <img
-                            src='./logo-icon.svg'
-                            alt='logo'
-                            className='w-6 h-6'
-                        />
+                        <img src={Logo} alt='logo' className='w-6 h-6' />
                         <span className='font-oleo text-3xl text-[#F97316] hidden lg:block'>
                             Foodie List
                         </span>
@@ -94,8 +91,8 @@ export default function Navbar({ handleRouteChange }: NavbarProps) {
                             onClick={handleRouteChange}
                             className={({ isActive }) =>
                                 isActive
-                                    ? 'text-orange-500 text-sm hidden lg:block font-poppins'
-                                    : 'text-sm hidden lg:block font-poppins'
+                                    ? ' text-orange-500 hidden text-base lg:block font-poppins'
+                                    : 'hidden text-base lg:block font-poppins'
                             }>
                             {link.name}
                         </NavLink>
