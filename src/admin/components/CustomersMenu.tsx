@@ -1,13 +1,12 @@
 import { useState } from 'react';
-import { BiChevronRight, BiSolidReport } from 'react-icons/bi';
+import { BiChevronRight } from 'react-icons/bi';
 import Dropdown from './Dropdown';
+import { FaUsers } from 'react-icons/fa';
 
-export default function ProductsMenu() {
+export default function CustomersMenu() {
     const [showDropdown, setShowDropdown] = useState(false);
     const menuItems = [
-        { path: '/dashboard/products', label: 'Productos' },
-        { path: '/dashboard/products/add', label: 'Añadir Producto' },
-        { path: '/dashboard/category', label: 'Categoría de Productos', },
+        { path: '/dashboard/customers', label: 'Lista de clientes' },
     ];
 
     return (
@@ -17,8 +16,8 @@ export default function ProductsMenu() {
                 className=' w-full text-white flex justify-between items-center py-2 px-4 rounded-lg hover:bg-secondary-900 transition-colors'
                 onClick={() => setShowDropdown(!showDropdown)}>
                 <span className='flex items-center gap-4'>
-                    <BiSolidReport className='text-orange-500 text-lg' />{' '}
-                    Catalogo
+                    <FaUsers className='text-orange-500 text-lg' />{' '}
+                    Clientes
                 </span>
                 <BiChevronRight
                     className={`text-orange-500 text-xl mt-1 ${

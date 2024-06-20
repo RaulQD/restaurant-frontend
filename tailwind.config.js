@@ -30,7 +30,8 @@ export default {
       }
     },
     backgroundImage: {
-      'header': "url('/foodhero5.webp')",
+      'header': "url('./src/assets/foodhero5.webp')",
+      'signup': "url('/foodhero5.webp')",
       'footer': "url('/foodhero2.png')",
     },
     backgroundPosition: {

@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 type MenuItemProps = {
@@ -11,12 +12,23 @@ type DropdownProps = {
 };
 
 export default function Dropdown({ showDropdown, menuItems }: DropdownProps) {
+    const contentRef = useRef<HTMLUListElement>(null);
+    const [height, setHeight] = useState('0px');
+
+    useEffect(() => {
+        if (contentRef.current) {
+            setHeight(
+                showDropdown ? `${contentRef.current.scrollHeight}px` : '0px'
+            );
+        }
+    }, [showDropdown]);
+
     return (
         <>
             <ul
-                className={` ${
-                    showDropdown ? 'h-[120px]' : ' h-0'
-                } overflow-y-hidden transition-all mt-1`}>
+                ref={contentRef}
+                className='overflow-y-hidden transition-all mt-1'
+                style={{ height }}>
                 {menuItems.map((item) => (
                     <li key={item.path}>
                         <NavLink

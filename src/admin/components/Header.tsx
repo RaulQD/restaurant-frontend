@@ -14,7 +14,7 @@ import Avatar from '../../assets/avatar1.png';
 
 export default function Header() {
     return (
-        <header className='h-[7vh] md:h-[10vh] border-b border-gray-300 bg-gray-100 p-8 flex items-center justify-end'>
+        <header className='h-[7vh] md:h-[10vh] border-b border-gray-300 bg-white p-8 flex items-center justify-end'>
             <nav className='flex items-center font-outfit'>
                 <Menu>
                     <MenuButton className='flex items-center gap-x-2 py-2 px-4 rounded-lg hover:bg-gray-200'>

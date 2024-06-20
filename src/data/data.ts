@@ -86,6 +86,6 @@ export const CategoryDishes: Category[] = [
 ]
 export const navLinks: NavLinks[] = [
     { name: 'Inicio', path: '/' },
-    { name: 'Nuestros platos', path: '/nuestros-platos' },
+    { name: 'Nuestros platos', path: '/our-dishes' },
     { name: 'Sobre Nosotros', path: '/about' },
 ];

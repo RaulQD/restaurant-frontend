@@ -1,15 +1,13 @@
 import { useState } from 'react';
-import { BiChevronRight, BiSolidReport } from 'react-icons/bi';
 import Dropdown from './Dropdown';
+import { BiChevronRight, BiSolidReport } from 'react-icons/bi';
 
-export default function ProductsMenu() {
+export const EmployeesMenu = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const menuItems = [
-        { path: '/dashboard/products', label: 'Productos' },
-        { path: '/dashboard/products/add', label: 'Añadir Producto' },
-        { path: '/dashboard/category', label: 'Categoría de Productos', },
+        { path: '/dashboard/employees', label: 'Empleados' },
+        { path: '/dashboard/employees/add', label: 'Añadir Empleado' },
     ];
-
     return (
         <>
             <button
@@ -18,7 +16,7 @@ export default function ProductsMenu() {
                 onClick={() => setShowDropdown(!showDropdown)}>
                 <span className='flex items-center gap-4'>
                     <BiSolidReport className='text-orange-500 text-lg' />{' '}
-                    Catalogo
+                    Empleados
                 </span>
                 <BiChevronRight
                     className={`text-orange-500 text-xl mt-1 ${
@@ -29,4 +27,4 @@ export default function ProductsMenu() {
             <Dropdown showDropdown={showDropdown} menuItems={menuItems} />
         </>
     );
-}
+};

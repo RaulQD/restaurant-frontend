@@ -1,19 +1,19 @@
 import { useState } from 'react';
-import  Logo  from '../../assets/logo-icon.svg';
+import Logo from '../../assets/logo-icon.svg';
 import {
     BiChevronRight,
     BiFile,
     BiLogOut,
     BiMenu,
     BiSolidDashboard,
-    BiSolidFile,
     BiSolidReport,
     BiX,
 } from 'react-icons/bi';
-import { FaUsers } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import Dropdown from './Dropdown';
 import ProductsMenu from './ProductsMenu';
+import CustomersMenu from './CustomersMenu';
+import { EmployeesMenu } from './EmployeesMenu';
 
 export default function Sidebar() {
     const [showSidebar, setShowSidebar] = useState(false);
@@ -30,11 +30,7 @@ export default function Sidebar() {
                 } transition-all`}>
                 <div>
                     <div className='flex justify-start items-center gap-2 mb-10 pl-4'>
-                        <img
-                            src={Logo}
-                            alt='logo'
-                            className='w-8 h-8'
-                        />
+                        <img src={Logo} alt='logo' className='w-8 h-8' />
                         <span className='font-oleo text-3xl text-white '>
                             Foodie List
                         </span>
@@ -61,20 +57,10 @@ export default function Sidebar() {
                                 </NavLink>
                             </li>
                             <li className='mb-3'>
-                                <NavLink
-                                    to='/dashboard/customers'
-                                    className=' text-white flex items-center gap-4 py-2 px-4 rounded-lg hover:bg-secondary-900 transition-colors'>
-                                    <FaUsers className='text-orange-500 text-lg' />{' '}
-                                    Clientes
-                                </NavLink>
+                                <CustomersMenu />
                             </li>
                             <li className='mb-3'>
-                                <NavLink
-                                    to='/dashboard/employees'
-                                    className=' text-white flex items-center gap-4 py-2 px-4 rounded-lg hover:bg-secondary-900 transition-colors'>
-                                    <BiSolidFile className='text-orange-500 text-lg' />{' '}
-                                    Empleados
-                                </NavLink>
+                                <EmployeesMenu />
                             </li>
                             <li className='mb-3'>
                                 <button

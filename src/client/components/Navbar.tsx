@@ -15,6 +15,7 @@ export default function Navbar({ handleRouteChange }: NavbarProps) {
     const [isOrderOpen, setIsOrderOpen] = useState(false);
     const [scroll, setScroll] = useState(false);
 
+    // Evitar el scroll en el body cuando el menu lateral esté abierto
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth >= 768 && showMenu) {
@@ -28,6 +29,7 @@ export default function Navbar({ handleRouteChange }: NavbarProps) {
         };
     }, [showMenu]);
 
+    // Cambiar el color de fondo del navbar al hacer scroll
     const handleChangeBackgroundNavbar = () => {
         if (window.scrollY >= 0) {
             setScroll(true);
@@ -37,17 +39,21 @@ export default function Navbar({ handleRouteChange }: NavbarProps) {
     };
     window.addEventListener('scroll', handleChangeBackgroundNavbar);
 
+    // Mostrar u ocultar el menu lateral
     const handleMenu = () => {
         setShowMenu(!showMenu);
     };
+    // Cerrar el menu lateral y cambiar la ruta
     const handleMenuClose = () => {
         handleRouteChange();
         setShowMenu(false);
     };
+    // Mostrar u ocultar el modal de la orden
     const handleOrder = () => {
         setIsOrderOpen(!isOrderOpen);
     };
 
+    // Evitar el scroll en el body cuando el modal de la orden esté abierto
     useEffect(() => {
         const handleBodyScroll = () => {
             if (isOrderOpen) {
@@ -62,6 +68,7 @@ export default function Navbar({ handleRouteChange }: NavbarProps) {
             document.body.style.overflow = 'visible'; // Restaurar el scrollbar al desmontar el componente
         };
     }, [isOrderOpen]);
+
     return (
         <nav
             className={`sticky top-0 left-0 w-full z-10 px-5 md:px-16 lg:px-32 xl:px-44 ${
@@ -140,7 +147,7 @@ export default function Navbar({ handleRouteChange }: NavbarProps) {
                             onClick={handleOrder}
                             className='flex justify-center items-center'>
                             <CiShoppingBasket className='text-2xl  cursor-pointer ' />
-                            <p className='text-[12px] font-medium font-poppins absolute -top-1 -right-2 w-4 h-4 bg-orange-500 flex justify-center items-center text-white rounded-full'>
+                            <p className='text-[12px] font-medium font-poppins absolute -top-1 -right-1.5 w-4 h-4 bg-orange-500 flex justify-center items-center text-white rounded-full'>
                                 1
                             </p>
                         </button>
@@ -151,10 +158,9 @@ export default function Navbar({ handleRouteChange }: NavbarProps) {
                     </div>
                     <button
                         type='button'
-                        className='flex justify-between items-center gap-2 text-sm bg-orange-500 py-2 px-3 text-white rounded-full hover:bg-orange-600 transition-all duration-200 ease-in-out'>
-                        <BiUser className=' md:text-xl cursor-pointer text-white' />
+                        className=' bg-orange-500 text-white py-2 px-3 rounded-lg hover:bg-orange-600 transition-all duration-200 ease-in-out font-poppins '>
                         Iniciar sesión
-                    </button>
+                    </button> 
                 </div>
             </div>
         </nav>

@@ -4,7 +4,7 @@ export const Form = () => {
     const navigate = useNavigate();
     const redirectTo = () => {
         // redirect to the SignUp page
-        navigate('/registration');
+        navigate('/signup');
         setTimeout(() => {
             window.scrollTo(0, 0);
         }, 1000);

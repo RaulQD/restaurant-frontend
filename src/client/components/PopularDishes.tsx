@@ -6,7 +6,7 @@ export default function PopularDishes() {
     const navigate = useNavigate();
     const redirecToMenu = () => {
         // Redirect to menu page
-        navigate('/nuestros-platos');
+        navigate('/our-dishes');
         setTimeout(() => {
             window.scrollTo(0, 0);
         }, 100);
@@ -38,7 +38,7 @@ export default function PopularDishes() {
             </div>
             <div className='flex justify-center items-center mt-8'>
                 <button
-                    className='bg-orange-500 py-2 p-4 rounded-full text-white hover:bg-orange-600 transition-all duration-200 ease-in-out'
+                    className='bg-orange-500 py-2 p-4 rounded-lg text-white hover:bg-orange-600 transition-all duration-200 ease-in-out'
                     onClick={redirecToMenu}>
                     Explorar Menú
                 </button>
