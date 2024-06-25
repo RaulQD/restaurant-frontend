@@ -85,7 +85,7 @@ export default function Navbar({ handleRouteChange }: NavbarProps) {
                     <div className='flex justify-center items-center gap-2'>
                         <img src={Logo} alt='logo' className='w-6 h-6' />
                         <span className='font-oleo text-3xl text-[#F97316] hidden lg:block'>
-                            Foodie List
+                            Foodie Hub
                         </span>
                     </div>
                 </div>
@@ -160,7 +160,7 @@ export default function Navbar({ handleRouteChange }: NavbarProps) {
                         type='button'
                         className=' bg-orange-500 text-white py-2 px-3 rounded-lg hover:bg-orange-600 transition-all duration-200 ease-in-out font-poppins '>
                         Iniciar sesión
-                    </button> 
+                    </button>
                 </div>
             </div>
         </nav>

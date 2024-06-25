@@ -14,15 +14,20 @@ type Columns = {
     className?: string;
     hidden?: 'sm' | 'md' | 'lg';
 };
+type NavActionProps = {
+    to: string;
+    label: string;
+};
 // type DataRow = {
 //     [key: string]: string;
 // };
 type TableProps = {
     columns: Columns[];
     // data: DataRow[];
+    navAction: NavActionProps[];
 };
 
-export default function Tables({ columns }: TableProps) {
+export default function Tables({ columns, navAction }: TableProps) {
     return (
         <>
             <div className=' mt-5 hidden md:flex md:flex-col'>
@@ -98,12 +103,9 @@ export default function Tables({ columns }: TableProps) {
                                     </td>
                                     <td className='  whitespace-nowrap pl-3 pr-4 sm:pr-6 py-4 text-right text-sm'>
                                         <Menu>
-                                            <MenuButton>
-                                                {' '}
-                                                <button className='flex items-center gap-x-2 py-2 px-4 rounded-lg hover:bg-orange-100 bg-gray-100 transition-all hover:text-orange-600'>
-                                                    Acciones
-                                                    <BiChevronDown className='text-lg' />
-                                                </button>
+                                            <MenuButton className='flex items-center gap-x-2 py-2 px-4 rounded-lg hover:bg-orange-100 bg-gray-100 transition-all hover:text-orange-600'>
+                                                Acciones
+                                                <BiChevronDown className='text-lg' />
                                             </MenuButton>
                                             <Transition
                                                 enter='transition ease-out duration-75'
@@ -118,20 +120,23 @@ export default function Tables({ columns }: TableProps) {
                                                         gap: '4px',
                                                     }}
                                                     className='py-4 px-2 bg-white rounded-lg shadow-lg w-36'>
-                                                    <MenuItem>
-                                                        <NavLink
-                                                            to='/settings'
-                                                            className='text-xs flex items-center gap-x-2 rounded-lg transition-colors hover:bg-orange-100 py-2 px-4 mb-1 text-gray-400 font-medium hover:text-orange-600'>
-                                                            Editar
-                                                        </NavLink>
-                                                    </MenuItem>
-                                                    <MenuItem>
-                                                        <NavLink
+                                                    {navAction.map((action) => (
+                                                        <MenuItem
+                                                            key={action.label}>
+                                                            <NavLink
+                                                                to={action.to}
+                                                                className='text-xs flex items-center gap-x-2 rounded-lg transition-colors hover:bg-orange-100 py-2 px-4 mb-1 text-gray-400 font-medium hover:text-orange-600'>
+                                                                {action.label}
+                                                            </NavLink>
+                                                        </MenuItem>
+                                                    ))}
+                                                    {/* <MenuItem>
+                                                       <NavLink
                                                             to='/settings'
                                                             className='text-xs flex items-center gap-x-2 rounded-lg transition-colors hover:bg-orange-100 py-2 px-4 text-gray-400 font-medium hover:text-orange-600'>
                                                             Eliminar
-                                                        </NavLink>
-                                                    </MenuItem>
+                                                        </NavLink> 
+                                                    </MenuItem> */}
                                                 </MenuItems>
                                             </Transition>
                                         </Menu>
@@ -167,11 +172,8 @@ export default function Tables({ columns }: TableProps) {
                             </p>
                         </div>
                         <Menu>
-                            <MenuButton>
-                                {' '}
-                                <button className='text-sm'>
-                                    <BiDotsVerticalRounded className='text-lg' />
-                                </button>
+                            <MenuButton className='text-sm'>
+                                <BiDotsVerticalRounded className='text-lg' />
                             </MenuButton>
                             <Transition
                                 enter='transition ease-out duration-75'
@@ -186,20 +188,15 @@ export default function Tables({ columns }: TableProps) {
                                         gap: '4px',
                                     }}
                                     className='py-4 px-2 bg-white rounded-lg shadow-lg w-36'>
-                                    <MenuItem>
-                                        <NavLink
-                                            to='/settings'
-                                            className='text-xs flex items-center gap-x-2 rounded-lg transition-colors hover:bg-orange-100 py-2 px-4 mb-1 text-gray-600 font-medium hover:text-orange-600'>
-                                            Editar
-                                        </NavLink>
-                                    </MenuItem>
-                                    <MenuItem>
-                                        <NavLink
-                                            to='/settings'
-                                            className='text-xs flex items-center gap-x-2 rounded-lg transition-colors hover:bg-orange-100 py-2 px-4 text-gray-600 font-medium hover:text-orange-600'>
-                                            Eliminar
-                                        </NavLink>
-                                    </MenuItem>
+                                    {navAction && navAction.map((action) => (
+                                        <MenuItem key={action.label}>
+                                            <NavLink
+                                                to={action.to}
+                                                className='text-xs flex items-center gap-x-2 rounded-lg transition-colors hover:bg-orange-100 py-2 px-4 mb-1 text-gray-400 font-medium hover:text-orange-600'>
+                                                {action.label}
+                                            </NavLink>
+                                        </MenuItem>
+                                    ))}
                                 </MenuItems>
                             </Transition>
                         </Menu>

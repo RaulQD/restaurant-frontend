@@ -14,7 +14,7 @@ import ProductsPage from './admin/pages/ProductsPage';
 import NotFound from './shared/NotFound';
 import { CategoryPages } from './admin/pages/CategoryPages';
 import EmployeesPages from './admin/pages/EmployeesPages';
-import { CreateEmployeesPage } from './admin/pages/CreateEmployeesPage';
+// import { CreateEmployeesPage } from './admin/pages/CreateEmployeesPage';
 import { CreateCategoryPage } from './admin/pages/CreateCategoryPage';
 
 export default function AppRoutes() {
@@ -36,7 +36,7 @@ export default function AppRoutes() {
                     <Route path='/dashboard/customers' element={<CustomersPage />} />
                     <Route path='/dashboard/orders' element={<Orders />} />
                     <Route path='/dashboard/employees' element={<EmployeesPages />} />
-                    <Route path ='/dashboard/employees/add' element={<CreateEmployeesPage/>}/>
+                    {/* <Route path ='/dashboard/employees/add' element={<CreateEmployeesPage/>}/> */}
                 </Route>
                 <Route path='*' element={<NotFound />} />
             </Routes>

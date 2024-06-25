@@ -8,50 +8,94 @@ export default function SignUp() {
                 <div className='w-full md:p-10 '>
                     <div className='flex flex-col items-center justify-center mb-11'>
                         <h1 className='text-2xl font-medium text-center mb-3 font-poppins'>
-                            Registrate
+                           Create tu cuenta
                         </h1>
-                        <span className='text-gray-400 font-poppins font-normal text-sm text-center'>
-                            Disfruta Los Mejores Platos
+                        <span className='text-gray-600 font-poppins text-sm text-center'>
+                           y descubre sabores inolvidables de nuestros platos
                         </span>
                     </div>
                     <form action='' className='font-poppins'>
                         <div className='flex flex-col'>
                             <div className='grid grid-cols-1 md:grid-cols-2 gap-8 mb-8'>
                                 <div className=''>
+                                    <label
+                                        htmlFor='first_name'
+                                        className='block text-sm  leading-6 text-gray-900'>
+                                        Nombre
+                                    </label>
+
                                     <input
                                         type='text'
-                                        placeholder='Nombre'
-                                        className='w-full py-2 px-4 border border-gray-300 text-gray-700 focus:outline-none rounded-lg focus:border-orange-500'
+                                        name='first_name'
+                                        id='first_name'
+                                        className='block w-full rounded-md border-0 py-2 pl-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 outline-none placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-orange-500 sm:text-sm sm:leading-6 mt-2'
+                                        placeholder='Nombre '
                                     />
                                 </div>
                                 <div className=''>
+                                    <label
+                                        htmlFor='last_name'
+                                        className='block text-sm  leading-6 text-gray-900'>
+                                        Apellido
+                                    </label>
+
                                     <input
                                         type='text'
+                                        name='last_name'
+                                        id='last_name'
+                                        className='block w-full rounded-md border-0 py-2 pl-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 outline-none placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-orange-500 sm:text-sm sm:leading-6 mt-2'
                                         placeholder='Apellido'
-                                        className='w-full py-2 px-4 border border-gray-300 text-gray-700 focus:outline-none rounded-lg focus:border-orange-500'
                                     />
                                 </div>
                             </div>
-                            <div className='mb-8 '>
-                                <input
-                                    type='text'
-                                    placeholder='DNI'
-                                    className=' w-full py-2 px-4 border border-gray-300 text-gray-700 focus:outline-none rounded-lg focus:border-orange-500'
-                                />
+                            <div className='mb-8'>
+                                <label
+                                    htmlFor='dni'
+                                    className='block text-sm font-medium leading-6 text-gray-900'>
+                                    DNI
+                                </label>
+                                <div className='mt-2'>
+                                    <input
+                                        id='dni'
+                                        name='dni'
+                                        type='text'
+                                        className='block w-full rounded-md border-0 py-2 pl-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 outline-none placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-orange-500 sm:text-sm sm:leading-6'
+                                        placeholder='DNI'
+                                    />
+                                </div>
                             </div>
                             <div className='mb-8'>
-                                <input
-                                    type='text'
-                                    placeholder='Correo electronico'
-                                    className=' w-full py-2 px-4 border border-gray-300 text-gray-700 focus:outline-none rounded-lg focus:border-orange-500'
-                                />
+                                <label
+                                    htmlFor='email'
+                                    className='block text-sm font-medium leading-6 text-gray-900'>
+                                    Email address
+                                </label>
+                                <div className='mt-2'>
+                                    <input
+                                        id='email'
+                                        name='email'
+                                        type='email'
+                                        autoComplete='email'
+                                        required
+                                        className='block w-full rounded-md border-0 py-2 pl-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 outline-none placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-orange-500 sm:text-sm sm:leading-6'
+                                    />
+                                </div>
                             </div>
                             <div className='mb-8'>
-                                <input
-                                    type='password'
-                                    placeholder='contraseña'
-                                    className=' w-full py-2 px-4 border border-gray-300 text-gray-700 focus:outline-none rounded-lg focus:border-orange-500'
-                                />
+                                <label
+                                    htmlFor='password'
+                                    className='block text-sm font-medium leading-6 text-gray-900'>
+                                    Password
+                                </label>
+
+                                <div className='mt-2 '>
+                                    <input
+                                        type='password'
+                                        id='password'
+                                        name='password'
+                                        className='block w-full rounded-md border-0 py-2 pl-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 outline-none placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-orange-500 sm:text-sm sm:leading-6'
+                                    />
+                                </div>
                             </div>
                         </div>
 

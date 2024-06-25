@@ -7,7 +7,8 @@ export default function ProductsMenu() {
     const menuItems = [
         { path: '/dashboard/products', label: 'Productos' },
         { path: '/dashboard/products/add', label: 'Añadir Producto' },
-        { path: '/dashboard/category', label: 'Categoría de Productos', },
+        { path: '/dashboard/category', label: 'Categorias'},
+        { path: '/dashboard/category/add', label: 'Categoría de Productos', },
     ];
 
     return (

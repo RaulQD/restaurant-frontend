@@ -11,7 +11,10 @@ const categoryColumns = [
     },
     { header: 'Estado', accessor: 'status' },
 ];
-
+const categoryActions = [
+    { to: '/admin/employees/view', label: 'Ver' },
+    { to: '/admin/employees/delete', label: 'Eliminar' },
+];
 export const CategoryPages = () => {
     const navigate = useNavigate();
 
@@ -52,7 +55,7 @@ export const CategoryPages = () => {
                     </div>
                 </div>
             </div>
-            <Tables columns={categoryColumns} />
+            <Tables columns={categoryColumns} navAction={categoryActions} />
         </>
     );
 };

@@ -12,7 +12,10 @@ export default function CustomersPages() {
         { header: 'Rol', accessor: 'role', className: 'hidden md:table-cell' },
         { header: 'Estado', accessor: 'status' },
     ];
-
+    const customerActions = [
+        { to: '/admin/employees/view', label: 'Ver' },
+        { to: '/admin/employees/delete', label: 'Eliminar' },
+    ];
     return (
         <>
             <div className='mb-6 px-4 md:px-6 xl:px-8 pt-8'>
@@ -49,12 +52,9 @@ export default function CustomersPages() {
                                 <option value='' className='text-sm '>
                                     Activos
                                 </option>
-                                <option
-                                    value=''
-                                    className='text-sm '>
+                                <option value='' className='text-sm '>
                                     Bloqueados
                                 </option>
-                               
                             </select>
                         </div>
                         <button
@@ -66,7 +66,7 @@ export default function CustomersPages() {
                     </div>
                 </div>
             </div>
-            <Tables columns={userColumns} />
+            <Tables columns={userColumns} navAction={customerActions} />
         </>
     );
 }

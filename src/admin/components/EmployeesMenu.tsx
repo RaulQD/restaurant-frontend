@@ -4,10 +4,7 @@ import { BiChevronRight, BiSolidReport } from 'react-icons/bi';
 
 export const EmployeesMenu = () => {
     const [showDropdown, setShowDropdown] = useState(false);
-    const menuItems = [
-        { path: '/dashboard/employees', label: 'Empleados' },
-        { path: '/dashboard/employees/add', label: 'Añadir Empleado' },
-    ];
+    const menuItems = [{ path: '/dashboard/employees', label: 'Empleados' }];
     return (
         <>
             <button

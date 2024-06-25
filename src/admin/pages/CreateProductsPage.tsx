@@ -1,13 +1,20 @@
 import { BiChevronRight, BiEditAlt, BiPlus } from 'react-icons/bi';
 import NoImage from '../../assets/no-image.jpg';
+import { useNavigate } from 'react-router-dom';
 
 export const CreateProductsPage = () => {
+    const navigate = useNavigate();
+
+    const redirectTo = () => {
+        navigate('/dashboard/category/add');
+    };
+
     return (
         <>
             <div className='mb-6 px-4 md:px-6 xl:px-8 pt-8'>
                 <h1 className='text-lg font-medium mb-2'>Crear Productos</h1>
                 <div className='flex items-center gap-1 text-xs text-gray-400'>
-                    <span>Home</span>
+                    <span>Inicio</span>
                     <BiChevronRight />
                     <span>Productos</span>
                     <BiChevronRight />
@@ -86,7 +93,7 @@ export const CreateProductsPage = () => {
                                     name='category'
                                     id='category'
                                     className='w-full border border-gray-300 p-2 rounded-md font-outfit focus:outline-none '>
-                                    <option value='' disabled selected>
+                                    <option value='' disabled>
                                         Selecciona una categoria
                                     </option>
                                     <option value=''>Platos Principales</option>
@@ -97,22 +104,23 @@ export const CreateProductsPage = () => {
                                 </select>
                                 <button
                                     type='button'
-                                    className='mt-6 py-2 px-5 bg-orange-100 hover:bg-orange-500 text-orange-500 transition-all ease-in-out rounded-lg hover:text-white flex items-center justify-center gap-2 text-sm font-outfit'>
+                                    className='mt-6 py-2 px-5 bg-orange-100 hover:bg-orange-500 text-orange-500 transition-all ease-in-out rounded-lg hover:text-white flex items-center justify-center gap-2 text-sm font-outfit'
+                                    onClick={() => redirectTo()}>
                                     <BiPlus className='text-lg' />
                                     Nueva categoria
                                 </button>
                             </div>
                         </div>
                         <div className='flex-1'>
-                            <div className='mb-7 flex space-x-8 '>
+                            {/* <div className='mb-7 flex space-x-8 '>
                                 <h2 className='cursor-pointer pb-2 border-b-2 border-orange-500 text-orange-500'>
                                     General
                                 </h2>
-                            </div>
+                            </div> */}
                             <div className='flex flex-col gap-7 '>
-                                <div className='bg-white p-8 shadow'>
+                                <div className='bg-white p-8 shadow rounded-lg'>
                                     <h3 className='text-lg font-medium mb-6 '>
-                                        Detalles del producto
+                                        General
                                     </h3>
                                     <div className='mb-6'>
                                         <label
@@ -132,7 +140,7 @@ export const CreateProductsPage = () => {
                                     <div>
                                         <label
                                             htmlFor='name'
-                                            className='block text-sm  leading-6 text-gray-900'>
+                                            className='block text-sm leading-6 text-gray-900'>
                                             Descripción
                                         </label>
 
@@ -152,7 +160,7 @@ export const CreateProductsPage = () => {
                                         <label
                                             htmlFor='price'
                                             className='block text-sm leading-6 text-gray-900 '>
-                                            Precio
+                                            Precio base
                                         </label>
 
                                         <input

@@ -17,6 +17,10 @@ const productColumns = [
     },
     { header: 'Estado', accessor: 'status' },
 ];
+const productActions = [
+    { to: '/admin/employees/edit', label: 'Editar' },
+    { to: '/admin/employees/delete', label: 'Eliminar' },
+];
 
 export default function ProductsPage() {
     const navigate = useNavigate();
@@ -86,7 +90,7 @@ export default function ProductsPage() {
                     </div>
                 </div>
             </div>
-            <Tables columns={productColumns} />
+            <Tables columns={productColumns} navAction={productActions} />
         </>
     );
 }
