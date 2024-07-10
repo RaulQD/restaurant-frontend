@@ -1,8 +1,9 @@
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
-import { FormUsers } from '../components/FormUsers';
+import { FormUsers } from '../components/projects/FormUsers';
 import { Modal } from '../../shared/Modal';
+import { ToastContainer } from 'react-toastify';
 
 export default function LayoutAdmin() {
     return (
@@ -19,6 +20,7 @@ export default function LayoutAdmin() {
             {/* <Modal>
                 <FormUsers />
             </Modal> */}
+            {/* <ToastContainer/> */}
         </>
     );
 }

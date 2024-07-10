@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BiMenu, BiUser, BiX } from 'react-icons/bi';
+import { BiMenu, BiX } from 'react-icons/bi';
 import { NavLink } from 'react-router-dom';
 import { navLinks } from '../../data/data';
 import OrderList from './OrderList';

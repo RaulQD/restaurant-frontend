@@ -6,16 +6,16 @@ import HomePage from './client/page/HomePage';
 import AboutPage from './client/page/AboutPage';
 
 import LayoutAdmin from './admin/layout/LayoutAdmin';
-import DashboardPage from './admin/pages/DashboardPage';
-import CustomersPage from './admin/pages/CustomersPages';
-import Orders from './admin/pages/Orders';
-import { CreateProductsPage } from './admin/pages/CreateProductsPage';
-import ProductsPage from './admin/pages/ProductsPage';
+import DashboardPage from './admin/pages/dashboard/DashboardPage';
+import CustomersPage from './admin/pages/Customer/CustomersPages';
+import Orders from './admin/pages/orders/Orders';
+import { CreateProductsPage} from './admin/pages/dishes/CreateProductsPage';
+import ProductsPage from './admin/pages/dishes/ProductsPage';
 import NotFound from './shared/NotFound';
-import { CategoryPages } from './admin/pages/CategoryPages';
-import EmployeesPages from './admin/pages/EmployeesPages';
+import { CategoryPages } from './admin/pages/category/CategoryPages';
+import EmployeesPages from './admin/pages/employee/EmployeesPages';
 // import { CreateEmployeesPage } from './admin/pages/CreateEmployeesPage';
-import { CreateCategoryPage } from './admin/pages/CreateCategoryPage';
+import { CreateCategoryPage } from './admin/pages/category/CreateCategoryPage';
 
 export default function AppRoutes() {
     return (

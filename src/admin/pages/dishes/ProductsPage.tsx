@@ -1,22 +1,10 @@
 import { BiChevronRight } from 'react-icons/bi';
-import Tables from '../components/Tables';
 import { useNavigate } from 'react-router-dom';
+import { useAppStore } from '../../../store/useAppStore';
+import { useEffect } from 'react';
+import TableProduct from './components/TableProduct';
 
-const productColumns = [
-    { header: 'Nombre', accessor: 'name', className: 'text-gray-500' },
-    {
-        header: 'Descripción',
-        accessor: 'description',
-        className: 'hidden lg:table-cell',
-    },
-    { header: 'Precio', accessor: 'price', className: 'hidden sm:table-cell' },
-    {
-        header: 'Categoría',
-        accessor: 'category',
-        className: 'hidden md:table-cell',
-    },
-    { header: 'Estado', accessor: 'status' },
-];
+
 const productActions = [
     { to: '/admin/employees/edit', label: 'Editar' },
     { to: '/admin/employees/delete', label: 'Eliminar' },
@@ -28,7 +16,12 @@ export default function ProductsPage() {
     const redirectTo = () => {
         navigate('/dashboard/products/add');
     };
-
+    const fetchDishes = useAppStore((state) => state.fetchDishes);
+    const dishes = useAppStore((state) => state.dishes);
+    useEffect(() => {
+        fetchDishes();
+    }, [fetchDishes]);
+    
     return (
         <>
             <div className='mb-6 px-4 md:px-6 xl:px-8 pt-8'>
@@ -90,7 +83,13 @@ export default function ProductsPage() {
                     </div>
                 </div>
             </div>
-            <Tables columns={productColumns} navAction={productActions} />
+
+            <div className=' md:px-6 xl:px-8'>
+                <TableProduct
+                    navAction={productActions}
+                    data={dishes}
+                />
+            </div>
         </>
     );
 }

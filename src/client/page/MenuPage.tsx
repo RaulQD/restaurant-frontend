@@ -1,7 +1,15 @@
 import CardMenuList from '../components/CardMenuList';
-import { CategoryDishes } from '../../data/data';
+import { useAppStore } from '../../store/useAppStore';
+import { useEffect } from 'react';
 
 export default function MenuPage() {
+    const categories = useAppStore((state) => state.categories);
+    const fetchCategories = useAppStore((state) => state.fetchCategories);
+
+    useEffect(() => {
+        fetchCategories();
+    }, [fetchCategories]);
+
     return (
         <section className='mt-14 mb-48 px-5 md:px-16 lg:px-32 xl:px-44'>
             <div className='flex flex-col items-center text-center'>
@@ -10,7 +18,7 @@ export default function MenuPage() {
                         nuestro menu especial
                     </span>
                     <h2 className=' text-2xl mdtext-3xl lg:text-4xl xl:text-5xl uppercase font-extrabold font-poppins'>
-                       Menu del día
+                        Menu del día
                     </h2>
                 </div>
                 <p className='w-full lg:w-3/5 text-[#444341] font-poppins text-sm'>
@@ -22,12 +30,12 @@ export default function MenuPage() {
             {/*Categoria de los platos*/}
             <div className='mt-9'>
                 <ul className=' flex flex-wrap justify-center items-center gap-5'>
-                    {CategoryDishes.map((category) => (
-                        <li key={category.id}>
+                    {categories.categories.map((category) => (
+                        <li key={category.id_category}>
                             <button
                                 type='button'
                                 className='bg-slate-100 text-black hover:text-white py-2 px-4 text-sm font-bold font-poppins uppercase hover:bg-orange-500 rounded shadow-sm'>
-                                {category.title}
+                                {category.category_name}
                             </button>
                         </li>
                     ))}

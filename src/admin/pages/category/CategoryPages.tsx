@@ -1,16 +1,11 @@
 import { BiChevronRight } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
-import Tables from '../components/Tables';
+import { useEffect } from 'react';
+import { useAppStore } from '../../../store/useAppStore';
+import TableCategory from './components/TableCategory';
+import { CategoryForm } from './components/CategoryForm';
+import { Modal } from '../../../shared/Modal';
 
-const categoryColumns = [
-    { header: 'Nombre', accessor: 'name', className: 'text-gray-500' },
-    {
-        header: 'Descripción',
-        accessor: 'description',
-        className: 'hidden lg:table-cell',
-    },
-    { header: 'Estado', accessor: 'status' },
-];
 const categoryActions = [
     { to: '/admin/employees/view', label: 'Ver' },
     { to: '/admin/employees/delete', label: 'Eliminar' },
@@ -21,6 +16,12 @@ export const CategoryPages = () => {
     const redirectTo = () => {
         navigate('/dashboard/category/add');
     };
+    const getCategories = useAppStore((state) => state.fetchCategories);
+    const categories = useAppStore((state) => state.categories);
+
+    useEffect(() => {
+        getCategories();
+    }, [getCategories]);
     return (
         <>
             <div className='mb-6 px-4 md:px-6 xl:px-8 pt-8'>
@@ -55,7 +56,12 @@ export const CategoryPages = () => {
                     </div>
                 </div>
             </div>
-            <Tables columns={categoryColumns} navAction={categoryActions} />
+            <div className=' md:px-6 xl:px-8'>
+                <TableCategory navAction={categoryActions} data={categories} />
+            </div>
+            <Modal>
+                <CategoryForm />
+            </Modal>
         </>
     );
 };

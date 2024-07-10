@@ -1,9 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 import { dishes } from '../../data/data';
 import CardList from './CardList';
+import { useAppStore } from '../../store/useAppStore';
+import { useEffect } from 'react';
 
 export default function PopularDishes() {
     const navigate = useNavigate();
+    const dishes = useAppStore((state) => state.dishes);
+    const fetchDishes = useAppStore((state) => state.fetchDishes);
+
+    useEffect(() => {
+        fetchDishes();
+    }, [fetchDishes]);
     const redirecToMenu = () => {
         // Redirect to menu page
         navigate('/our-dishes');
@@ -11,6 +19,7 @@ export default function PopularDishes() {
             window.scrollTo(0, 0);
         }, 100);
     };
+
     return (
         <section className='mt-28 mb-48 px-5 md:px-16 lg:px-32 xl:px-44 '>
             <div className='flex flex-col items-center text-center'>
@@ -31,8 +40,8 @@ export default function PopularDishes() {
             {/*Categoria de los platos*/}
             <div className=''>
                 <div className='pt-20 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8'>
-                    {dishes.map((dish) => (
-                        <CardList key={dish.id} dish={dish} />
+                    {dishes.dishes.map((dish) => (
+                        <CardList key={dish.id_dish} dish={dishes} />
                     ))}
                 </div>
             </div>
