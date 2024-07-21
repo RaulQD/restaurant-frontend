@@ -7,27 +7,19 @@ import {
 } from '@headlessui/react';
 import { BiChevronDown, BiDotsVerticalRounded } from 'react-icons/bi';
 import { NavLink } from 'react-router-dom';
+import { Employee } from '../../../../types/employee';
 
-type Columns = {
-    header: string;
-    accessor: string;
-    className?: string;
-    hidden?: 'sm' | 'md' | 'lg';
-};
 type NavActionProps = {
     to: string;
     label: string;
 };
-type DataRow = {
-    [key: string]: any;
-};
+
 type TableProps = {
-    columns: Columns[];
-    data: DataRow[];
+    data: Employee[];
     navAction: NavActionProps[];
 };
 
-export default function TableEmployee({ columns, navAction, data }: TableProps) {
+export default function TableEmployee({ navAction, data }: TableProps) {
     return (
         <>
             {/* <div className='mt-5 hidden md:flex md:flex-col'>
@@ -40,94 +32,64 @@ export default function TableEmployee({ columns, navAction, data }: TableProps) 
             <div className='hidden md:flex md:flex-col'>
                 <div className='overflow-x-auto shadow-sm ring-1 ring-black ring-opacity-5 md:rounded-lg align-middle'>
                     <table className='w-full divide-y divide-gray-300'>
-                        <thead className='font-outfit uppercase text-[#99a1c7]'>
+                        <thead className='font-outfit uppercase text-[#99a1c7] text-center'>
                             <tr>
-                                {columns.map((column) => (
-                                    <th
-                                        key={column.accessor}
-                                        className={`font-medium px-3 py-3.5 text-left text-sm ${
-                                            column.className
-                                        } ${
-                                            column.hidden
-                                                ? `hidden ${column.hidden}:table-cell`
-                                                : ''
-                                        }`}
-                                        scope='col'>
-                                        {column.header}
-                                    </th>
-                                ))}
+                                <th className='font-medium px-3 py-3.5 text-sm'>
+                                    Código
+                                </th>
+                                <th className='font-medium px-3 py-3.5 text-sm'>
+                                    Nombre
+                                </th>
+                                <th className='font-medium px-3 py-3.5 text-sm'>
+                                    Apellido
+                                </th>
+                                <th className='font-medium px-3 py-3.5 text-sm'>
+                                    Email
+                                </th>
+                                <th className='font-medium px-3 py-3.5 text-sm'>
+                                    Rol
+                                </th>
+                                <th className='font-medium px-3 py-3.5 text-sm'>
+                                    Acciones
+                                </th>
                             </tr>
                         </thead>
                         <tbody className='font-outfit divide-y divide-gray-200 bg-white'>
-                            {/* {data.map((row, index) => (
-                                    <tr key={index}>
-                                        {columns.map((column) => (
-                                            <td
-                                                key={column.accessor}
-                                                className={`whitespace-nowrap px-3 py-4 text-sm ${
-                                                    column.className
-                                                } ${
-                                                    column.hidden
-                                                        ? `hidden ${column.hidden}:table-cell`
-                                                        : ''
-                                                }`}>
-                                                {row[column.accessor]}
-                                            </td>
-                                        ))}
-                                    </tr>
-                                ))} */}
-
-                            {data.map((row, index) => (
-                                <tr key={index}>
-                                    {columns.map((column) => (
-                                        <td
-                                            key={column.accessor}
-                                            className={`whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6 truncate`}>
-                                            {typeof row[column.accessor] ===
-                                            'object'
-                                                ? JSON.stringify(
-                                                      row[column.accessor]
-                                                          .category_name
-                                                  )
-                                                : row[column.accessor]}
-                                        </td>
-                                    ))}
-                                    <td className=' whitespace-nowrap pl-3 pr-4 sm:pr-6 py-4 text-right text-sm'>
-                                        <Menu>
-                                            <MenuButton className='flex items-center gap-x-2 py-2 px-4 rounded-lg hover:bg-orange-100 bg-gray-100 transition-all hover:text-orange-600'>
-                                                Acciones
-                                                <BiChevronDown className='text-lg' />
-                                            </MenuButton>
-                                            <Transition
-                                                enter='transition ease-out duration-75'
-                                                enterFrom='opacity-0 scale-95'
-                                                enterTo='opacity-100 scale-100'
-                                                leave='transition ease-in duration-100'
-                                                leaveFrom='opacity-100 scale-100'
-                                                leaveTo='opacity-0 scale-95'>
-                                                <MenuItems
-                                                    anchor={{
-                                                        to: 'bottom end',
-                                                        gap: '4px',
-                                                    }}
-                                                    className='py-4 px-2 bg-white rounded-lg shadow-lg w-36'>
-                                                    {navAction.map((action) => (
-                                                        <MenuItem
-                                                            key={action.label}>
-                                                            <NavLink
-                                                                to={action.to}
-                                                                className='text-xs flex items-center gap-x-2 rounded-lg transition-colors hover:bg-orange-100 py-2 px-4 mb-1 text-gray-400 font-medium hover:text-orange-600'>
-                                                                {action.label}
-                                                            </NavLink>
-                                                        </MenuItem>
-                                                    ))}
-                                                </MenuItems>
-                                            </Transition>
-                                        </Menu>
-                                    </td>
-                                </tr>
-                            ))}
-                            
+                            <tr>
+                                <td className=' whitespace-nowrap pl-3 pr-4 sm:pr-6 py-4 text-right text-sm'>
+                                    <Menu>
+                                        <MenuButton className='flex items-center gap-x-2 py-2 px-4 rounded-lg hover:bg-orange-100 bg-gray-100 transition-all hover:text-orange-600'>
+                                            Acciones
+                                            <BiChevronDown className='text-lg' />
+                                        </MenuButton>
+                                        <Transition
+                                            enter='transition ease-out duration-75'
+                                            enterFrom='opacity-0 scale-95'
+                                            enterTo='opacity-100 scale-100'
+                                            leave='transition ease-in duration-100'
+                                            leaveFrom='opacity-100 scale-100'
+                                            leaveTo='opacity-0 scale-95'>
+                                            <MenuItems
+                                                anchor={{
+                                                    to: 'bottom end',
+                                                    gap: '4px',
+                                                }}
+                                                className='py-4 px-2 bg-white rounded-lg shadow-lg w-36'>
+                                                {navAction.map((action) => (
+                                                    <MenuItem
+                                                        key={action.label}>
+                                                        <NavLink
+                                                            to={action.to}
+                                                            className='text-xs flex items-center gap-x-2 rounded-lg transition-colors hover:bg-orange-100 py-2 px-4 mb-1 text-gray-400 font-medium hover:text-orange-600'>
+                                                            {action.label}
+                                                        </NavLink>
+                                                    </MenuItem>
+                                                ))}
+                                            </MenuItems>
+                                        </Transition>
+                                    </Menu>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

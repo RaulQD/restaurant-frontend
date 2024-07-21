@@ -1,26 +1,35 @@
 import { BiChevronRight } from 'react-icons/bi';
 import TableEmployee from './components/TableEmployee';
 
-const employeesColumns = [
-    { header: 'Codigo', accessor: 'id', className: 'text-gray-500' },
-    { header: 'Nombre', accessor: 'name', className: 'text-gray-500' },
-    {
-        header: 'Apellido',
-        accessor: 'lastname',
-        className: 'hidden lg:table-cell',
-    },
-    { header: 'Correo', accessor: 'email', className: 'hidden sm:table-cell' },
-    {
-        header: 'Rol',
-        accessor: 'role',
-        className: 'hidden md:table-cell',
-    },
-    { header: 'Estado', accessor: 'status' },
-];
 const employeeActions = [
     { to: '/admin/employees/view', label: 'Ver' },
     { to: '/admin/employees/edit', label: 'Editar' },
     { to: '/admin/employees/delete', label: 'Eliminar' },
+];
+
+const employees = [
+    {
+        id: 1,
+        name: 'Juan Perez',
+        email: 'raul@gmail.com',
+        phone: '1234567890',
+        address: 'Calle 123',
+        role: 'Admin',
+        status: 'Activo',
+        createdAt: '2021-10-10',
+        updatedAt: '2021-10-10',
+    },
+    {
+        id: 2,
+        name: 'Juan Perez',
+        email: 'raul@gmail.com',
+        phone: '1234567890',
+        address: 'Calle 123',
+        role: 'Admin',
+        status: 'Activo',
+        createdAt: '2021-10-10',
+        updatedAt: '2021-10-10',
+    },
 ];
 
 export default function EmployeesPages() {
@@ -84,7 +93,7 @@ export default function EmployeesPages() {
                     </div>
                 </div>
             </div>
-            <TableEmployee columns={employeesColumns} navAction={employeeActions} />
+            <TableEmployee navAction={employeeActions} data={employees} />
         </>
     );
 }

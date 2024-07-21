@@ -1,11 +1,14 @@
-import { BiEditAlt, BiPlus } from 'react-icons/bi';
-import NoImage from '../../../../assets/no-image.jpg';
+import { ChangeEvent, useEffect } from 'react';
+import { FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { BiEditAlt, BiPlus } from 'react-icons/bi';
+
+import NoImage from '../../../../assets/no-image.jpg';
 import { ErrorMessage } from '../../../components/ErrorMessage';
-import { DishesFormData } from '../../../../types/index';
-import { FieldErrors, UseFormRegister } from 'react-hook-form';
-import { useEffect } from 'react';
 import { useAppStore } from '../../../../store/useAppStore';
+import { DishesFormData } from '../../../../types/index';
+import { getCategories } from '../../category/services/CategoryApi';
 
 type DishesFormProps = {
     register: UseFormRegister<DishesFormData>;
@@ -17,12 +20,11 @@ export const DishesForm = ({ register, errors }: DishesFormProps) => {
     const redirectTo = () => {
         navigate('/dashboard/category/add');
     };
-    const fetchCategories = useAppStore((state) => state.fetchCategories);
-    const categories = useAppStore((state) => state.categories);
-
-    useEffect(() => {
-        fetchCategories();
-    }, [fetchCategories]);
+    const { data: categories, isLoading } = useQuery({
+        queryKey: ['category'],
+        queryFn: getCategories,
+    });
+    if (isLoading) return <p>Loading...</p>;
 
     return (
         <div className='flex flex-col lg:flex-row'>
@@ -38,16 +40,11 @@ export const DishesForm = ({ register, errors }: DishesFormProps) => {
                                 <input
                                     type='file'
                                     id='image_url'
-                                    // className='hidden'
+                                    className='hidden'
                                     {...register('image_url', {
                                         required: true,
                                     })}
                                 />
-                                {errors.image_url && (
-                                    <ErrorMessage>
-                                        {errors.image_url.message}
-                                    </ErrorMessage>
-                                )}
                             </label>
                         </div>
 
@@ -55,7 +52,7 @@ export const DishesForm = ({ register, errors }: DishesFormProps) => {
                             <img
                                 src={NoImage}
                                 alt='NoImage'
-                                className=' object-cover size-44 border border-orange-400 border-dashed'
+                                className='object-cover size-44 border border-orange-400 border-dashed'
                             />
                         </div>
                     </div>
@@ -65,6 +62,9 @@ export const DishesForm = ({ register, errors }: DishesFormProps) => {
                             .png, .jpg and .jpeg son aceptados.
                         </p>
                     </div>
+                    {errors.image_url && (
+                        <ErrorMessage>{errors.image_url.message}</ErrorMessage>
+                    )}
                 </div>
                 {/* <div className='bg-white shadow p-8 w-full lg:w-[300px] rounded-lg'>
                     <div className='flex items-center justify-between mb-5'>
@@ -88,19 +88,19 @@ export const DishesForm = ({ register, errors }: DishesFormProps) => {
                         Detalles del producto
                     </h2>
                     <label
-                        htmlFor='name'
+                        htmlFor='id_category'
                         className='block text-sm leading-6 text-gray-900 mb-2 font-outfit'>
                         Categoria
                     </label>
 
                     <select
-                        id='category'
+                        id='id_category'
                         className='w-full border border-gray-300 p-2 rounded-md font-outfit focus:outline-none '
-                        {...register('id_category', { required: true })}>
-                        <option value='0' disabled>
-                            Selecciona una categoria
-                        </option>
-                        {categories.map((category) => (
+                        {...register('id_category', {
+                            required: 'La categoria es requerida',
+                        })}>
+                        <option value='0'>Selecciona una categoria</option>
+                        {categories?.map((category) => (
                             <option
                                 value={category.id_category}
                                 key={category.id_category}>
@@ -128,7 +128,7 @@ export const DishesForm = ({ register, errors }: DishesFormProps) => {
                         <h3 className='text-lg font-medium mb-6 '>General</h3>
                         <div className='mb-6'>
                             <label
-                                htmlFor='name'
+                                htmlFor='dishes_name'
                                 className='block text-sm  leading-6 text-gray-900'>
                                 Plato
                             </label>
@@ -151,7 +151,7 @@ export const DishesForm = ({ register, errors }: DishesFormProps) => {
                         </div>
                         <div>
                             <label
-                                htmlFor='name'
+                                htmlFor='description'
                                 className='block text-sm leading-6 text-gray-900'>
                                 Descripción
                             </label>

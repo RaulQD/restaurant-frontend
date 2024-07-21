@@ -7,7 +7,7 @@ import {
 } from '@headlessui/react';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { NavLink } from 'react-router-dom';
-import { Dish } from '../../../../types';
+import { DishesList } from '../../../../types/dishes';
 
 type NavActionProps = {
     to: string;
@@ -16,7 +16,7 @@ type NavActionProps = {
 
 type TableProps = {
     navAction: NavActionProps[];
-    data: Dish[];
+    data: DishesList[];
 };
 export const CardViewTable = ({ navAction, data }: TableProps) => {
     return (

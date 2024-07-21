@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import { dishes } from '../../data/data';
 import CardList from './CardList';
 import { useAppStore } from '../../store/useAppStore';
 import { useEffect } from 'react';
@@ -8,7 +7,6 @@ export default function PopularDishes() {
     const navigate = useNavigate();
     const dishes = useAppStore((state) => state.dishes);
     const fetchDishes = useAppStore((state) => state.fetchDishes);
-
     useEffect(() => {
         fetchDishes();
     }, [fetchDishes]);
@@ -40,7 +38,7 @@ export default function PopularDishes() {
             {/*Categoria de los platos*/}
             <div className=''>
                 <div className='pt-20 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8'>
-                    {dishes.dishes.map((dish) => (
+                    {dishes.map((dish) => (
                         <CardList key={dish.id_dish} dish={dishes} />
                     ))}
                 </div>

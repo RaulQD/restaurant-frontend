@@ -1,15 +1,39 @@
 import { z } from "zod";
-import { CategorySchema } from "./category";
+// import { CategorySchema } from "./category";
+import { CategorySchema, type Category } from "./category";
 
-export const DishSchema = z.object({
+
+
+export type Dishes = {
+  id_dish: number;
+  dishes_name: string;
+  description: string;
+  available: number;
+  price: number;
+  image_url: string | null;
+  created_at: string;
+  category: Category;
+}
+
+export const DishesSchema = z.object({
+  "id_dish": z.number(),
+  "dishes_name": z.string(),
+  "description": z.string(),
+  "price": z.number(),
+  "image_url": z.string().optional(),
+  "id_category": z.number(),
+});
+
+export const DishListSchema = z.object({
   id_dish: z.number(),
   dishes_name: z.string(),
   description: z.string(),
-  available: z.number(),
   price: z.number(),
-  image_url: z.string().nullable(),
-  created_at: z.string().datetime(),
-  category: CategorySchema
+  available: z.number(),
+  image_url: z.string().optional(),
+  category: CategorySchema,
 });
+export const DishesListSchema = z.array(DishListSchema);
 
-export const DishesSchema = z.array(DishSchema);
+export type DishesList = z.infer<typeof DishesSchema>;
+export type DishesFormData = Pick<DishesList, 'dishes_name' | 'description' | 'id_category' | 'price' | 'image_url'>

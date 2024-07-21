@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form';
 import { BiChevronRight } from 'react-icons/bi';
 import { DishesForm } from './components/DishesForm';
 import { DishesFormData } from '../../../types';
-import { createDishes } from '../../services/DishesApi';
 
 export const CreateProductsPage = () => {
     const initialValues: DishesFormData = {
@@ -24,12 +23,11 @@ export const CreateProductsPage = () => {
         formData.append('description', data.description);
         formData.append('price', data.price.toString());
         formData.append('id_category', data.id_category.toString());
-        if (data.image_url && data.image_url[0]) {
-            formData.append('image_url', data.image_url[0]);
-        }
-
-        createDishes(data);
-        console.log(data);
+      
+        
+        console.log(data.image_url);
+        console.log(formData);
+        // toast.success(data);
     };
     return (
         <>

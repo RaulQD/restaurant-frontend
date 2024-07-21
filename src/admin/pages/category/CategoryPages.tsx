@@ -1,10 +1,7 @@
 import { BiChevronRight } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useAppStore } from '../../../store/useAppStore';
+
 import TableCategory from './components/TableCategory';
-import { CategoryForm } from './components/CategoryForm';
-import { Modal } from '../../../shared/Modal';
 
 const categoryActions = [
     { to: '/admin/employees/view', label: 'Ver' },
@@ -16,12 +13,7 @@ export const CategoryPages = () => {
     const redirectTo = () => {
         navigate('/dashboard/category/add');
     };
-    const getCategories = useAppStore((state) => state.fetchCategories);
-    const categories = useAppStore((state) => state.categories);
 
-    useEffect(() => {
-        getCategories();
-    }, [getCategories]);
     return (
         <>
             <div className='mb-6 px-4 md:px-6 xl:px-8 pt-8'>
@@ -56,12 +48,9 @@ export const CategoryPages = () => {
                     </div>
                 </div>
             </div>
-            <div className=' md:px-6 xl:px-8'>
-                <TableCategory navAction={categoryActions} data={categories} />
+            <div className='px-4 md:px-6 xl:px-8'>
+                <TableCategory navAction={categoryActions} />
             </div>
-            <Modal>
-                <CategoryForm />
-            </Modal>
         </>
     );
 };
