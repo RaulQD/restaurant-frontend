@@ -1,10 +1,11 @@
 import { StateCreator } from 'zustand';
-import { getDishes } from '../admin/services/DishesApi';
-import type { Dishes, DishesFormData } from '../types/dishes';
+import { DishesFormData } from '../types';
+import { Dishes } from '../types/dishes';
+import { getDishes } from '../services/DishesApi';
 
 export type DishesSliceType = {
   dishes: Dishes[],
-  fetchDishes: () => Promise<void>
+  fetchDishes: () => Promise<void>,
   addDishes: (dish: DishesFormData) => Promise<void>
 }
 
@@ -13,7 +14,7 @@ export const createDishesSlice: StateCreator<DishesSliceType> = (set) => ({
   fetchDishes: async () => {
     const dishes = await getDishes();
     console.log('Dishes:', dishes);
-    set({ dishes });
+    // set({ dishes });
   },
   addDishes: async (dish: DishesFormData) => {
     console.log(dish);

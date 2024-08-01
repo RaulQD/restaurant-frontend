@@ -30,12 +30,12 @@ export default function MenuPage() {
             {/*Categoria de los platos*/}
             <div className='mt-9'>
                 <ul className=' flex flex-wrap justify-center items-center gap-5'>
-                    {categories.categories.map((category) => (
-                        <li key={category.id_category}>
+                    {categories.map((category) => (
+                        <li key={category.id}>
                             <button
                                 type='button'
                                 className='bg-slate-100 text-black hover:text-white py-2 px-4 text-sm font-bold font-poppins uppercase hover:bg-orange-500 rounded shadow-sm'>
-                                {category.category_name}
+                                {category.name}
                             </button>
                         </li>
                     ))}

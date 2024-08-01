@@ -1,33 +1,54 @@
 import { useForm } from 'react-hook-form';
 import { BiChevronRight } from 'react-icons/bi';
 import { DishesForm } from './components/DishesForm';
-import { DishesFormData } from '../../../types';
+import { DishFormData } from './types/dishes';
+import { useNavigate } from 'react-router-dom';
+import { createDishes } from '../../../services/DishesApi';
+import { useMutation } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 
-export const CreateProductsPage = () => {
-    const initialValues: DishesFormData = {
-        dishes_name: '',
+export default function CreateProductsPage() {
+    const navigate = useNavigate();
+    const initialValues: DishFormData = {
+        name: '',
         description: '',
-        price: 0,
-        id_category: 0,
-        image_url: null,
+        originalPrice: 0,
+        category: '',
+        images: '',
     };
     const {
         register,
         handleSubmit,
         formState: { errors },
+        reset,
     } = useForm({ defaultValues: initialValues });
 
-    const handleForm = (data: DishesFormData) => {
+    const mutation = useMutation({
+        mutationFn: createDishes,
+        onError: (error) => {
+            toast.error(error.message);
+        },
+        onSuccess: (data) => {
+            toast.success(data.message);
+            navigate('/dashboard/products');
+            reset();
+        },
+    });
+
+    const handleForm = async (data: DishFormData) => {
+        console.log(data.images[0]);
         const formData = new FormData();
-        formData.append('dishes_name', data.dishes_name);
+        formData.append('name', data.name);
         formData.append('description', data.description);
-        formData.append('price', data.price.toString());
-        formData.append('id_category', data.id_category.toString());
-      
-        
-        console.log(data.image_url);
-        console.log(formData);
-        // toast.success(data);
+        formData.append('originalPrice', data.originalPrice.toString());
+        formData.append('category', data.category);
+        if (data.images[0]) {
+            formData.append('images', data.images[0]);
+        }
+        await mutation.mutateAsync(formData);
+    };
+    const redirectTo = () => {
+        navigate('/dashboard/products/');
     };
     return (
         <>
@@ -47,7 +68,8 @@ export const CreateProductsPage = () => {
                     <div className='flex flex-col md:flex-row md:items-center md:justify-end gap-4 mt-5 w-full mb-20'>
                         <button
                             type='button'
-                            className='bg-gray100 hover:bg-gray-200 py-2 px-4 transition-all ease-in rounded-lg font-outfit'>
+                            className='bg-gray100 hover:bg-gray-200 py-2 px-4 transition-all ease-in rounded-lg font-outfit'
+                            onClick={redirectTo}>
                             Cancelar
                         </button>
                         <input
@@ -60,4 +82,4 @@ export const CreateProductsPage = () => {
             </div>
         </>
     );
-};
+}

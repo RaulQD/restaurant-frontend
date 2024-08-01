@@ -9,7 +9,8 @@ import LayoutAdmin from './admin/layout/LayoutAdmin';
 import DashboardPage from './admin/pages/dashboard/DashboardPage';
 import CustomersPage from './admin/pages/Customer/CustomersPages';
 import Orders from './admin/pages/orders/Orders';
-import { CreateProductsPage} from './admin/pages/dishes/CreateProductsPage';
+import  CreateProductsPage from './admin/pages/dishes/CreateProductsPage';
+import  EditProductsPage  from './admin/pages/dishes/EditProductsPage';
 import ProductsPage from './admin/pages/dishes/ProductsPage';
 import NotFound from './shared/NotFound';
 import { CategoryPages } from './admin/pages/category/CategoryPages';
@@ -31,6 +32,7 @@ export default function AppRoutes() {
                     <Route path='/dashboard' element={<DashboardPage />} />
                     <Route path='/dashboard/products' element={<ProductsPage />} />
                     <Route path='/dashboard/products/add' element={<CreateProductsPage />} />
+                    <Route path='/dashboard/products/:id/edit' element = {<EditProductsPage />} />
                     <Route path='/dashboard/category' element={<CategoryPages/>}/>
                     <Route path='/dashboard/category/add' element={<CreateCategoryPage/>}/>
                     <Route path='/dashboard/customers' element={<CustomersPage />} />

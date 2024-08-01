@@ -2,17 +2,17 @@ import { useForm } from 'react-hook-form';
 import { BiChevronRight } from 'react-icons/bi';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 import { CategoryForm } from './components/CategoryForm';
-import { CategoryFormData } from '../../../types/category';
-import { createCategory } from './services/CategoryApi';
+import { CategoryFormData } from './types/category';
+import { createCategory } from '../../../services/CategoryApi';
+import toast from 'react-hot-toast';
 
 export const CreateCategoryPage = () => {
     const navigate = useNavigate();
 
     const initialValues: CategoryFormData = {
-        category_name: '',
+        name: '',
     };
     const {
         register,
@@ -30,9 +30,6 @@ export const CreateCategoryPage = () => {
             navigate('/dashboard/category');
         },
     });
-    // const handleForm = async (data: CategoryFormData) => {
-    //     await addCategory(data);
-    // };
 
     const handleForm = async (data: CategoryFormData) => await mutation.mutateAsync(data);
 

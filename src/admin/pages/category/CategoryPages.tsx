@@ -1,7 +1,7 @@
 import { BiChevronRight } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
-
 import TableCategory from './components/TableCategory';
+
 
 const categoryActions = [
     { to: '/admin/employees/view', label: 'Ver' },

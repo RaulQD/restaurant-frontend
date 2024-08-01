@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { BiMenu, BiX } from 'react-icons/bi';
 import { NavLink } from 'react-router-dom';
-import { navLinks } from '../../data/data';
 import OrderList from './OrderList';
 import { CiShoppingBasket } from 'react-icons/ci';
 import Logo from '../../assets/logo-icon.svg';
+import { NavLinks } from '../../types';
 
 type NavbarProps = {
     handleRouteChange: () => void;
@@ -14,7 +14,11 @@ export default function Navbar({ handleRouteChange }: NavbarProps) {
     const [showMenu, setShowMenu] = useState(false);
     const [isOrderOpen, setIsOrderOpen] = useState(false);
     const [scroll, setScroll] = useState(false);
-
+    const navLinks: NavLinks[] = [
+        { name: 'Inicio', path: '/' },
+        { name: 'Nuestros platos', path: '/our-dishes' },
+        { name: 'Sobre Nosotros', path: '/about' },
+    ];
     // Evitar el scroll en el body cuando el menu lateral esté abierto
     useEffect(() => {
         const handleResize = () => {

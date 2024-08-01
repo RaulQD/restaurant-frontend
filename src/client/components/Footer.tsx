@@ -1,8 +1,13 @@
 import { NavLink } from 'react-router-dom';
-import { navLinks } from '../../data/data';
 import { BiLogoFacebook, BiLogoInstagram, BiLogoTiktok } from 'react-icons/bi';
+import { NavLinks } from '../../types';
 
 export default function Footer() {
+    const navLinks: NavLinks[] = [
+        { name: 'Inicio', path: '/' },
+        { name: 'Nuestros platos', path: '/our-dishes' },
+        { name: 'Sobre Nosotros', path: '/about' },
+    ];
     return (
         <footer className='bg-[#191919] py-8'>
             {/* <div className='absolute inset-0 bg-black '></div> */}

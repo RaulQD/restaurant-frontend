@@ -1,7 +1,6 @@
 import { StateCreator } from "zustand";
-import { createCategory, getCategories } from "../admin/pages/category/services/CategoryApi";
-import type { Category, CategoryFormData } from "../types/category";
-import { toast } from "react-toastify";
+import { createCategory, getCategories } from "../services/CategoryApi";
+import type { Category, CategoryFormData } from "../admin/pages/category/types/category";
 
 
 export type CategorySliceType = {
@@ -12,7 +11,7 @@ export type CategorySliceType = {
 const createCategories = (category: CategoryFormData): Category => {
   return {
     ...category,
-    id_category: 0
+    id: ''
   }
 }
 
@@ -31,9 +30,6 @@ export const createCategorySlice: StateCreator<CategorySliceType> = (set) => ({
       set((state) => ({
         categories: [...state.categories, newCategory]
       }))
-      toast.success(response.message);
-    } else if (response.status === 400) {
-      toast.error(response.data.error);
     }
   }
 })

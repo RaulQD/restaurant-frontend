@@ -1,6 +1,6 @@
-import { z } from "zod";
+// import { z } from "zod";
 // import { CategorySchema } from "./category";
-import { CategorySchema, type Category } from "./category";
+import { type Category } from "../admin/pages/category/types/category";
 
 
 
@@ -15,25 +15,18 @@ export type Dishes = {
   category: Category;
 }
 
-export const DishesSchema = z.object({
-  "id_dish": z.number(),
-  "dishes_name": z.string(),
-  "description": z.string(),
-  "price": z.number(),
-  "image_url": z.string().optional(),
-  "id_category": z.number(),
-});
 
-export const DishListSchema = z.object({
-  id_dish: z.number(),
-  dishes_name: z.string(),
-  description: z.string(),
-  price: z.number(),
-  available: z.number(),
-  image_url: z.string().optional(),
-  category: CategorySchema,
-});
-export const DishesListSchema = z.array(DishListSchema);
 
-export type DishesList = z.infer<typeof DishesSchema>;
-export type DishesFormData = Pick<DishesList, 'dishes_name' | 'description' | 'id_category' | 'price' | 'image_url'>
+// export const DishListSchema = z.object({
+//   id_dish: z.number(),
+//   dishes_name: z.string(),
+//   description: z.string(),
+//   price: z.number(),
+//   available: z.number(),
+//   image_url: z.string().optional(),
+//   category: CategorySchema,
+// });
+// export const DishesListSchema = z.array(DishListSchema);
+
+// export type DishesList = z.infer<typeof DishesSchema>;
+// export type DishesFormData = Pick<DishesList, 'dishes_name' | 'description' | 'id_category' | 'price' | 'image_url'>

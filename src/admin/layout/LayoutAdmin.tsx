@@ -3,8 +3,6 @@ import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import { FormUsers } from '../components/projects/FormUsers';
 import { Modal } from '../../shared/Modal';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 export default function LayoutAdmin() {
     return (
@@ -21,7 +19,6 @@ export default function LayoutAdmin() {
             {/* <Modal>
                 <FormUsers />
             </Modal> */}
-            <ToastContainer pauseOnHover={false} pauseOnFocusLoss={false}/>
         </>
     );
 }

@@ -7,7 +7,7 @@ import {
 } from '@headlessui/react';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { NavLink } from 'react-router-dom';
-import { Category } from '../../../../types/category';
+import { Category } from '../types/category';
 
 type NavActionProps = {
     to: string;
