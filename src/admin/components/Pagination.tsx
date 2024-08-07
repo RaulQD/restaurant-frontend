@@ -55,7 +55,7 @@ export default function Pagination({
                     type='button'
                     onClick={prevPage}
                     disabled={page === 1}
-                    className={`p-2 flex justify-center items-center rounded-md ${
+                    className={`p-2 flex justify-center items-center rounded-md transition-all ${
                         page === 1
                             ? ''
                             : 'hover:bg-orange-500  hover:text-white'
@@ -68,7 +68,7 @@ export default function Pagination({
                     type='button'
                     onClick={nextPage}
                     disabled={currentPage === pageCount}
-                    className={`p-2 flex justify-center items-center rounded-md ${
+                    className={`p-2 flex justify-center items-center rounded-md transition-all ${
                         currentPage === pageCount
                             ? ''
                             : 'hover:bg-orange-500  hover:text-white'

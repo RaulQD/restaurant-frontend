@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Logo from '../../assets/logo-icon.svg';
 import {
-    BiChevronRight,
     BiFile,
     BiLogOut,
     BiMenu,
@@ -10,18 +9,14 @@ import {
     BiX,
 } from 'react-icons/bi';
 import { NavLink } from 'react-router-dom';
-import Dropdown from './Dropdown';
-import ProductsMenu from './ProductsMenu';
-import CustomersMenu from './CustomersMenu';
-import { EmployeesMenu } from './EmployeesMenu';
+import SidebarItems from './SidebarItems';
+import SidebarDropdown from './SidebarDropdown';
+import { FaUsers } from 'react-icons/fa';
+import { FaBuildingUser } from 'react-icons/fa6';
 
 export default function Sidebar() {
     const [showSidebar, setShowSidebar] = useState(false);
-    const [showDropdown, setShowDropdown] = useState(false);
-    const menuItems = [
-        { path: '/dashboard/orders', label: 'Reporte de ordenes' },
-        { path: '/dashboard/sales', label: 'Reporte de ventas' },
-    ];
+
     return (
         <>
             <aside
@@ -37,54 +32,25 @@ export default function Sidebar() {
                     </div>
                     <nav className=''>
                         <ul className='font-outfit'>
-                            <li className='mb-3'>
-                                <NavLink
-                                    to='/dashboard'
-                                    className=' text-white flex items-center gap-4 py-2 px-4 rounded-lg hover:bg-secondary-900 transition-colors'>
-                                    <BiSolidDashboard className='text-orange-500 text-lg' />{' '}
-                                    Dashboard
-                                </NavLink>
-                            </li>
-                            <li className='mb-3'>
-                                <ProductsMenu />
-                            </li>
-                            <li className='mb-3'>
-                                <NavLink
-                                    to='/dashboard/orders'
-                                    className=' text-white flex items-center gap-4 py-2 px-4 rounded-lg hover:bg-secondary-900 transition-colors'>
-                                    <BiFile className='text-orange-500 text-lg' />{' '}
-                                    Ordenes
-                                </NavLink>
-                            </li>
-                            <li className='mb-3'>
-                                <CustomersMenu />
-                            </li>
-                            <li className='mb-3'>
-                                <EmployeesMenu />
-                            </li>
-                            <li className='mb-3'>
-                                <button
-                                    type='button'
-                                    className=' w-full text-white flex justify-between items-center py-2 px-4 rounded-lg hover:bg-secondary-900 transition-colors'
-                                    onClick={() =>
-                                        setShowDropdown(!showDropdown)
-                                    }>
-                                    <span className='flex items-center gap-4'>
-                                        <BiSolidReport className='text-orange-500 text-lg' />{' '}
-                                        Reportes
-                                    </span>
-                                    <BiChevronRight
-                                        className={`text-orange-500 text-xl mt-1 ${
-                                            showDropdown ? 'rotate-90' : ''
-                                        }  transition-all`}
-                                    />
-                                </button>
-
-                                <Dropdown
-                                    showDropdown={showDropdown}
-                                    menuItems={menuItems}
-                                />
-                            </li>
+                            <SidebarItems path='/dashboard' label='Dashboard' Icon={BiSolidDashboard}/>
+                            <SidebarDropdown label='Catalogo' Icon={BiSolidReport} menuItems={[
+                                { path: '/dashboard/products', label: 'Productos' },
+                                { path: '/dashboard/products/add', label: 'Añadir Producto' },
+                                { path: '/dashboard/category', label: 'Categorias'},
+                                { path: '/dashboard/category/add', label: 'Categoría de Productos', },
+                            ]}/>
+                            <SidebarItems path='/dashboard/orders' label='Ordenes' Icon={BiFile}/>
+                            <SidebarDropdown label='Clientes' Icon={FaUsers} menuItems={[
+                                { path: '/dashboard/customers', label: 'Lista de clientes' },
+                            ]}/>
+                            <SidebarDropdown label='Empleados' Icon={FaBuildingUser} menuItems={[
+                                { path: '/dashboard/employees', label: 'Empleados' }
+                            ]}/>
+                            <SidebarDropdown label='Reportes' Icon={BiSolidReport} menuItems={ [
+                                { path: '/dashboard/orders', label: 'Reporte de ordenes' },
+                                { path: '/dashboard/sales', label: 'Reporte de ventas' },
+                            ]}/>
+                            
                         </ul>
                     </nav>
                 </div>

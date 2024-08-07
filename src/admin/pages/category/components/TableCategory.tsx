@@ -10,7 +10,7 @@ import { NavLink } from 'react-router-dom';
 // import { CardViewTable } from './CardViewTable';
 // import { Category } from '../../../../types/category';
 import { useQuery } from '@tanstack/react-query';
-import { getCategories } from '../../../../services/CategoryApi';
+import { getCategories } from '../../../services/apiCategory';
 
 type NavActionProps = {
     to: string;
@@ -29,8 +29,6 @@ export default function TableCategory({ navAction }: TableProps) {
     });
 
     if (isLoading) return <p>Loading...</p>;
-    console.log('Categories', data);
-
     if (data)
     return (
         <>

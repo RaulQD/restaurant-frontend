@@ -10,21 +10,29 @@ import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import Pagination from '../../../components/Pagination';
 import { formatCurrency, transformId } from '../../../../helpers';
-import { useDishes } from '../hook/useDishes';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { getDishes} from '../../../services/apiDishes';
+import { DishesResponseType } from '../types/dishes';
+import { Modal } from '../../../../shared/Modal';
+import AddImageForm from './AddImageForm';
 
-type NavActionProps = {
-    to: string;
-    label: string;
-};
-type TableProps = {
-    navAction: NavActionProps[];
-};
-export default function TableProduct({ navAction }: TableProps) {
+export default function TableProduct() {
+    const [selectedDishId, setSelectedDishId] = useState<string>('');
+    const [modal, setModal] = useState(false);
     const [page, setPage] = useState(1);
-    
     const limit = 10;
 
-    const { data, isLoading, isError, error } = useDishes(page, limit);
+    const { data, isLoading, isError, error } = useQuery<DishesResponseType>({
+        queryKey: ['dishes', page, limit],
+        queryFn: () => getDishes({ page, limit }),
+        placeholderData: keepPreviousData,
+    });
+
+    const handleImageClick = (dishesId: string) => {
+        setSelectedDishId(dishesId);
+        console.log('dishId : ' + dishesId);
+        setModal(true);
+    };
 
     {
         isLoading && <p className='text-center mt-16'>Cargando...</p>;
@@ -64,11 +72,17 @@ export default function TableProduct({ navAction }: TableProps) {
                                             {transformId(dish.id)}
                                         </td>
                                         <td className=' whitespace-nowrap px-3 py-4 font-medium flex justify-start gap-5 ml-4  truncate '>
-                                            <img
-                                                src={dish.images}
-                                                alt={dish.name}
-                                                className='size-12'
-                                            />
+                                            <button
+                                                type='button'
+                                                onClick={() =>
+                                                    handleImageClick(dish.id)
+                                                }>
+                                                <img
+                                                    src={dish.images}
+                                                    alt={dish.name}
+                                                    className='size-12'
+                                                />
+                                            </button>
                                             <div className='flex flex-col '>
                                                 <p>{dish.name}</p>
                                                 <span className='text-sm text-gray-500'>
@@ -115,24 +129,22 @@ export default function TableProduct({ navAction }: TableProps) {
                                                             gap: '4px',
                                                         }}
                                                         className='py-4 px-2 bg-white rounded-lg shadow-lg w-36'>
-                                                        {navAction.map(
-                                                            (action) => (
-                                                                <MenuItem
-                                                                    key={
-                                                                        action.label
-                                                                    }>
-                                                                    <NavLink
-                                                                        to={
-                                                                            action.to
-                                                                        }
-                                                                        className='text-xs flex items-center gap-x-2 rounded-lg transition-colors hover:bg-orange-100 py-2 px-4 mb-1 text-gray-400 font-medium hover:text-orange-600'>
-                                                                        {
-                                                                            action.label
-                                                                        }
-                                                                    </NavLink>
-                                                                </MenuItem>
-                                                            )
-                                                        )}
+                                                        <MenuItem>
+                                                            <NavLink
+                                                                to={`/dashboard/products/${dish.id}/edit`}
+                                                                className='text-xs flex items-center gap-x-2 rounded-lg transition-colors hover:bg-orange-100 py-2 px-4 mb-1 text-gray-400 font-medium hover:text-orange-600'>
+                                                                Editar
+                                                            </NavLink>
+                                                        </MenuItem>
+                                                        <MenuItem>
+                                                            <NavLink
+                                                                to={
+                                                                    '/dashboard/products/delete'
+                                                                }
+                                                                className='text-xs flex items-center gap-x-2 rounded-lg transition-colors hover:bg-orange-100 py-2 px-4 mb-1 text-gray-400 font-medium hover:text-orange-600'>
+                                                                Eliminar
+                                                            </NavLink>
+                                                        </MenuItem>
                                                     </MenuItems>
                                                 </Transition>
                                             </Menu>
@@ -159,6 +171,16 @@ export default function TableProduct({ navAction }: TableProps) {
                 {/* <div className='px-4'>
                     <CardViewTable  navAction={navAction} />
                 </div> */}
+                {modal && (
+                    <Modal
+                        title='Cargar Imagen'
+                        closeModal={() => setModal(false)}>
+                        <AddImageForm
+                            dishesId={selectedDishId}
+                            onClose={() => setModal(false)}
+                        />
+                    </Modal>
+                )}
             </>
         );
 }

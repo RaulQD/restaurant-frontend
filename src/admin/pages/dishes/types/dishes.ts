@@ -42,12 +42,13 @@ export type Dish = {
   id: string;
   name: string;
   description: string;
-  originalPrice: number;
-  available: boolean;
+  originalPrice?: number;
+  available?: boolean;
   category: string;
-  images: string;
+  images?: string;
 }
-export type DishFormData = Pick<Dish, 'name' | 'description' | 'originalPrice' | 'category' | 'images'>;
+export type DishFormData = Pick<Dish, 'name' | 'description' | 'originalPrice' | 'category' | 'available' | 'images'>;
+
 export type DishesType = {
   id: string;
   name: string;
@@ -65,6 +66,5 @@ export type PaginationInfoType = {
 export type DishesResponseType = {
   result: DishesType[];
   pagination: PaginationInfoType
-
 }
 

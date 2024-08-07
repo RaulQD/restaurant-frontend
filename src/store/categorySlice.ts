@@ -1,5 +1,5 @@
 import { StateCreator } from "zustand";
-import { createCategory, getCategories } from "../services/CategoryApi";
+import { createCategory, getCategories } from "../admin/services/apiCategory";
 import type { Category, CategoryFormData } from "../admin/pages/category/types/category";
 
 

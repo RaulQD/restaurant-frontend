@@ -7,21 +7,21 @@ type MenuItemProps = {
 };
 
 type DropdownProps = {
-    showDropdown: boolean;
+    isOpen: boolean;
     menuItems: MenuItemProps[];
 };
 
-export default function Dropdown({ showDropdown, menuItems }: DropdownProps) {
+export default function Dropdown({ isOpen, menuItems }: DropdownProps) {
     const contentRef = useRef<HTMLUListElement>(null);
     const [height, setHeight] = useState('0px');
 
     useEffect(() => {
         if (contentRef.current) {
             setHeight(
-                showDropdown ? `${contentRef.current.scrollHeight}px` : '0px'
+                isOpen ? `${contentRef.current.scrollHeight}px` : '0px'
             );
         }
-    }, [showDropdown]);
+    }, [isOpen]);
 
     return (
         <>
