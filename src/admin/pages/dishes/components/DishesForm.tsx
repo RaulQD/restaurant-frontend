@@ -99,18 +99,7 @@ export const DishesForm = ({
                         </div>
                     </div>
                     <div className='flex flex-col gap-5 col-span-2'>
-                        <div className='bg-white shadow p-4 md:p-6 lg:p-8 w-full rounded-lg'>
-                            <label
-                                htmlFor='images'
-                                className='font-outfit text-xl font-medium mb-5'>
-                                Imagen del plato
-                            </label>
-                            <input
-                                type='file'
-                                id='images'
-                                className='block w-full rounded-md border-0 py-2 pl-4 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 outline-none placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-orange-500 text-sm sm:leading-6 mt-4'
-                            />
-                        </div>
+                      
                         <div className='bg-white shadow p-4 md:p-6 lg:p-8 w-full rounded-lg'>
                             <h2 className='font-medium text-lg mb-5'>
                                 Categoria del producto

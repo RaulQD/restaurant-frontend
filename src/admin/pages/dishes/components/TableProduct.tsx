@@ -11,7 +11,7 @@ import { useState } from 'react';
 import Pagination from '../../../components/Pagination';
 import { formatCurrency, transformId } from '../../../../helpers';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import { getDishes} from '../../../services/apiDishes';
+import { getDishes } from '../../../services/apiDishes';
 import { DishesResponseType } from '../types/dishes';
 import { Modal } from '../../../../shared/Modal';
 import AddImageForm from './AddImageForm';

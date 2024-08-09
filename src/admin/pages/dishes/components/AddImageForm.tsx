@@ -6,7 +6,6 @@ import {
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Dish } from '../types/dishes';
-import { ErrorMessage } from '../../../components/ErrorMessage';
 import { ChangeEvent, useState } from 'react';
 
 type ImageFormProps = {
@@ -19,11 +18,7 @@ type DishFormImage = {
 
 export default function AddImageForm({ dishesId, onClose }: ImageFormProps) {
     const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<DishFormImage>();
+    const { register, handleSubmit } = useForm<DishFormImage>();
 
     const queryClient = useQueryClient();
     const mutation = useMutation({
@@ -69,33 +64,56 @@ export default function AddImageForm({ dishesId, onClose }: ImageFormProps) {
         // RESETEA EL PREVIEW
         setPreview(null);
     };
+    const removeFile = () => {
+        setPreview(null);
+    };
+
     return (
         <>
-            <form onSubmit={handleSubmit(handleSubmitImage)} noValidate>
-                <div className='flex flex-col p-4'>
+            <form
+                onSubmit={handleSubmit(handleSubmitImage)}
+                noValidate
+                className='p-8'>
+                <div className='border-2 border-dashed border-gray-300 rounded-lg py-10 px-6 '>
+                    <label htmlFor='images' className='flex justify-center'>
+                        Seleccionar imagen
+                    </label>
                     <input
                         type='file'
                         id='images'
-                        {...register('images', {
-                            required: 'Debes seleccionar una imagen',
-                        })}
-                        className='p-2  rounded-lg mt-4'
+                        className='opacity-0 pointer-events-none'
+                        accept='image/*'
+                        {...register('images')}
                         onChange={handlePreview}
                     />
-                    {preview && (
-                        <div>
-                            <p>Vista previa de la imagen:</p>
-                            <img
-                                src={preview as string}
-                                alt='Vista previa'
-                                style={{ width: '200px', height: 'auto' }}
-                            />
-                        </div>
-                    )}
-                    {errors.images && (
-                        <ErrorMessage>{errors.images.message}</ErrorMessage>
-                    )}
-                    <input type='submit' value='Subir Imagen' className='bg-orange-500 hover:bg-orange-600 text-white p-2 rounded-lg mt-10'/>
+                </div>
+                {preview && (
+                    <div className='mt-4'>
+                        <img
+                            src={preview as string}
+                            alt='Vista previa'
+                            className='mx-auto rounded-lg object-cover w-52 h-52'
+                        />
+                        <button
+                            type='button'
+                            className='block text-center mt-2 text-red-500 font-outfit'
+                            onClick={removeFile}>
+                            Eliminar
+                        </button>
+                    </div>
+                )}
+                <div className='mt-8 flex flex-col md:flex-row justify-between items-center gap-14'>
+                    <input
+                        type='submit'
+                        value='Subir Imagen'
+                        className='w-full block font-outfit bg-orange-500 hover:bg-orange-600 text-white p-2 rounded-lg cursor-pointer'
+                    />
+                    <button
+                        type='button'
+                        className='w-full block bg-gray-300 text-black py-2 rounded-lg  font-outfit'
+                        onClick={onClose}>
+                        Cancelar
+                    </button>
                 </div>
             </form>
         </>
