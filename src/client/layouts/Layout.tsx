@@ -4,22 +4,28 @@ import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import { Modal } from '../../shared/Modal';
 import Login from '../../auth/pages/Login';
+import { useState } from 'react';
 
 export default function Layout() {
+    const [modal, setModal] = useState(false);
     const handleRouteChange = () => {
         window.scrollTo(0, 0);
     };
+
     return (
         <>
-            <Navbar handleRouteChange={handleRouteChange} />
+            <Navbar handleRouteChange={handleRouteChange} setModal={setModal}/>
             <Header />
             <main>
                 <Outlet />
             </main>
-            {/* <Modal>
-                <Login />
-            </Modal> */}
+
             <Footer />
+            {modal && (
+                <Modal closeModal={() => setModal(false)}>
+                    <Login />
+                </Modal>
+            )}
         </>
     );
 }

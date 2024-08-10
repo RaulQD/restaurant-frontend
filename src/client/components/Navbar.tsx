@@ -8,9 +8,10 @@ import { NavLinks } from '../../types';
 
 type NavbarProps = {
     handleRouteChange: () => void;
+    setModal: (value: boolean) => void;
 };
 
-export default function Navbar({ handleRouteChange }: NavbarProps) {
+export default function Navbar({ handleRouteChange, setModal }: NavbarProps) {
     const [showMenu, setShowMenu] = useState(false);
     const [isOrderOpen, setIsOrderOpen] = useState(false);
     const [scroll, setScroll] = useState(false);
@@ -162,7 +163,8 @@ export default function Navbar({ handleRouteChange }: NavbarProps) {
                     </div>
                     <button
                         type='button'
-                        className=' bg-orange-500 text-white py-2 px-3 rounded-lg hover:bg-orange-600 transition-all duration-200 ease-in-out font-poppins '>
+                        className=' bg-orange-500 text-white py-2 px-3 rounded-lg hover:bg-orange-600 transition-all duration-200 ease-in-out font-poppins '
+                        onClick={() => setModal(true)}>
                         Iniciar sesión
                     </button>
                 </div>

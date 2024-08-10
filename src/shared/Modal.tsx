@@ -2,7 +2,7 @@ import { BiX } from 'react-icons/bi';
 
 type ModalProps = {
     children: React.ReactNode;
-    title: string;
+    // title: string;
     closeModal: () => void;
 };
 

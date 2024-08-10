@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
+import Logo from '../../assets/logo.svg';
 
-export const Form = () => {
+export default function Form() {
     const navigate = useNavigate();
     const redirectTo = () => {
-        // redirect to the SignUp page
         navigate('/signup');
         setTimeout(() => {
             window.scrollTo(0, 0);
@@ -12,11 +12,7 @@ export const Form = () => {
     return (
         <div className='flex min-h-full flex-1 flex-col justify-center px-8 pt-5 pb-10'>
             <div className='sm:mx-auto sm:w-full sm:max-w-sm '>
-                <img
-                    src='./logo.svg'
-                    alt='logo'
-                    className='mx-auto h-15 w-auto'
-                />
+                <img src={Logo} alt='logo' className='mx-auto h-15 w-auto' />
                 <h2 className='mt-4 text-center text-base md:text-2xl font-bold leading-9 tracking-tight text-gray-900'>
                     Inicia sesión con tu cuenta
                 </h2>
@@ -73,7 +69,6 @@ export const Form = () => {
                         </button>
                     </div>
                 </form>
-
                 <p className='mt-8 text-center text-sm text-gray-500'>
                     ¿No tienes cuenta?{' '}
                     <button
@@ -86,4 +81,4 @@ export const Form = () => {
             </div>
         </div>
     );
-};
+}

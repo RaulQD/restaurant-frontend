@@ -1,14 +1,20 @@
+import { useQuery } from '@tanstack/react-query';
 import CardMenuList from '../components/CardMenuList';
-import { useAppStore } from '../../store/useAppStore';
-import { useEffect } from 'react';
+import { getCategories } from '../../admin/services/apiCategory';
+// import { useAppStore } from '../../store/useAppStore';
+// import { useEffect } from 'react';
 
 export default function MenuPage() {
-    const categories = useAppStore((state) => state.categories);
-    const fetchCategories = useAppStore((state) => state.fetchCategories);
+    // const categories = useAppStore((state) => state.categories);
+    // const fetchCategories = useAppStore((state) => state.fetchCategories);
 
-    useEffect(() => {
-        fetchCategories();
-    }, [fetchCategories]);
+    // useEffect(() => {
+    //     fetchCategories();
+    // }, [fetchCategories]);
+    const { data, isLoading, isError } = useQuery({
+        queryKey: ['categoriesClient'],
+        queryFn: getCategories,
+    });
 
     return (
         <section className='mt-14 mb-48 px-5 md:px-16 lg:px-32 xl:px-44'>
@@ -30,7 +36,7 @@ export default function MenuPage() {
             {/*Categoria de los platos*/}
             <div className='mt-9'>
                 <ul className=' flex flex-wrap justify-center items-center gap-5'>
-                    {categories.map((category) => (
+                    {data?.map((category) => (
                         <li key={category.id}>
                             <button
                                 type='button'

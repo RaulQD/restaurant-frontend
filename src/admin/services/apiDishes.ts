@@ -15,10 +15,14 @@ export const createDishes = async (formData: DishFormData) => {
     }
   }
 }
+export type GetDishesAPIType = {
+  page: number;
+  limit: number;
+}
 
-export const getDishes = async ({ page = 1, limit = 10 }: { page: number, limit: number }) => {
+export const getDishes = async (params: GetDishesAPIType) => {
   try {
-    const { data } = await api.get(`/dishes?page=${page}&limit=${limit}`);
+    const { data } = await api.get('/dishes', { params });
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {
@@ -66,7 +70,6 @@ export type UpdateImageAPIType = {
 export const updateDishesImage = async ({ formData, dishesId }: UpdateImageAPIType) => {
   try {
     const { data } = await api.put(`/uploads/dishes/${dishesId}`, formData)
-    console.log(data);
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {

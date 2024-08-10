@@ -12,9 +12,8 @@ export type DishesSliceType = {
 export const createDishesSlice: StateCreator<DishesSliceType> = (set) => ({
   dishes: [],
   fetchDishes: async () => {
-    const dishes = await getDishes();
-    console.log('Dishes:', dishes);
-    // set({ dishes });
+    const dishes = await getDishes({ page: 1, limit: 5 });
+    set({ dishes });
   },
   addDishes: async (dish: DishesFormData) => {
     console.log(dish);

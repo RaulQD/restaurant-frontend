@@ -38,9 +38,11 @@ export default function PopularDishes() {
             {/*Categoria de los platos*/}
             <div className=''>
                 <div className='pt-20 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8'>
-                    {dishes.map((dish) => (
-                        <CardList key={dish.id_dish} dish={dishes} />
-                    ))}
+                    <CardList />
+                    <CardList />
+                    <CardList />
+                    <CardList />
+                    <CardList />
                 </div>
             </div>
             <div className='flex justify-center items-center mt-8'>
