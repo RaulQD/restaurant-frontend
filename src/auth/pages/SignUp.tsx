@@ -1,10 +1,51 @@
 import { NavLink } from 'react-router-dom';
 import Logo from '../../assets/logo-icon.svg';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { UserRegisterform } from '../../types/auth';
+import { ErrorMessage } from '../../admin/components/ErrorMessage';
+import { useMutation } from '@tanstack/react-query';
+import { createAccount } from '../../services/apiUser';
+import toast from 'react-hot-toast';
+
 export default function SignUp() {
+    const initialValues: UserRegisterform = {
+        firstName: '',
+        lastName: '',
+        dni: '',
+        email: '',
+        password: '',
+        phone: '',
+        address: '',
+    };
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isSubmitting },
+        reset,
+    } = useForm({
+        defaultValues: initialValues,
+    });
+    const mutation = useMutation({
+        mutationFn: createAccount,
+        onError: (error) => {
+            toast.error(error.message);
+        },
+        onSuccess: (data) => {
+            toast.success(data.message);
+            reset();
+        },
+    });
+
+    const onSubmit: SubmitHandler<UserRegisterform> = async (data) => {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await mutation.mutateAsync(data);
+    };
+
     return (
         <>
             <div className='py-14 lg:py-[70px]'>
-                <div className='bg-white rounded-md w-[550px] mx-auto'>
+                <div className='bg-white rounded-md w-[600px] mx-auto'>
                     <div className='flex justify-center items-center gap-2 p-5'>
                         <img src={Logo} alt='logo' className='size-9' />
                         <span className='font-oleo text-4xl text-[#F97316] hidden lg:block'>
@@ -25,66 +66,174 @@ export default function SignUp() {
                                 sencilla.
                             </p>
                         </div>
-                        <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-md'>
-                            <form className='space-y-6'>
+                        <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-lg'>
+                            <form
+                                className='space-y-6'
+                                onSubmit={handleSubmit(onSubmit)}
+                               >
                                 <div className=''>
                                     <label
-                                        htmlFor='first_name'
+                                        htmlFor='firstName'
                                         className='block text-sm  leading-6 text-gray-900'>
                                         Nombre
                                     </label>
 
                                     <input
                                         type='text'
-                                        name='first_name'
-                                        id='first_name'
+                                        id='firstName'
                                         className='block w-full rounded-md border-0 py-2 pl-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 outline-none placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-orange-500 sm:text-sm sm:leading-6 mt-2'
+                                        {...register('firstName', {
+                                            required: 'El nombre es requerido.',
+                                            minLength: {
+                                                value: 3,
+                                                message:
+                                                    'El nombre debe tener al menos 3 caracteres.',
+                                            },
+                                        })}
                                     />
+                                    {errors.firstName && (
+                                        <ErrorMessage>
+                                            {errors.firstName.message}
+                                        </ErrorMessage>
+                                    )}
                                 </div>
                                 <div className='mt-8'>
                                     <label
-                                        htmlFor='last_name'
+                                        htmlFor='lastName'
                                         className='block text-sm  leading-6 text-gray-900'>
                                         Apellido
                                     </label>
 
                                     <input
                                         type='text'
-                                        name='last_name'
-                                        id='last_name'
+                                        id='lastName'
                                         className='block w-full rounded-md border-0 py-2 pl-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 outline-none placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-orange-500 sm:text-sm sm:leading-6 mt-2'
+                                        {...register('lastName', {
+                                            required:
+                                                'El apellido es requerido.',
+                                            minLength: {
+                                                value: 3,
+                                                message:
+                                                    'El apellido debe tener al menos 3 caracteres.',
+                                            },
+                                        })}
                                     />
+                                    {errors.lastName && (
+                                        <ErrorMessage>
+                                            {errors.lastName.message}
+                                        </ErrorMessage>
+                                    )}
                                 </div>
+                                <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-8'>
+                                    <div>
+                                        <label
+                                            htmlFor='dni'
+                                            className='block text-sm font-medium leading-6 text-gray-900'>
+                                            DNI
+                                        </label>
 
+                                        <input
+                                            id='dni'
+                                            type='text'
+                                            className='block w-full rounded-md border-0 py-2 pl-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 outline-none placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-orange-500 sm:text-sm sm:leading-6 mt-2'
+                                            {...register('dni', {
+                                                required:
+                                                    'El DNI es requerido.',
+                                                pattern: {
+                                                    value: /^[0-9]{8}$/,
+                                                    message:
+                                                        'El DNI debe tener 8 digitos.',
+                                                },
+                                            })}
+                                        />
+                                        {errors.dni && (
+                                            <ErrorMessage>
+                                                {errors.dni.message}
+                                            </ErrorMessage>
+                                        )}
+                                    </div>
+                                    <div>
+                                        <label
+                                            htmlFor='phone'
+                                            className='block text-sm font-medium leading-6 text-gray-900'>
+                                            Telefono
+                                        </label>
+
+                                        <input
+                                            id='phone'
+                                            type='text'
+                                            className='block w-full rounded-md border-0 py-2 pl-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 outline-none placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-orange-500 sm:text-sm sm:leading-6 mt-2'
+                                            {...register('phone', {
+                                                required:
+                                                    'El telefono es requerido.',
+                                                pattern: {
+                                                    value: /^9[0-9]{8}$/,
+                                                    message:
+                                                        'El telefono debe tener 9 digitos y empezar con 9.',
+                                                },
+                                            })}
+                                        />
+                                        {errors.phone && (
+                                            <ErrorMessage>
+                                                {errors.phone.message}
+                                            </ErrorMessage>
+                                        )}
+                                    </div>
+                                </div>
                                 <div className='mt-8'>
                                     <label
-                                        htmlFor='dni'
+                                        htmlFor='address'
                                         className='block text-sm font-medium leading-6 text-gray-900'>
-                                        DNI
+                                        Dirección
                                     </label>
 
                                     <input
-                                        id='dni'
-                                        name='dni'
+                                        id='address'
                                         type='text'
                                         className='block w-full rounded-md border-0 py-2 pl-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 outline-none placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-orange-500 sm:text-sm sm:leading-6 mt-2'
+                                        {...register('address', {
+                                            required:
+                                                'La dirección es requerido.',
+                                            minLength: {
+                                                value: 10,
+                                                message:
+                                                    'La dirección debe tener al menos 10 caracteres.',
+                                            },
+                                        })}
                                     />
+                                    {errors.address && (
+                                        <ErrorMessage>
+                                            {errors.address.message}
+                                        </ErrorMessage>
+                                    )}
                                 </div>
                                 <div className='mt-8'>
                                     <label
                                         htmlFor='email'
                                         className='block text-sm font-medium leading-6 text-gray-900'>
-                                        Email address
+                                        Correo electronico
                                     </label>
 
                                     <input
                                         id='email'
-                                        name='email'
                                         type='email'
                                         autoComplete='email'
-                                        required
+
                                         className='block w-full rounded-md border-0 py-2 pl-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 outline-none placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-orange-500 sm:text-sm sm:leading-6 mt-2'
+                                        {...register('email', {
+                                            required: 'El email es requerido',
+                                            pattern: {
+                                                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                                                message:
+                                                    'El email no es valido',
+                                            },
+                                        })}
                                     />
+                                    {errors.email && (
+                                        <ErrorMessage>
+                                            {errors.email.message}
+                                        </ErrorMessage>
+                                    )}
                                 </div>
                                 <div className='mt-8'>
                                     <label
@@ -97,16 +246,32 @@ export default function SignUp() {
                                         <input
                                             type='password'
                                             id='password'
-                                            name='password'
                                             className='block w-full rounded-md border-0 py-2 pl-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 outline-none placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-orange-500 sm:text-sm sm:leading-6 mt-2'
+                                            {...register('password', {
+                                                required:
+                                                    'La contraseña es requerida.',
+                                                minLength: {
+                                                    value: 8,
+                                                    message:
+                                                        'La contraseña debe tener al menos 8 caracteres.',
+                                                },
+                                            })}
                                         />
+                                        {errors.password && (
+                                            <ErrorMessage>
+                                                {errors.password.message}
+                                            </ErrorMessage>
+                                        )}
                                     </div>
                                 </div>
                                 <div className='mt-10'>
                                     <button
+                                        disabled={isSubmitting}
                                         type='submit'
-                                        className=' w-full rounded-md border border-orange-500 py-2 text-sm font-semibold leading-6 text-black hover:text-white hover:bg-orange-500 focus:outline-none transition-all'>
-                                        Crear cuenta
+                                        className=' w-full rounded-md border border-orange-500 py-2 text-sm font-semibold leading-6 text-black  focus:outline-none transition-all'>
+                                        {isSubmitting
+                                            ? 'Cargando...'
+                                            : 'Crear cuenta'}
                                     </button>
                                 </div>
                             </form>

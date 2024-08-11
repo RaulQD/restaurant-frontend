@@ -21,7 +21,7 @@ export default function Form() {
     return (
         <>
             <div className='py-14 lg:py-[70px]'>
-                <div className='bg-white rounded-md w-[550px] mx-auto'>
+                <div className='bg-white rounded-md w-[600px] mx-auto'>
                     <div className='flex justify-center items-center gap-2 p-5'>
                         <img src={Logo} alt='logo' className='size-9' />
                         <span className='font-oleo text-4xl text-[#F97316] hidden lg:block'>
@@ -39,7 +39,7 @@ export default function Form() {
                                 iniciar sesión
                             </p>
                         </div>
-                        <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-md'>
+                        <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-lg'>
                             <form className='space-y-6'>
                                 <div>
                                     <label
