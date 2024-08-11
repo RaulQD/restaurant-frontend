@@ -1,7 +1,7 @@
 import { BiChevronRight } from 'react-icons/bi';
 import { DishesForm } from './DishesForm';
 import { useForm } from 'react-hook-form';
-import { DishFormData } from '../types/dishes';
+import { DishFormData } from '../../../types/dishes';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateDishes } from '../../../services/apiDishes';

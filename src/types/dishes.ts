@@ -1,32 +1,70 @@
 // import { z } from "zod";
-// import { CategorySchema } from "./category";
-import { type Category } from "../admin/pages/category/types/category";
+import { Categories } from "./category";
+
+// export const ResultSchema = z.object({
+//   "id": z.string(),
+//   "name": z.string(),
+//   "description": z.string(),
+//   "originalPrice": z.number(),
+//   "available": z.boolean(),
+//   "category": categorySchema,
+//   "images": z.string().optional(),
+// })
+// export const PaginationInfoSchema = z.object({
+//   "page": z.number(),
+//   "limit": z.number(),
+//   "totalDishes": z.number(),
+// });
+// export type Pagination = z.infer<typeof PaginationInfoSchema>;
+// export const DishesSchema = z.object({
+//   result: z.array(ResultSchema),
+//   info: PaginationInfoSchema,
+// });
+// export const DishesListSchema = z.array(DishesSchema);
+// export type Result = z.infer<typeof ResultSchema>;
+
+// export type Dishes = z.infer<typeof DishesSchema>;
+// export type DishesList = z.infer<typeof DishesListSchema>
+
+// export const DishSchema = z.object({
+//   "id": z.string(),
+//   "name": z.string(),
+//   "description": z.string(),
+//   "originalPrice": z.number(),
+//   "available": z.boolean(),
+//   "category": z.string(),
+//   "images": z.string(),
+// });
+// export type Dish = z.infer<typeof DishSchema>;
 
 
-
-export type Dishes = {
-  id_dish: number;
-  dishes_name: string;
+export type Dish = {
+  id: string;
+  name: string;
   description: string;
-  available: number;
-  price: number;
-  image_url: string | null;
-  created_at: string;
-  category: Category;
+  originalPrice?: number;
+  available?: boolean;
+  category: string;
+  images?: string;
+}
+export type DishFormData = Pick<Dish, 'name' | 'description' | 'originalPrice' | 'category' | 'available' | 'images'>;
+
+export type DishesType = {
+  id: string;
+  name: string;
+  description: string;
+  originalPrice: number;
+  available: boolean;
+  category: Categories;
+  images: string;
+}
+export type PaginationInfoType = {
+  page: number;
+  limit: number;
+  totalDishes: number;
+}
+export type DishesResponseType = {
+  result: DishesType[];
+  pagination: PaginationInfoType
 }
 
-
-
-// export const DishListSchema = z.object({
-//   id_dish: z.number(),
-//   dishes_name: z.string(),
-//   description: z.string(),
-//   price: z.number(),
-//   available: z.number(),
-//   image_url: z.string().optional(),
-//   category: CategorySchema,
-// });
-// export const DishesListSchema = z.array(DishListSchema);
-
-// export type DishesList = z.infer<typeof DishesSchema>;
-// export type DishesFormData = Pick<DishesList, 'dishes_name' | 'description' | 'id_category' | 'price' | 'image_url'>

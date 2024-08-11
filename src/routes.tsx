@@ -24,7 +24,6 @@ export default function AppRoutes() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path='/signup' element={<SignUp />} />
                 <Route element={<Layout />}>
                     <Route path='/' element={<HomePage />} index />
                     <Route path='/our-dishes' element={<MenuPage />} />
@@ -44,6 +43,7 @@ export default function AppRoutes() {
                 </Route>
                 <Route element= {<AuthLayout/>}>
                    <Route path='/auth/login' element={<Login/>} />
+                    <Route path='/auth/register' element={<SignUp />} />
                 </Route>
                 <Route path='*' element={<NotFound />} />
             </Routes>

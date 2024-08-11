@@ -8,10 +8,9 @@ import { NavLinks } from '../../types';
 
 type NavbarProps = {
     handleRouteChange: () => void;
-    setModal: (value: boolean) => void;
 };
 
-export default function Navbar({ handleRouteChange, setModal }: NavbarProps) {
+export default function Navbar({ handleRouteChange }: NavbarProps) {
     const [showMenu, setShowMenu] = useState(false);
     const [isOrderOpen, setIsOrderOpen] = useState(false);
     const [scroll, setScroll] = useState(false);
@@ -44,10 +43,6 @@ export default function Navbar({ handleRouteChange, setModal }: NavbarProps) {
     };
     window.addEventListener('scroll', handleChangeBackgroundNavbar);
 
-    // Mostrar u ocultar el menu lateral
-    const handleMenu = () => {
-        setShowMenu(!showMenu);
-    };
     // Cerrar el menu lateral y cambiar la ruta
     const handleMenuClose = () => {
         handleRouteChange();
@@ -84,7 +79,7 @@ export default function Navbar({ handleRouteChange, setModal }: NavbarProps) {
                     <div className='lg:hidden'>
                         <BiMenu
                             className='text-2xl cursor-pointer'
-                            onClick={handleMenu}
+                            onClick={() => setShowMenu(!showMenu)}
                         />
                     </div>
                     <div className='flex justify-center items-center gap-2'>
@@ -123,7 +118,7 @@ export default function Navbar({ handleRouteChange, setModal }: NavbarProps) {
                         <div className='flex justify-end mt-0 mb-8'>
                             <BiX
                                 className='text-2xl cursor-pointer'
-                                onClick={handleMenu}
+                                onClick={() => setShowMenu(!showMenu)}
                             />
                         </div>
 
@@ -161,12 +156,11 @@ export default function Navbar({ handleRouteChange, setModal }: NavbarProps) {
                             handleOrder={handleOrder}
                         />
                     </div>
-                    <button
-                        type='button'
-                        className=' bg-orange-500 text-white py-2 px-3 rounded-lg hover:bg-orange-600 transition-all duration-200 ease-in-out font-poppins '
-                        onClick={() => setModal(true)}>
+                    <NavLink
+                        to={'/auth/login'}
+                        className=' bg-orange-500 text-white py-2 px-3 rounded-lg hover:bg-orange-600 transition-all duration-200 ease-in-out font-poppins '>
                         Iniciar sesión
-                    </button>
+                    </NavLink>
                 </div>
             </div>
         </nav>

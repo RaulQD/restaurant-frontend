@@ -1,7 +1,7 @@
 import { Navigate, useParams } from 'react-router-dom';
-import EditDishesform from './components/EditDishesform';
+import EditDishesform from '../../components/dishes/EditDishesform';
 import { useQuery } from '@tanstack/react-query';
-import { getDishesById } from '../../services/apiDishes';
+import { getDishesById } from '../../../services/apiDishes';
 
 export default function EditProductsPage() {
     const params = useParams();

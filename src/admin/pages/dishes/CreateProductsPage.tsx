@@ -1,11 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { BiChevronRight } from 'react-icons/bi';
-import { DishesForm } from './components/DishesForm';
-import { DishFormData } from './types/dishes';
+import { DishesForm } from '../../components/dishes/DishesForm';
+import { DishFormData } from '../../../types/dishes';
 import { useNavigate } from 'react-router-dom';
-import { createDishes } from '../../services/apiDishes';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
+import { createDishes } from '../../../services/apiDishes';
 
 export default function CreateProductsPage() {
 

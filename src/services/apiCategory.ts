@@ -1,6 +1,6 @@
 import { isAxiosError } from "axios";
-import api from "../../lib/axios";
-import { CategoryFormData, categoryListSchema } from "../pages/category/types/category";
+import api from "../lib/axios";
+import { CategoryFormData, categoryListSchema } from "../types/category";
 // import { CategoriesSchema } from "../../types/category";
 
 

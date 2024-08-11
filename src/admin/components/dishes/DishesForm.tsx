@@ -2,9 +2,9 @@ import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import { ErrorMessage } from '../../../components/ErrorMessage';
+import { ErrorMessage } from '../ErrorMessage';
 import { getCategories } from '../../../services/apiCategory';
-import { DishFormData } from '../types/dishes';
+import { DishFormData } from '../../../types/dishes';
 import { BiPlus } from 'react-icons/bi';
 
 type DishesFormProps = {

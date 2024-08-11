@@ -1,6 +1,6 @@
 import { StateCreator } from "zustand";
-import { createCategory, getCategories } from "../admin/services/apiCategory";
-import type { Category, CategoryFormData } from "../admin/pages/category/types/category";
+import { createCategory, getCategories } from "../services/apiCategory";
+import type { Category, CategoryFormData } from "../types/category";
 
 
 export type CategorySliceType = {

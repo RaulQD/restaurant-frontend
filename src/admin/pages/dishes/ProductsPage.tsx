@@ -1,6 +1,6 @@
 import { BiChevronRight } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
-import TableProduct from './components/TableProduct';
+import TableProduct from '../../components/dishes/TableProduct';
 
 // const productActions = [
 //     { to: '/dashboard/products/edit', label: 'Editar' },

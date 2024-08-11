@@ -1,5 +1,5 @@
 import { BiHeart, BiSolidPlusCircle } from 'react-icons/bi';
-import TallarinesPobre from '../../assets/Tallarines-verdes-bistec.webp';
+import LomoSaltado from '../../assets/lomo-saltado.jpg';
 
 
 export default function CardList() {
@@ -7,8 +7,8 @@ export default function CardList() {
         <div className='bg-slate-100 rounded-md'>
             <div className='overflow-hidden'>
                 <img
-                    src={TallarinesPobre}
-                    alt='Tallarines a lo pobre'
+                    src={LomoSaltado}
+                    alt='Lomo saltado'
                     className=' object-cover rounded-t-md hover:scale-125 transition-transform duration-300'
                 />
             </div>

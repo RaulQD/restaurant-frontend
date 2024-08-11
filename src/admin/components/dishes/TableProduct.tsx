@@ -8,12 +8,12 @@ import {
 import { BiChevronDown } from 'react-icons/bi';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
-import Pagination from '../../../components/Pagination';
-import { formatCurrency, transformId } from '../../../../helpers';
+import Pagination from '../Pagination';
+import { formatCurrency, transformId } from '../../../helpers';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { getDishes } from '../../../services/apiDishes';
-import { DishesResponseType } from '../types/dishes';
-import { Modal } from '../../../../shared/Modal';
+import { DishesResponseType } from '../../../types/dishes';
+import { Modal } from '../../../shared/Modal';
 import AddImageForm from './AddImageForm';
 
 export default function TableProduct() {

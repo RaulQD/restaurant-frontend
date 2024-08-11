@@ -6,6 +6,7 @@ export type Authentication = {
 
 export type User = {
   email:     string;
+  password:  string;
   firstName: string;
   lastName:  string;
   dni:       string;
@@ -16,3 +17,7 @@ export type User = {
   updatedAt: Date;
   id:        string;
 }
+
+export type UserLoginForm = Pick<User, 'email' | 'password'>
+
+export type UserRegisterform = Pick<User, 'email' | 'password' | 'firstName' | 'lastName' | 'dni' | 'phone' | 'address'>

@@ -1,6 +1,7 @@
 import { isAxiosError } from 'axios';
-import api from '../../lib/axios';
-import { Dish, DishFormData } from '../pages/dishes/types/dishes';
+import api from '../lib/axios';
+
+import { Dish, DishFormData } from '../types/dishes';
 
 export const createDishes = async (formData: DishFormData) => {
   try {

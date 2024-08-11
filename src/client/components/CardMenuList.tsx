@@ -1,11 +1,11 @@
 import { BiCartAdd, BiHeart } from 'react-icons/bi';
-
+import LomoSaltado from '../../assets/lomo-saltado.jpg';
 export default function CardMenuList() {
     return (
         <div className='bg-slate-100 rounded-md'>
             <div className='overflow-hidden'>
                 <img
-                    src='./Tallarines-verdes-bistec.webp'
+                    src={LomoSaltado}
                     alt='tallarines verdes'
                     className=' object-cover rounded-t-md hover:scale-125 transition-transform duration-300'
                 />

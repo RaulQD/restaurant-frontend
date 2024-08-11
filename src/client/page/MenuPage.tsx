@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import CardMenuList from '../components/CardMenuList';
-import { getCategories } from '../../admin/services/apiCategory';
+import { getCategories } from '../../services/apiCategory';
 // import { useAppStore } from '../../store/useAppStore';
 // import { useEffect } from 'react';
 

@@ -1,6 +1,6 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
-import { CategoryFormData } from '../types/category';
-import { ErrorMessage } from '../../../components/ErrorMessage';
+import { CategoryFormData } from '../../../types/category';
+import { ErrorMessage } from '../ErrorMessage';
 
 type CategoryFormProps = {
     register: UseFormRegister<CategoryFormData>;

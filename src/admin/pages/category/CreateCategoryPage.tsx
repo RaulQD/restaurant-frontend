@@ -3,9 +3,9 @@ import { BiChevronRight } from 'react-icons/bi';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
-import { CategoryForm } from './components/CategoryForm';
-import { CategoryFormData } from './types/category';
-import { createCategory } from '../../services/apiCategory';
+import { CategoryForm } from '../../components/category/CategoryForm';
+import { CategoryFormData } from '../../../types/category';
+import { createCategory } from '../../../services/apiCategory';
 import toast from 'react-hot-toast';
 
 export const CreateCategoryPage = () => {

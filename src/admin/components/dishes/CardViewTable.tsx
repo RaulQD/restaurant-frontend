@@ -7,7 +7,7 @@ import {
 } from '@headlessui/react';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { NavLink } from 'react-router-dom';
-import { Category } from '../types/category';
+import { DishesList } from '../../../types/dishes';
 
 type NavActionProps = {
     to: string;
@@ -15,35 +15,43 @@ type NavActionProps = {
 };
 
 type TableProps = {
-    data: Category[];
     navAction: NavActionProps[];
+    data: DishesList[];
 };
-
 export const CardViewTable = ({ navAction, data }: TableProps) => {
     return (
         <div className='mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:hidden'>
-            {data.map((category) => (
+            {data.map((dish) => (
                 <div
                     className='relative flex items-start gap-4 space-x-3 rounded-lg bg-white px-6 py-5 shadow ring-1 ring-black ring-opacity-5'
-                    key={category.id_category}>
+                    key={dish.id_dish}>
                     <div className='min-w-0 flex-1'>
                         <div className='flex items-center space-x-3'>
                             <p className='truncate text-sm font-medium text-gray-900'>
                                 {' '}
-                                {category.category_name}
+                                {dish.dishes_name}
                             </p>
                             <span
                                 className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium  ring-1 ring-inset  ${
-                                    category.available === 1
+                                    dish.available === 1
                                         ? 'bg-green-50 text-green-700 ring-green-600/20'
                                         : 'bg-red-50 text-red-700 ring-red-600/20'
                                 }`}>
                                 {' '}
-                                {category.available === 1
+                                {dish.available === 1
                                     ? 'Disponible'
                                     : 'No disponible'}
                             </span>
                         </div>
+                        <p className=' truncate text-sm text-gray-700 mt-1'>
+                            {dish.description}
+                        </p>
+                        <p className='text-sm text-gray-500 mt-1'>
+                            {dish.category.category_name}
+                        </p>
+                        <p className='text-md font-medium text-gray-900 mt-3'>
+                            {dish.price}
+                        </p>
                     </div>
                     <Menu>
                         <MenuButton className='text-sm'>

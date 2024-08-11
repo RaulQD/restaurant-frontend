@@ -1,7 +1,7 @@
 import { StateCreator } from 'zustand';
 import { DishesFormData } from '../types';
+import { getDishes } from '../services/apiDishes';
 import { Dishes } from '../types/dishes';
-import { getDishes } from '../admin/services/apiDishes';
 
 export type DishesSliceType = {
   dishes: Dishes[],

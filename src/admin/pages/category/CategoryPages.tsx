@@ -1,6 +1,6 @@
 import { BiChevronRight } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
-import TableCategory from './components/TableCategory';
+import TableCategory from '../../components/category/TableCategory';
 
 
 const categoryActions = [

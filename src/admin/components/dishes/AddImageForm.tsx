@@ -5,7 +5,7 @@ import {
 } from '../../../services/apiDishes';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Dish } from '../types/dishes';
+import { Dish } from '../../../types/dishes';
 import { ChangeEvent, useState } from 'react';
 
 type ImageFormProps = {
