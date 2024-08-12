@@ -19,6 +19,8 @@ import EmployeesPages from './admin/pages/employee/EmployeesPages';
 import { CreateCategoryPage } from './admin/pages/category/CreateCategoryPage';
 import AuthLayout from './auth/layout/AuthLayout';
 import Login from './auth/pages/Login';
+import ForgotPassword from './auth/pages/ForgotPassword';
+import NewPasswordPage from './auth/pages/NewPasswordPage';
 
 export default function AppRoutes() {
     return (
@@ -44,6 +46,8 @@ export default function AppRoutes() {
                 <Route element= {<AuthLayout/>}>
                    <Route path='/auth/login' element={<Login/>} />
                     <Route path='/auth/register' element={<SignUp />} />
+                    <Route path='/auth/forgot-password' element={<ForgotPassword/>} />
+                    <Route path='/auth/update-password/:token' element={<NewPasswordPage/>}/>
                 </Route>
                 <Route path='*' element={<NotFound />} />
             </Routes>

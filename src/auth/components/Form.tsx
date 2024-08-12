@@ -1,17 +1,43 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import Logo from '../../assets/logo-icon.svg';
 import { UserLoginForm } from '../../types/auth';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
+import { authenticateUser } from '../../services/apiUser';
+import toast from 'react-hot-toast';
+import { ErrorMessage } from '../../admin/components/ErrorMessage';
+import { useState } from 'react';
 
 export default function Form() {
+    const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
     const initialValues: UserLoginForm = {
         email: '',
         password: '',
     };
-    const { register, handleSubmit } = useForm({
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm({
         defaultValues: initialValues,
     });
-    const navigate = useNavigate();
+    const mutation = useMutation({
+        mutationFn: authenticateUser,
+        onError: (error) => {
+            toast.error(error.message);
+        },
+        onSuccess: () => {
+            toast.success('Inicio de sesión exitoso');
+            reset();
+            // navigate('/dashboard');
+        },
+    });
+    const onSubmit: SubmitHandler<UserLoginForm> = async (data) => {
+        await mutation.mutateAsync(data);
+    };
+
     const redirectTo = () => {
         navigate('/auth/register');
         setTimeout(() => {
@@ -21,7 +47,7 @@ export default function Form() {
     return (
         <>
             <div className='py-14 lg:py-[70px]'>
-                <div className='bg-white rounded-md w-[600px] mx-auto'>
+                <div className='bg-white rounded-md w-[550px] mx-auto'>
                     <div className='flex justify-center items-center gap-2 p-5'>
                         <img src={Logo} alt='logo' className='size-9' />
                         <span className='font-oleo text-4xl text-[#F97316] hidden lg:block'>
@@ -40,7 +66,9 @@ export default function Form() {
                             </p>
                         </div>
                         <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-lg'>
-                            <form className='space-y-6'>
+                            <form
+                                className='space-y-6'
+                                onSubmit={handleSubmit(onSubmit)}>
                                 <div>
                                     <label
                                         htmlFor='email'
@@ -50,11 +78,23 @@ export default function Form() {
                                     <div className='mt-2'>
                                         <input
                                             id='email'
-                                            name='email'
                                             type='email'
                                             autoComplete='email'
                                             className='block w-full rounded-md border p-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6 '
+                                            {...register('email', {
+                                                required:
+                                                    'El email es requerido',
+                                                pattern: {
+                                                    value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
+                                                    message: 'Email invalido',
+                                                },
+                                            })}
                                         />
+                                        {errors.email && (
+                                            <ErrorMessage>
+                                                {errors.email.message}
+                                            </ErrorMessage>
+                                        )}
                                     </div>
                                 </div>
 
@@ -69,16 +109,47 @@ export default function Form() {
                                     <div className='mt-2'>
                                         <input
                                             id='password'
-                                            name='password'
-                                            type='password'
+                                            type={showPassword ? 'text' : 'password'}
                                             autoComplete='off'
                                             className='block w-full rounded-md p-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6 border border-gray-300'
+                                            {...register('password', {
+                                                required:
+                                                    'La contraseña es requerida',
+                                                minLength: {
+                                                    value: 8,
+                                                    message:
+                                                        'La contraseña debe tener al menos 8 caracteres',
+                                                },
+                                            })}
                                         />
+                                        {errors.password && (
+                                            <ErrorMessage>
+                                                {errors.password.message}
+                                            </ErrorMessage>
+                                        )}
                                     </div>
-                                    <div className='text-sm flex justify-end mt-4'>
+                                    <div className='text-sm flex justify-between mt-4'>
+                                        <div className='flex items-center'>
+                                            <input
+                                                type='checkbox'
+                                                id='showPassword'
+                                                checked={showPassword}
+                                                onChange={() =>
+                                                    setShowPassword(
+                                                        !showPassword
+                                                    )
+                                                }
+                                                className=' h-3 w-3 rounded transition duration-200'
+                                            />
+                                            <label
+                                                htmlFor='showPassword'
+                                                className='ml-2 text-sm'>
+                                                Mostrar contraseñas
+                                            </label>
+                                        </div>
                                         <NavLink
-                                            to='/forgot-password'
-                                            className='font-semibold text-orange-600 hover:text-orange-500'>
+                                            to='/auth/forgot-password'
+                                            className='font-medium text-orange-600 hover:text-orange-500'>
                                             ¿Olvidates tú contraseña?
                                         </NavLink>
                                     </div>
@@ -91,9 +162,9 @@ export default function Form() {
                                     </button>
                                 </div>
                             </form>
-                            <div className='flex flex-col items-center gap-6'>
-                                <p className='mt-8 text-center text-sm text-gray-500'>
-                                    ¿No tienes cuenta en Foodie Hub?{' '}
+                            <div className='flex justify-center items-center gap-2 mt-8'>
+                                <p className='text-center text-sm text-gray-500'>
+                                    ¿No tienes cuenta en Foodie Hub?
                                 </p>
                                 <nav>
                                     <NavLink
