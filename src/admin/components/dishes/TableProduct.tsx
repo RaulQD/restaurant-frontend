@@ -13,7 +13,7 @@ import { formatCurrency, transformId } from '../../../helpers';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { getDishes } from '../../../services/apiDishes';
 import { DishesResponseType } from '../../../types/dishes';
-import { Modal } from '../../../shared/Modal';
+import { Modal } from '../../../ui/Modal';
 import AddImageForm from './AddImageForm';
 
 export default function TableProduct() {

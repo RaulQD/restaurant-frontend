@@ -4,9 +4,9 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { ErrorMessage } from '../../admin/components/ErrorMessage';
 import { ResetPasswordForm } from '../../types/auth';
 import { useMutation } from '@tanstack/react-query';
-import { updatePasswordToken } from '../../services/apiUser';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
+import { updatePasswordToken } from '../../services/apiAuth';
 
 type NewPasswordProps = {
     token: string;

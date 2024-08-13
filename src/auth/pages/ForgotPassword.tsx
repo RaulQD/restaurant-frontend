@@ -5,8 +5,8 @@ import { NavLink } from 'react-router-dom';
 import { ErrorMessage } from '../../admin/components/ErrorMessage';
 import { ForgotPasswordForm } from '../../types/auth';
 import { useMutation } from '@tanstack/react-query';
-import { forgotPassword } from '../../services/apiUser';
 import toast from 'react-hot-toast';
+import { forgotPassword } from '../../services/apiAuth';
 
 export default function ForgotPassword() {
     const initialValues: ForgotPasswordForm = {

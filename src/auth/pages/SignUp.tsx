@@ -1,14 +1,14 @@
 import { NavLink } from 'react-router-dom';
 import Logo from '../../assets/logo-icon.svg';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { UserRegisterform } from '../../types/auth';
+import { AuthRegisterform } from '../../types/auth';
 import { ErrorMessage } from '../../admin/components/ErrorMessage';
 import { useMutation } from '@tanstack/react-query';
-import { createAccount } from '../../services/apiUser';
 import toast from 'react-hot-toast';
+import { createAccount } from '../../services/apiAuth';
 
 export default function SignUp() {
-    const initialValues: UserRegisterform = {
+    const initialValues: AuthRegisterform = {
         firstName: '',
         lastName: '',
         dni: '',
@@ -37,7 +37,7 @@ export default function SignUp() {
         },
     });
 
-    const onSubmit: SubmitHandler<UserRegisterform> = async (data) => {
+    const onSubmit: SubmitHandler<AuthRegisterform> = async (data) => {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         await mutation.mutateAsync(data);
     };

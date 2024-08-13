@@ -4,7 +4,7 @@ export type Authentication = {
   password: string;
 }
 
-export type User = {
+export type Auth = {
   email:           string;
   password:        string;
   confirmPassword: string;
@@ -23,8 +23,9 @@ export type ConfirmToken = {
   
 }
 
-export type UserLoginForm = Pick<User, 'email' | 'password'>
+export type AuthLoginForm = Pick<Auth, 'email' | 'password'>
 
-export type UserRegisterform = Pick<User, 'email' | 'password' | 'firstName' | 'lastName' | 'dni' | 'phone' | 'address'>
-export type ForgotPasswordForm = Pick<User, 'email'>
-export type ResetPasswordForm = Pick<User, 'password' | 'confirmPassword'>
+export type AuthRegisterform = Pick<Auth, 'email' | 'password' | 'firstName' | 'lastName' | 'dni' | 'phone' | 'address'>
+export type ForgotPasswordForm = Pick<Auth, 'email'>
+export type ResetPasswordForm = Pick<Auth, 'password' | 'confirmPassword'>
+export type User = Pick<Auth, 'firstName' | 'lastName' | 'email' | 'roles'> & { id: string }

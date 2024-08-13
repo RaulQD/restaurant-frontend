@@ -15,6 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <ReactQueryDevtools
                 initialIsOpen={false}
                 buttonPosition='bottom-left'
+                position='left'
             />
             <Toaster
                 position='top-center'
@@ -31,7 +32,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                     },
                     style: {
                         fontSize: '16px',
-                        maxWidth: '400px',
+                        maxWidth: '800px',
                         padding: '16px 24px',
                     },
                 }}

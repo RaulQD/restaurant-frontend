@@ -11,8 +11,25 @@ import {
 } from '@headlessui/react';
 import { NavLink } from 'react-router-dom';
 import Avatar from '../../assets/avatar1.png';
+import { User } from '../../types/auth';
+import { useQueryClient } from '@tanstack/react-query';
 
-export default function Header() {
+type HeaderProps = {
+    data: User;
+};
+
+export default function Header({ data }: HeaderProps) {
+    const queryClient = useQueryClient();
+
+    const logout = () => {
+        queryClient.invalidateQueries({ queryKey: ['currentUser'] });
+        localStorage.removeItem('AUTHENTICATION');
+    };
+    // OBTENER EL PRIMER NOMBRE Y APELLIDO DEL USUARIO Y LUEGO CONCATENARLOS
+    const firstName = data.firstName.split(' ')[0];
+    const lastName = data.lastName.split(' ')[0];
+    const fullName = `${firstName} ${lastName}`;
+
     return (
         <header className='h-[7vh] md:h-[10vh] border-b border-gray-300 bg-white p-8 flex items-center justify-end'>
             <nav className='flex items-center font-outfit'>
@@ -23,7 +40,7 @@ export default function Header() {
                             alt='avatar1'
                             className='w-7 h-7 bg-blue-200 rounded-full object-cover'
                         />
-                        <span className='text-sm'>Gabriela Guerra</span>
+                        <span className='text-sm'>{fullName}</span>
                         <BiChevronDown />
                     </MenuButton>
                     <Transition
@@ -51,10 +68,10 @@ export default function Header() {
                                         />
                                         <div className='flex flex-col items-start gap-1'>
                                             <span className='text-sm font-outfit'>
-                                                Gabriela Guerra
+                                                {fullName}
                                             </span>
                                             <span className='text-xs font-outfit text-gray-400'>
-                                                gabrielaguerrafelix@gmail.com
+                                                {data.email}
                                             </span>
                                         </div>
                                     </NavLink>
@@ -74,12 +91,13 @@ export default function Header() {
                                     </NavLink>
                                 </MenuItem>
                                 <MenuItem>
-                                    <NavLink
-                                        to='/settings'
-                                        className='text-sm flex items-center gap-x-2 rounded-lg transition-colors hover:bg-gray-200 py-2 px-4 flex-1'>
+                                    <button
+                                        type='button'
+                                        className='w-full text-sm flex items-center gap-x-2 rounded-lg transition-colors hover:bg-gray-200 py-2 px-4 flex-1'
+                                        onClick={logout}>
                                         <BiLogOutCircle className='text-lg' />{' '}
                                         Cerrar Sesión
-                                    </NavLink>
+                                    </button>
                                 </MenuItem>
                             </MenuSection>
                         </MenuItems>
