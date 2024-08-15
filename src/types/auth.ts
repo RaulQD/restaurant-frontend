@@ -28,4 +28,15 @@ export type AuthLoginForm = Pick<Auth, 'email' | 'password'>
 export type AuthRegisterform = Pick<Auth, 'email' | 'password' | 'firstName' | 'lastName' | 'dni' | 'phone' | 'address'>
 export type ForgotPasswordForm = Pick<Auth, 'email'>
 export type ResetPasswordForm = Pick<Auth, 'password' | 'confirmPassword'>
-export type User = Pick<Auth, 'firstName' | 'lastName' | 'email' | 'roles'> & { id: string }
+
+export type User = {
+  email:     string;
+  firstName: string;
+  lastName:  string;
+  roles:     UserRoles[];
+  id:        string;
+}
+export type UserRoles = {
+  name: string;
+  id:   string;
+}

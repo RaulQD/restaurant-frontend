@@ -12,7 +12,6 @@ export default function ForgotPassword() {
     const initialValues: ForgotPasswordForm = {
         email: '',
     };
-
     const {
         register,
         handleSubmit,
@@ -27,7 +26,7 @@ export default function ForgotPassword() {
         },
         onSuccess: (data) => {
             toast.success(data.message);
-            reset()
+            reset();
         },
     });
 

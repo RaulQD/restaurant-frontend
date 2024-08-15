@@ -6,6 +6,7 @@ import { ErrorMessage } from '../../admin/components/ErrorMessage';
 import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { createAccount } from '../../services/apiAuth';
+import { Button } from '../../ui';
 
 export default function SignUp() {
     const initialValues: AuthRegisterform = {
@@ -69,8 +70,7 @@ export default function SignUp() {
                         <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-lg'>
                             <form
                                 className='space-y-6'
-                                onSubmit={handleSubmit(onSubmit)}
-                               >
+                                onSubmit={handleSubmit(onSubmit)}>
                                 <div className=''>
                                     <label
                                         htmlFor='firstName'
@@ -218,7 +218,6 @@ export default function SignUp() {
                                         id='email'
                                         type='email'
                                         autoComplete='email'
-
                                         className='block w-full rounded-md border-0 py-2 pl-4 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 outline-none placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-orange-500 sm:text-sm sm:leading-6 mt-2'
                                         {...register('email', {
                                             required: 'El email es requerido',
@@ -265,6 +264,14 @@ export default function SignUp() {
                                     </div>
                                 </div>
                                 <div className='mt-10'>
+                                    <Button
+                                        disabled={isSubmitting}
+                                        type='submit'>
+                                        {isSubmitting
+                                            ? 'Cargando...'
+                                            : 'Crear cuenta'}
+                                    </Button>
+
                                     <button
                                         disabled={isSubmitting}
                                         type='submit'

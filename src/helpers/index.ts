@@ -6,7 +6,6 @@ export const formatCurrency = (value: number) => {
   }).format(value);
 }
 
-
 export const transformId = (id: string) => {
   if (id.length <= 6) return id;
   return `${id.slice(0, 3)}...${id.slice(-3)}`;

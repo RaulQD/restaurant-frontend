@@ -15,7 +15,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <ReactQueryDevtools
                 initialIsOpen={false}
                 buttonPosition='bottom-left'
-                position='left'
             />
             <Toaster
                 position='top-center'

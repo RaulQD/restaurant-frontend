@@ -19,7 +19,7 @@ export const authenticateUser = async (formData: AuthLoginForm) => {
   try {
     const url = '/auth/login';
     const { data } = await api.post(url, formData);
-    localStorage.setItem('AUTHENTICATION', JSON.stringify(data));
+    console.log(data);
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {

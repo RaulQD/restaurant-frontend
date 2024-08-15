@@ -1,10 +1,10 @@
 // import { useState } from 'react';
 // import Navbar from './Navbar';
-import Hero from '../../assets/foodhero5.webp';
+import background from '../../assets/foodhero5.webp';
 import { useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-export default function Header() {
+export default function Hero() {
     const { pathname } = useLocation();
     const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ export default function Header() {
             {isHome && (
                 <header className='relative w-full h-screen bg-zinc-900/90'>
                     <img
-                        src={Hero}
+                        src={background}
                         alt='foodhero5'
                         className='absolute w-full h-full object-cover mix-blend-overlay'
                     />

@@ -1,29 +1,32 @@
-import { NavLink } from 'react-router-dom';
-import { AuthLoginForm } from '../../../types/auth';
-import {
-    FieldErrors,
-    UseFormHandleSubmit,
-    UseFormRegister,
-} from 'react-hook-form';
-// import { authenticateUser } from '../../services/apiUser';
+import { NavLink} from 'react-router-dom';
+
 import { useState } from 'react';
 import { ErrorMessage } from '../../../admin/components/ErrorMessage';
 import { Button, Input, Label } from '../../../ui';
+import { useForm } from 'react-hook-form';
+import { AuthLoginForm } from '../../../types/auth';
+import { useLogin } from './useLogin';
+import SpinnerMini from '../../../ui/SpinnerMini';
 
-type LoginForm = {
-    register: UseFormRegister<AuthLoginForm>;
-    errors: FieldErrors<AuthLoginForm>;
-    handleSubmit: UseFormHandleSubmit<AuthLoginForm, undefined>;
-    onSubmit: (data: AuthLoginForm) => Promise<void>;
-};
-
-export default function LoginForm({
-    register,
-    errors,
-    handleSubmit,
-    onSubmit,
-}: LoginForm) {
+export default function LoginForm() {
     const [showPassword, setShowPassword] = useState(false);
+    const initialValues: AuthLoginForm = {
+        email: '',
+        password: '',
+    };
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm({
+        defaultValues: initialValues,
+    });
+    const { login, isPending } = useLogin();
+    const onSubmit = (data: AuthLoginForm) => {
+        login(data);
+        reset();
+    };
 
     return (
         <>
@@ -53,7 +56,6 @@ export default function LoginForm({
                             )}
                         </div>
                     </div>
-
                     <div>
                         <div className='flex items-center justify-start'>
                             <Label title='Contraseña' htmlFor='password' />
@@ -105,12 +107,16 @@ export default function LoginForm({
                         </div>
                     </div>
                     <div>
-                        <Button type='submit'>Inicia sesión</Button>
-                        {/* <button
-                            type='submit'
-                            className=' w-full rounded-md border border-orange-500 py-2 text-sm font-semibold leading-6 text-black hover:text-white hover:bg-orange-500 focus:outline-none transition-all'>
-                            Inicia sesión
-                        </button> */}
+                        <Button type='submit' disabled={isPending}>
+                            {!isPending ? (
+                                'Iniciar Sesión'
+                            ) : (
+                                <div className='flex items-center justify-center'>
+                                    {' '}
+                                    <SpinnerMini />
+                                </div>
+                            )}
+                        </Button>
                     </div>
                 </form>
             </div>

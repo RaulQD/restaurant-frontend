@@ -5,12 +5,16 @@ import OrderList from './OrderList';
 import { CiShoppingBasket } from 'react-icons/ci';
 import Logo from '../../assets/logo-icon.svg';
 import { NavLinks } from '../../types';
+import { useUser } from '../../hooks/useUser';
+import Header from '../../ui/Header';
 
 type NavbarProps = {
     handleRouteChange: () => void;
 };
 
 export default function Navbar({ handleRouteChange }: NavbarProps) {
+    const {  isUser } = useUser();
+
     const [showMenu, setShowMenu] = useState(false);
     const [isOrderOpen, setIsOrderOpen] = useState(false);
     const [scroll, setScroll] = useState(false);
@@ -52,7 +56,6 @@ export default function Navbar({ handleRouteChange }: NavbarProps) {
     const handleOrder = () => {
         setIsOrderOpen(!isOrderOpen);
     };
-
     // Evitar el scroll en el body cuando el modal de la orden esté abierto
     useEffect(() => {
         const handleBodyScroll = () => {
@@ -156,11 +159,16 @@ export default function Navbar({ handleRouteChange }: NavbarProps) {
                             handleOrder={handleOrder}
                         />
                     </div>
-                    <NavLink
-                        to={'/auth/login'}
-                        className=' bg-orange-500 text-white py-2 px-3 rounded-lg hover:bg-orange-600 transition-all duration-200 ease-in-out font-poppins '>
-                        Iniciar sesión
-                    </NavLink>
+
+                    {isUser ? (
+                        <Header />
+                    ) : (
+                        <NavLink
+                            to={'/auth/login'}
+                            className=' bg-orange-500 text-white py-2 px-3 rounded-lg hover:bg-orange-600 transition-all duration-200 ease-in-out font-poppins '>
+                            Iniciar sesión
+                        </NavLink>
+                    )}
                 </div>
             </div>
         </nav>

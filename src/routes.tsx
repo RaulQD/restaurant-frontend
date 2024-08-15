@@ -9,8 +9,8 @@ import LayoutAdmin from './admin/layout/LayoutAdmin';
 import DashboardPage from './admin/pages/dashboard/DashboardPage';
 import CustomersPage from './admin/pages/Customer/CustomersPages';
 import Orders from './admin/pages/orders/Orders';
-import  CreateProductsPage from './admin/pages/dishes/CreateProductsPage';
-import  EditProductsPage  from './admin/pages/dishes/EditProductsPage';
+import CreateProductsPage from './admin/pages/dishes/CreateProductsPage';
+import EditProductsPage from './admin/pages/dishes/EditProductsPage';
 import ProductsPage from './admin/pages/dishes/ProductsPage';
 import NotFound from './shared/NotFound';
 import { CategoryPages } from './admin/pages/category/CategoryPages';
@@ -21,6 +21,7 @@ import AuthLayout from './auth/layout/AuthLayout';
 import Login from './auth/pages/Login';
 import ForgotPassword from './auth/pages/ForgotPassword';
 import NewPasswordPage from './auth/pages/NewPasswordPage';
+import ProtectedRoute from './ui/ProtectedRoute';
 
 export default function AppRoutes() {
     return (
@@ -31,23 +32,55 @@ export default function AppRoutes() {
                     <Route path='/our-dishes' element={<MenuPage />} />
                     <Route path='/about' element={<AboutPage />} />
                 </Route>
-                <Route element={<LayoutAdmin />}>
+                <Route
+                    element={
+                        <ProtectedRoute>
+                            <LayoutAdmin />
+                        </ProtectedRoute>
+                    }>
                     <Route path='/dashboard' element={<DashboardPage />} />
-                    <Route path='/dashboard/products' element={<ProductsPage />} />
-                    <Route path='/dashboard/products/add' element={<CreateProductsPage />} />
-                    <Route path='/dashboard/products/:id/edit' element = {<EditProductsPage />} />
-                    <Route path='/dashboard/category' element={<CategoryPages/>}/>
-                    <Route path='/dashboard/category/add' element={<CreateCategoryPage/>}/>
-                    <Route path='/dashboard/customers' element={<CustomersPage />} />
+                    <Route
+                        path='/dashboard/products'
+                        element={<ProductsPage />}
+                    />
+                    <Route
+                        path='/dashboard/products/add'
+                        element={<CreateProductsPage />}
+                    />
+                    <Route
+                        path='/dashboard/products/:id/edit'
+                        element={<EditProductsPage />}
+                    />
+                    <Route
+                        path='/dashboard/category'
+                        element={<CategoryPages />}
+                    />
+                    <Route
+                        path='/dashboard/category/add'
+                        element={<CreateCategoryPage />}
+                    />
+                    <Route
+                        path='/dashboard/customers'
+                        element={<CustomersPage />}
+                    />
                     <Route path='/dashboard/orders' element={<Orders />} />
-                    <Route path='/dashboard/employees' element={<EmployeesPages />} />
+                    <Route
+                        path='/dashboard/employees'
+                        element={<EmployeesPages />}
+                    />
                     {/* <Route path ='/dashboard/employees/add' element={<CreateEmployeesPage/>}/> */}
                 </Route>
-                <Route element= {<AuthLayout/>}>
-                   <Route path='/auth/login' element={<Login/>} />
+                <Route element={<AuthLayout />}>
+                    <Route path='/auth/login' element={<Login />} />
                     <Route path='/auth/register' element={<SignUp />} />
-                    <Route path='/auth/forgot-password' element={<ForgotPassword/>} />
-                    <Route path='/auth/update-password/:token' element={<NewPasswordPage/>}/>
+                    <Route
+                        path='/auth/forgot-password'
+                        element={<ForgotPassword />}
+                    />
+                    <Route
+                        path='/auth/update-password/:token'
+                        element={<NewPasswordPage />}
+                    />
                 </Route>
                 <Route path='*' element={<NotFound />} />
             </Routes>
