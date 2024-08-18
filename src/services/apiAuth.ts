@@ -19,7 +19,6 @@ export const authenticateUser = async (formData: AuthLoginForm) => {
   try {
     const url = '/auth/login';
     const { data } = await api.post(url, formData);
-    console.log(data);
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {
@@ -44,7 +43,6 @@ export const updatePasswordToken = async ({ formData, token }: { formData: Reset
   try {
     const url = `/auth/update-password/${token}`;
     const { data } = await api.post(url, formData);
-    console.log(data);
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {

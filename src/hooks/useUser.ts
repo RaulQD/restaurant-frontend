@@ -15,6 +15,7 @@ export const useUser = () => {
   // VERIFICAR SI EL USUARIO ES ADMINISTRADOR O CLIENTE
   const isAdmin = roles.some(role => role.name === 'ADMIN_ROLE');
   const isUser = roles.some(role => role.name === 'USER_ROLE');
+  
 
   return { user, isError, isLoading, isAdmin, isUser };
 }

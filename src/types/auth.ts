@@ -13,7 +13,7 @@ export type Auth = {
   dni:             string;
   phone:           string;
   address:         string;
-  roles:           string[];
+  roles:           UserRoles[];
   createdAt:       Date;
   updatedAt:       Date;
   id:              string;
@@ -28,6 +28,7 @@ export type AuthLoginForm = Pick<Auth, 'email' | 'password'>
 export type AuthRegisterform = Pick<Auth, 'email' | 'password' | 'firstName' | 'lastName' | 'dni' | 'phone' | 'address'>
 export type ForgotPasswordForm = Pick<Auth, 'email'>
 export type ResetPasswordForm = Pick<Auth, 'password' | 'confirmPassword'>
+export type CurrentUser = Pick<Auth, 'firstName' | 'lastName' | 'dni' |'phone' | 'address' | 'email'>
 
 export type User = {
   email:     string;
@@ -35,6 +36,9 @@ export type User = {
   lastName:  string;
   roles:     UserRoles[];
   id:        string;
+  dni:       string;
+  phone:     string;
+  address:   string;
 }
 export type UserRoles = {
   name: string;

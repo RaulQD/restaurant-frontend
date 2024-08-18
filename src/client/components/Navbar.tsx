@@ -13,7 +13,7 @@ type NavbarProps = {
 };
 
 export default function Navbar({ handleRouteChange }: NavbarProps) {
-    const {  isUser } = useUser();
+    const { isUser } = useUser();
 
     const [showMenu, setShowMenu] = useState(false);
     const [isOrderOpen, setIsOrderOpen] = useState(false);

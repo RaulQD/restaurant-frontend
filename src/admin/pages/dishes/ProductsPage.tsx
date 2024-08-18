@@ -2,10 +2,7 @@ import { BiChevronRight } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 import TableProduct from '../../components/dishes/TableProduct';
 
-// const productActions = [
-//     { to: '/dashboard/products/edit', label: 'Editar' },
-//     { to: '/dashboard/products/delete', label: 'Eliminar' },
-// ];
+
 
 export default function ProductsPage() {
     const navigate = useNavigate();

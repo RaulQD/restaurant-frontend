@@ -10,7 +10,7 @@ export default function Layout() {
 
     return (
         <>
-            <div className='bg-[#FCFCFC]'>
+            <div className='bg-gray-50'>
                 <Navbar handleRouteChange={handleRouteChange} />
                 <Hero />
                 <main>

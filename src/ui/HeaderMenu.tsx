@@ -50,7 +50,7 @@ export default function HeaderMenu({ logout, user }: HeaderMenuProps) {
                         </MenuHeading>
                         <MenuItem>
                             <NavLink
-                                to='/profile'
+                                to='/account/profile'
                                 className='flex items-center gap-x-4 rounded-lg transition-colors hover:bg-gray-200  py-2 px-4 flex-1'>
                                 <img
                                     src={Avatar}

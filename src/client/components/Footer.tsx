@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { BiLogoFacebook, BiLogoInstagram, BiLogoTiktok } from 'react-icons/bi';
 import { NavLinks } from '../../types';
+import Logo from '../../assets/logov3.svg'
 
 export default function Footer() {
     const navLinks: NavLinks[] = [
@@ -10,10 +11,9 @@ export default function Footer() {
     ];
     return (
         <footer className='bg-[#191919] py-8'>
-            {/* <div className='absolute inset-0 bg-black '></div> */}
             <div className='relative text-white pt-8 h-full'>
                 <div className='relative flex justify-center items-center gap-2 mt-16 before:content-[""] before:block before:w-full before:h-[2px] before:bg-white after:content-[""] after:block after:w-full after:h-[2px] after:bg-white'>
-                    <img src='./logov2.svg' alt='logo' />
+                    <img src={Logo} alt='logo' className=' w-40'/>
                 </div>
                 <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-5 md:px-16 lg:px-44 mt-10 lg:mt-16 '>
                     <div className='flex flex-col gap-2'>
@@ -62,8 +62,12 @@ export default function Footer() {
                             <span className='text-[#A4A4A4]'>961450431</span>
                         </p>
 
-                        <p className='text-[#A4A4A4] text-sm'>Libro de reclamaciones</p>
-                        <p className='text-[#A4A4A4] text-sm'>Centro de ayuda</p>
+                        <p className='text-[#A4A4A4] text-sm'>
+                            Libro de reclamaciones
+                        </p>
+                        <p className='text-[#A4A4A4] text-sm'>
+                            Centro de ayuda
+                        </p>
                     </div>
                 </div>
                 <div className='mt-16'>

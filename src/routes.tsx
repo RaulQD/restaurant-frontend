@@ -19,9 +19,14 @@ import EmployeesPages from './admin/pages/employee/EmployeesPages';
 import { CreateCategoryPage } from './admin/pages/category/CreateCategoryPage';
 import AuthLayout from './auth/layout/AuthLayout';
 import Login from './auth/pages/Login';
-import ForgotPassword from './auth/pages/ForgotPassword';
+import ForgotPassword from './auth/components/resetpassword/ForgotPassword';
 import NewPasswordPage from './auth/pages/NewPasswordPage';
 import ProtectedRoute from './ui/ProtectedRoute';
+import ProfilePage from './client/page/ProfilePage';
+import ChangePasswordPage from './client/page/ChangePasswordPage';
+import ProfileLayout from './client/layouts/ProfileLayout';
+import AddressPage from './client/page/AddressPage';
+import ShoppingPage from './client/page/ShoppingPage';
 
 export default function AppRoutes() {
     return (
@@ -31,6 +36,12 @@ export default function AppRoutes() {
                     <Route path='/' element={<HomePage />} index />
                     <Route path='/our-dishes' element={<MenuPage />} />
                     <Route path='/about' element={<AboutPage />} />
+                    <Route element={<ProfileLayout />}>
+                        <Route path='/account/profile' element={<ProfilePage />} />
+                        <Route path='/account/password' element={<ChangePasswordPage />} />
+                        <Route path='/account/address' element={<AddressPage />} />
+                        <Route path='/account/my-shoppings' element={<ShoppingPage />} />
+                    </Route>
                 </Route>
                 <Route
                     element={

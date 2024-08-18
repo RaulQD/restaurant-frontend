@@ -2,11 +2,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { BiChevronLeft } from 'react-icons/bi';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { NavLink } from 'react-router-dom';
-import { ErrorMessage } from '../../admin/components/ErrorMessage';
-import { ForgotPasswordForm } from '../../types/auth';
+import { ErrorMessage } from '../../../admin/components/ErrorMessage';
+import { ForgotPasswordForm } from '../../../types/auth';
 import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import { forgotPassword } from '../../services/apiAuth';
+import { forgotPassword } from '../../../services/apiAuth';
+import { Button, Input, Label } from '../../../ui';
 
 export default function ForgotPassword() {
     const initialValues: ForgotPasswordForm = {
@@ -16,7 +17,7 @@ export default function ForgotPassword() {
         register,
         handleSubmit,
         formState: { errors },
-        reset
+        reset,
     } = useForm({ defaultValues: initialValues });
 
     const mutation = useMutation({
@@ -59,37 +60,28 @@ export default function ForgotPassword() {
                         onSubmit={handleSubmit(onSubmit)}
                         noValidate>
                         <div>
-                            <label
-                                htmlFor='email'
-                                className='block text-sm font-medium leading-6 text-gray-900'>
-                                Correo electronico
-                            </label>
-                            <div className='mt-2'>
-                                <input
-                                    id='email'
-                                    type='email'
-                                    autoComplete='email'
-                                    className='block w-full rounded-md border p-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6 '
-                                    {...register('email', {
-                                        required: 'El email es requerido.',
-                                        pattern: {
-                                            value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
-                                            message: 'Email invalido',
-                                        },
-                                    })}
-                                />
-                                {errors.email && (
-                                    <ErrorMessage>
-                                        {errors.email.message}
-                                    </ErrorMessage>
-                                )}
-                            </div>
+                            <Label htmlFor='email' title='Correo electronico' />
+
+                            <Input
+                                id='email'
+                                type='email'
+                                autoComplete='email'
+                                register={register('email', {
+                                    required: 'El email es requerido.',
+                                    pattern: {
+                                        value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
+                                        message: 'Email invalido',
+                                    },
+                                })}
+                            />
+
+                            {errors.email && (
+                                <ErrorMessage>
+                                    {errors.email.message}
+                                </ErrorMessage>
+                            )}
                         </div>
-                        <button
-                            type='submit'
-                            className='w-full bg-orange-600 text-white py-2 rounded-md hover:bg-orange-700 transition duration-200'>
-                            Reset password
-                        </button>
+                        <Button type='submit'>Enviar correo</Button>
                     </form>
                     <div className='mt-6 text-center '>
                         <NavLink

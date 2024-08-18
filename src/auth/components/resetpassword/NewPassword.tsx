@@ -1,12 +1,12 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { BiChevronLeft, BiMessageAltDots } from 'react-icons/bi';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { ErrorMessage } from '../../admin/components/ErrorMessage';
-import { ResetPasswordForm } from '../../types/auth';
-import { useMutation } from '@tanstack/react-query';
-import toast from 'react-hot-toast';
+import { NavLink } from 'react-router-dom';
+import { ErrorMessage } from '../../../admin/components/ErrorMessage';
+import { ResetPasswordForm } from '../../../types/auth';
 import { useState } from 'react';
-import { updatePasswordToken } from '../../services/apiAuth';
+import { Button, Input, Label } from '../../../ui';
+import { useNewPassword } from './useNewPassword';
+import SpinnerMini from '../../../ui/SpinnerMini';
 
 type NewPasswordProps = {
     token: string;
@@ -14,7 +14,6 @@ type NewPasswordProps = {
 
 export default function NewPassword({ token }: NewPasswordProps) {
     const [showPassword, setShowPassword] = useState(false);
-    const navigate = useNavigate();
     const initialValues: ResetPasswordForm = {
         password: '',
         confirmPassword: '',
@@ -24,28 +23,24 @@ export default function NewPassword({ token }: NewPasswordProps) {
         register,
         handleSubmit,
         formState: { errors },
+        watch,
         reset,
     } = useForm({ defaultValues: initialValues });
 
-    const mutation = useMutation({
-        mutationFn: updatePasswordToken,
-        onError: (error) => {
-            toast.error(error.message);
-        },
-        onSuccess: (data) => {
-            toast.success(data.message);
-            reset();
-            navigate('/auth/login');
-        },
-    });
+    const { newPassword, isPending } = useNewPassword();
 
-    const onSubmit: SubmitHandler<ResetPasswordForm> = async (formData) => {
+    const onSubmit: SubmitHandler<ResetPasswordForm> = (formData) => {
         const data = {
             formData,
             token,
         };
-        await mutation.mutateAsync(data);
+        newPassword(data, {
+            onSuccess: () => {
+                reset();
+            },
+        });
     };
+    const password = watch('password');
 
     return (
         <>
@@ -68,28 +63,25 @@ export default function NewPassword({ token }: NewPasswordProps) {
                         onSubmit={handleSubmit(onSubmit)}
                         noValidate>
                         <div>
-                            <div className='flex items-center justify-start'>
-                                <label
-                                    htmlFor='password'
-                                    className='block text-sm font-medium leading-6 text-gray-900'>
-                                    Contraseña
-                                </label>
-                            </div>
+                            <Label
+                                htmlFor='password'
+                                title='Nueva contraseña'
+                            />
                             <div className='mt-2'>
-                                <input
+                                <Input
                                     id='password'
                                     type={showPassword ? 'text' : 'password'}
                                     autoComplete='off'
-                                    className='block w-full rounded-md p-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6 border border-gray-300'
-                                    {...register('password', {
-                                        required: 'La contraseña es requerida',
+                                    register={register('password', {
+                                        required: 'La contraseña es requerida.',
                                         minLength: {
                                             value: 8,
                                             message:
-                                                'La contraseña debe tener al menos 8 caracteres',
+                                                'La contraseña debe tener al menos 8 caracteres.',
                                         },
                                     })}
                                 />
+
                                 {errors.password && (
                                     <ErrorMessage>
                                         {errors.password.message}
@@ -98,26 +90,21 @@ export default function NewPassword({ token }: NewPasswordProps) {
                             </div>
                         </div>
                         <div>
-                            <div className='flex items-center justify-start'>
-                                <label
-                                    htmlFor='confirmPassword'
-                                    className='block text-sm font-medium leading-6 text-gray-900'>
-                                    Nueva contraseña
-                                </label>
-                            </div>
+                            <Label
+                                htmlFor='confirmPassword'
+                                title='Confirmar contraseña'
+                            />
+
                             <div className='mt-2'>
-                                <input
+                                <Input
                                     id='confirmPassword'
                                     type={showPassword ? 'text' : 'password'}
                                     autoComplete='off'
-                                    className='block w-full rounded-md p-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6 border border-gray-300'
-                                    {...register('confirmPassword', {
-                                        required: 'Confirma tu contraseña',
-                                        minLength: {
-                                            value: 8,
-                                            message:
-                                                'La contraseña debe tener al menos 8 caracteres',
-                                        },
+                                    register={register('confirmPassword', {
+                                        required: 'Confirma tu contraseña.',
+                                        validate: (value) =>
+                                            value === password ||
+                                            'Las contraseñas no son iguales.',
                                     })}
                                 />
                                 {errors.confirmPassword && (
@@ -127,7 +114,7 @@ export default function NewPassword({ token }: NewPasswordProps) {
                                 )}
                             </div>
                         </div>
-                        <div className='flex items-center'>
+                        <div className='flex items-center gap-1'>
                             <input
                                 type='checkbox'
                                 id='showPassword'
@@ -135,15 +122,20 @@ export default function NewPassword({ token }: NewPasswordProps) {
                                 onChange={() => setShowPassword(!showPassword)}
                                 className=' h-4 w-4 rounded transition duration-200'
                             />
-                            <label htmlFor='showPassword' className='ml-2 text-sm'>
-                                Mostrar contraseñas
-                            </label>
+                            <Label
+                                htmlFor='showPassword'
+                                title='Mostrar contraseña'
+                            />
                         </div>
-                        <button
-                            type='submit'
-                            className='w-full bg-orange-600 text-white py-2 rounded-md hover:bg-orange-700 transition duration-200'>
-                            Restablecer contraseña
-                        </button>
+                        <Button type='submit' disabled={isPending}>
+                            {!isPending ? (
+                                'Restablecer contraseña'
+                            ) : (
+                                <div className='flex items-center justify-center'>
+                                    <SpinnerMini />
+                                </div>
+                            )}
+                        </Button>
                     </form>
                     <div className='mt-6 text-center '>
                         <NavLink

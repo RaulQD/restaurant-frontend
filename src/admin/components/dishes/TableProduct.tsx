@@ -15,12 +15,16 @@ import { getDishes } from '../../../services/apiDishes';
 import { DishesResponseType } from '../../../types/dishes';
 import { Modal } from '../../../ui/Modal';
 import AddImageForm from './AddImageForm';
+import NoImage from '../../../assets/no-image.jpg';
+import Spinner from '../../../ui/Spinner';
 
 export default function TableProduct() {
     const [selectedDishId, setSelectedDishId] = useState<string>('');
     const [modal, setModal] = useState(false);
     const [page, setPage] = useState(1);
     const limit = 10;
+
+    // VALIDAR SI MI PLATO NO TIENE UNA IMAGEN , PONER UNA IMAGEN POR DEFECTO
 
     const { data, isLoading, isError, error } = useQuery<DishesResponseType>({
         queryKey: ['dishes', page, limit],
@@ -34,7 +38,11 @@ export default function TableProduct() {
     };
 
     {
-        isLoading && <p className='text-center mt-16'>Cargando...</p>;
+        isLoading && (
+            <div className='flex justify-center items-center'>
+                <Spinner />
+            </div>
+        );
     }
     {
         isError && <p className='text-center mt-16'>{error?.message}</p>;
@@ -79,11 +87,19 @@ export default function TableProduct() {
                                                             dish.id
                                                         )
                                                     }>
-                                                    <img
-                                                        src={dish.images}
-                                                        alt={dish.name}
-                                                        className='size-12'
-                                                    />
+                                                    {dish.images ? (
+                                                        <img
+                                                            src={dish.images}
+                                                            alt={dish.name}
+                                                            className='size-12'
+                                                        />
+                                                    ) : (
+                                                        <img
+                                                            src={NoImage}
+                                                            alt={dish.name}
+                                                            className='size-12'
+                                                        />
+                                                    )}
                                                 </button>
                                                 <div className='flex flex-col '>
                                                     <p>{dish.name}</p>

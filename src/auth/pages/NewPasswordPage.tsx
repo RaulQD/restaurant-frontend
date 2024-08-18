@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import NewPassword from './NewPassword';
+import NewPassword from '../components/resetpassword/NewPassword';
 
 export default function NewPasswordPage() {
     const { token } = useParams<{ token: string }>();
