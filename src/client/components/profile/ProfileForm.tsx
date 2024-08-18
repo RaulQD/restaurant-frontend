@@ -15,11 +15,13 @@ export default function ProfileForm({ user }: ProfileFormProps) {
         formState: { errors },
         watch,
     } = useForm({ defaultValues: user });
+
+    const onSubmit = (data: User) => {};
     return (
         <>
-            <div className='bg-white rounded-lg p-8 '>
+            <div className='bg-white rounded-lg p-8 mb-4'>
                 <h1 className='text-xl'>Actualiza tus datos</h1>
-                <hr className='border-gray-500 my-8' />
+                <hr className='border-gray-500 mt-8 mb-10' />
                 <div className='flex items-center mb-8'>
                     <div className='w-1/4'>
                         <p className='font-medium'>Imagen</p>
@@ -43,6 +45,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
                         </p>
                     </div>
                 </div>
+
                 <div>
                     <form>
                         <div className='flex items-center mb-8'>
@@ -120,15 +123,18 @@ export default function ProfileForm({ user }: ProfileFormProps) {
                                 </div>
                             </div>
                         </div>
+                        <div className='flex justify-end gap-4'>
+                            <Button
+                                type='submit'
+                                color='secondary'
+                                width='w-1/6'>
+                                Cancelar
+                            </Button>
+                            <Button type='submit' color='primary' width='w-1/6'>
+                                Guardar
+                            </Button>
+                        </div>
                     </form>
-                    <div className='flex justify-end gap-4'>
-                        <Button type='submit' color='secondary' width='w-1/6'>
-                            Cancelar
-                        </Button>
-                        <Button type='submit' color='primary' width='w-1/6'>
-                            Guardar
-                        </Button>
-                    </div>
                 </div>
             </div>
         </>
