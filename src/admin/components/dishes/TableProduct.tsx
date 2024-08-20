@@ -25,7 +25,6 @@ export default function TableProduct() {
     const limit = 10;
 
     // VALIDAR SI MI PLATO NO TIENE UNA IMAGEN , PONER UNA IMAGEN POR DEFECTO
-
     const { data, isLoading, isError, error } = useQuery<DishesResponseType>({
         queryKey: ['dishes', page, limit],
         queryFn: () => getDishes({ page, limit }),
