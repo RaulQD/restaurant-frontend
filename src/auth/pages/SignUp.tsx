@@ -15,7 +15,6 @@ export default function SignUp() {
         email: '',
         password: '',
         phone: '',
-        address: '',
     };
 
     const {
@@ -30,7 +29,7 @@ export default function SignUp() {
 
     const onSubmit: SubmitHandler<AuthRegisterform> = (data) => {
         signup(data, {
-            onSettled: () => reset(),
+            onSuccess: () => reset(),
         });
     };
 
@@ -63,7 +62,7 @@ export default function SignUp() {
                                 className='space-y-6'
                                 onSubmit={handleSubmit(onSubmit)}>
                                 <div className=''>
-                                    <Label title='Nombre' htmlFor='firstName' />
+                                    <Label text='Nombre' htmlFor='firstName' />
                                     <Input
                                         type='text'
                                         id='firstName'
@@ -85,7 +84,7 @@ export default function SignUp() {
                                 </div>
                                 <div className='mt-8'>
                                     <Label
-                                        title='Apellido'
+                                        text='Apellido'
                                         htmlFor='lastName'
                                     />
                                     <Input
@@ -109,7 +108,7 @@ export default function SignUp() {
                                 </div>
                                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-8'>
                                     <div>
-                                        <Label title='DNI' htmlFor='dni' />
+                                        <Label text='DNI' htmlFor='dni' />
                                         <Input
                                             id='dni'
                                             type='text'
@@ -131,7 +130,7 @@ export default function SignUp() {
                                     </div>
                                     <div>
                                         <Label
-                                            title='Teléfono'
+                                            text='Teléfono'
                                             htmlFor='phone'
                                         />
                                         <Input
@@ -154,9 +153,9 @@ export default function SignUp() {
                                         )}
                                     </div>
                                 </div>
-                                <div className='mt-8'>
+                                {/* <div className='mt-8'>
                                     <Label
-                                        title='Dirección'
+                                        text='Dirección'
                                         htmlFor='address'
                                     />
                                     <Input
@@ -177,10 +176,10 @@ export default function SignUp() {
                                             {errors.address.message}
                                         </ErrorMessage>
                                     )}
-                                </div>
+                                </div> */}
                                 <div className='mt-8'>
                                     <Label
-                                        title='Correo electronico'
+                                        text='Correo electronico'
                                         htmlFor='email'
                                     />
                                     <Input
@@ -204,7 +203,7 @@ export default function SignUp() {
                                 </div>
                                 <div className='mt-8'>
                                     <Label
-                                        title='Contraseña'
+                                        text='Contraseña'
                                         htmlFor='password'
                                     />
 

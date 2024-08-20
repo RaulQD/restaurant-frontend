@@ -1,12 +1,12 @@
 import React from 'react';
 
 type Props = React.LabelHTMLAttributes<HTMLLabelElement> & {
-    title: string;
+    text: string;
 };
-export default function Label({ title }: Props) {
+export default function Label({ text }: Props) {
     return (
         <label className='block text-sm font-medium leading-6 text-gray-900'>
-            {title}
+            {text}
         </label>
     );
 }

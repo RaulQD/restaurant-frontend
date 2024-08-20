@@ -33,7 +33,7 @@ export default function LoginForm() {
             <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-lg'>
                 <form className='space-y-6' onSubmit={handleSubmit(onSubmit)}>
                     <div>
-                        <Label title='Correo electrónico' htmlFor='email' />
+                        <Label text='Correo electrónico' htmlFor='email' />
                         <div className='mt-2'>
                             <Input
                                 id='email'
@@ -58,7 +58,7 @@ export default function LoginForm() {
                     </div>
                     <div>
                         <div className='flex items-center justify-start'>
-                            <Label title='Contraseña' htmlFor='password' />
+                            <Label text='Contraseña' htmlFor='password' />
                         </div>
                         <div className='mt-2'>
                             <Input

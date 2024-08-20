@@ -60,7 +60,7 @@ export default function ForgotPassword() {
                         onSubmit={handleSubmit(onSubmit)}
                         noValidate>
                         <div>
-                            <Label htmlFor='email' title='Correo electronico' />
+                            <Label htmlFor='email' text='Correo electronico' />
 
                             <Input
                                 id='email'

@@ -3,6 +3,9 @@ import { User } from '../../../types/auth';
 import NoImage from '../../../assets/no-image-user2.png';
 import { BiEdit, BiErrorCircle } from 'react-icons/bi';
 import { Button, Input, Label } from '../../../ui';
+import { ErrorMessage } from '../../../admin/components/ErrorMessage';
+import { useProfile } from './useProfile';
+import SpinnerMini from '../../../ui/SpinnerMini';
 
 type ProfileFormProps = {
     user: User;
@@ -13,10 +16,12 @@ export default function ProfileForm({ user }: ProfileFormProps) {
         register,
         handleSubmit,
         formState: { errors },
-        watch,
     } = useForm({ defaultValues: user });
 
-    const onSubmit = (data: User) => {};
+    const { profile, isPending } = useProfile();
+    const onSubmit = (data: User) => {
+        profile(data);
+    };
     return (
         <>
             <div className='bg-white rounded-lg p-8 mb-4'>
@@ -24,7 +29,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
                 <hr className='border-gray-500 mt-8 mb-10' />
                 <div className='flex items-center mb-8'>
                     <div className='w-1/4'>
-                        <p className='font-medium'>Imagen</p>
+                        <p className=' text-sm font-medium'>Avatar</p>
                     </div>
                     <div className='flex-1'>
                         <div className='relative mb-2'>
@@ -47,12 +52,12 @@ export default function ProfileForm({ user }: ProfileFormProps) {
                 </div>
 
                 <div>
-                    <form>
+                    <form onSubmit={handleSubmit(onSubmit)} noValidate>
                         <div className='flex items-center mb-8'>
                             <div className='w-1/4'>
                                 <Label
                                     htmlFor='firstName'
-                                    title='Nombre completo'
+                                    text='Nombre completo'
                                 />
                             </div>
                             <div className='flex-1 flex items-center gap-4'>
@@ -60,29 +65,72 @@ export default function ProfileForm({ user }: ProfileFormProps) {
                                     <Input
                                         type='text'
                                         id='firstName'
-                                        register={register('firstName')}
+                                        register={register('firstName', {
+                                            required: 'El nombre es requerido',
+                                            minLength: {
+                                                value: 3,
+                                                message:
+                                                    'El nombre debe tener al menos 3 caracteres',
+                                            },
+                                        })}
                                     />
+                                    {errors.firstName && (
+                                        <ErrorMessage>
+                                            {errors.firstName.message}
+                                        </ErrorMessage>
+                                    )}
                                 </div>
                                 <div className='w-full'>
                                     <Input
                                         type='text'
                                         id='lastName'
-                                        register={register('lastName')}
+                                        register={register('lastName', {
+                                            required:
+                                                'El apellido es requerido',
+                                            minLength: {
+                                                value: 3,
+                                                message:
+                                                    'El apellido debe tener al menos 3 caracteres',
+                                            },
+                                        })}
                                     />
+                                    {errors.lastName && (
+                                        <ErrorMessage>
+                                            {errors.lastName.message}
+                                        </ErrorMessage>
+                                    )}
                                 </div>
                             </div>
                         </div>
                         <div className='flex items-center mb-8'>
                             <div className='w-1/4'>
-                                <Label htmlFor='phone' title='Telefono' />
+                                <Label htmlFor='phone' text='Telefono' />
                             </div>
                             <div className='flex-1 '>
                                 <div className='w-full'>
                                     <Input
                                         type='text'
                                         id='phone'
-                                        register={register('phone')}
+                                        register={register('phone', {
+                                            required:
+                                                'El telefono es requerido',
+                                            maxLength: {
+                                                value: 9,
+                                                message:
+                                                    'El telefono debe tener 9 digitos',
+                                            },
+                                            minLength: {
+                                                value: 9,
+                                                message:
+                                                    'El telefono debe tener 9 digitos',
+                                            },
+                                        })}
                                     />
+                                    {errors.phone && (
+                                        <ErrorMessage>
+                                            {errors.phone.message}
+                                        </ErrorMessage>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -90,7 +138,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
                             <div className='w-1/4'>
                                 <Label
                                     htmlFor='address'
-                                    title='Tipo de documento'
+                                    text='Tipo de documento'
                                 />
                             </div>
                             <div className='flex-1 '>
@@ -108,7 +156,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
                             <div className='w-1/4 flex items-center gap-1'>
                                 <Label
                                     htmlFor='email'
-                                    title='Correo electronico'
+                                    text='Correo electronico'
                                 />
                                 <BiErrorCircle />
                             </div>
@@ -126,12 +174,16 @@ export default function ProfileForm({ user }: ProfileFormProps) {
                         <div className='flex justify-end gap-4'>
                             <Button
                                 type='submit'
-                                color='secondary'
-                                width='w-1/6'>
-                                Cancelar
-                            </Button>
-                            <Button type='submit' color='primary' width='w-1/6'>
-                                Guardar
+                                color='primary'
+                                width='w-1/6'
+                                disabled={isPending}>
+                                {isPending ? (
+                                    <div className='flex justify-center'>
+                                        <SpinnerMini />
+                                    </div>
+                                ) : (
+                                    'Guardar'
+                                )}
                             </Button>
                         </div>
                     </form>

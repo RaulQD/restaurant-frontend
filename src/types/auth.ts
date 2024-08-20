@@ -1,4 +1,12 @@
 
+export type Address = {
+  id:        string;
+  street:    string;
+  district:  string;
+  deparment: string;
+  number:    string;
+
+}
 export type Authentication = {
   email:    string;
   password: string;
@@ -12,11 +20,12 @@ export type Auth = {
   lastName:        string;
   dni:             string;
   phone:           string;
-  address:         string;
+  address:         Address[];
   roles:           UserRoles[];
   createdAt:       Date;
   updatedAt:       Date;
   id:              string;
+  current_password:string;
 }
 export type ConfirmToken = {
   token:           string;
@@ -25,10 +34,11 @@ export type ConfirmToken = {
 
 export type AuthLoginForm = Pick<Auth, 'email' | 'password'>
 
-export type AuthRegisterform = Pick<Auth, 'email' | 'password' | 'firstName' | 'lastName' | 'dni' | 'phone' | 'address'>
+export type AuthRegisterform = Pick<Auth, 'email' | 'password' | 'firstName' | 'lastName' | 'dni' | 'phone'>
 export type ForgotPasswordForm = Pick<Auth, 'email'>
 export type ResetPasswordForm = Pick<Auth, 'password' | 'confirmPassword'>
-export type CurrentUser = Pick<Auth, 'firstName' | 'lastName' | 'dni' |'phone' | 'address' | 'email'>
+export type CurrentUser = Pick<Auth, 'firstName' | 'lastName' | 'dni' | 'phone' | 'address' | 'email'>
+export type UpdateCurrentUserPassword = Pick<Auth,'current_password' | 'password' | 'confirmPassword'>
 
 export type User = {
   email:     string;
@@ -38,7 +48,7 @@ export type User = {
   id:        string;
   dni:       string;
   phone:     string;
-  address:   string;
+  address:   Address[];
 }
 export type UserRoles = {
   name: string;

@@ -65,7 +65,7 @@ export default function NewPassword({ token }: NewPasswordProps) {
                         <div>
                             <Label
                                 htmlFor='password'
-                                title='Nueva contraseña'
+                                text='Nueva contraseña'
                             />
                             <div className='mt-2'>
                                 <Input
@@ -92,7 +92,7 @@ export default function NewPassword({ token }: NewPasswordProps) {
                         <div>
                             <Label
                                 htmlFor='confirmPassword'
-                                title='Confirmar contraseña'
+                                text='Confirmar contraseña'
                             />
 
                             <div className='mt-2'>
@@ -124,7 +124,7 @@ export default function NewPassword({ token }: NewPasswordProps) {
                             />
                             <Label
                                 htmlFor='showPassword'
-                                title='Mostrar contraseña'
+                                text='Mostrar contraseña'
                             />
                         </div>
                         <Button type='submit' disabled={isPending}>

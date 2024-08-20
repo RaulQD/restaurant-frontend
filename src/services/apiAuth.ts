@@ -6,7 +6,6 @@ export const createAccount = async (formData: AuthRegisterform) => {
   try {
     const url = '/auth/register';
     const { data } = await api.post(url, formData);
-    console.log(data);
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {
