@@ -1,23 +1,92 @@
 import { useState } from 'react';
 import AddressForm from '../components/address/AddressForm';
-import AddressList from '../components/address/AddressList';
+import AddressCard from '../components/address/AddressCard';
 import { Modal } from '../../ui/Modal';
-import { Button } from '../../ui';
+import { Address } from '../../types/auth';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { getUserAddress } from '../../services/apiAddress';
+import Ubicacion from '../../assets/ubicación.png';
+import Spinner from '../../ui/Spinner';
 
 export default function AddressPage() {
     const [isOpenModal, setIsOpenModal] = useState(false);
+    const {
+        data: address,
+        isError,
+        isLoading,
+        error,
+    } = useQuery<Address[]>({
+        queryKey: ['address'],
+        queryFn: getUserAddress,
+        placeholderData: keepPreviousData,
+        retry: false,
+    });
 
-    return (
-        <>
-            <AddressList />
-            <Button type='button' onClick={() => setIsOpenModal(true)}>
-                Agregar dirección
-            </Button>
-            {isOpenModal && (
-                <Modal closeModal={() => setIsOpenModal(false)}>
-                    <AddressForm />
-                </Modal>
-            )}
-        </>
-    );
+    if (isLoading)
+        return (
+            <div className='flex items-center justify-center '>
+                <Spinner />
+            </div>
+        );
+    if (isError)
+        return (
+            <div className='flex items-center justify-center '>
+                <p className='text-red-500'>{error.message}</p>
+            </div>
+        );
+    if (address)
+        return (
+            <>
+                <section className='bg-white rounded-lg p-8'>
+                    <h2 className='text-xl'>Direcciones</h2>
+                    <hr className='border-gray-500 mt-8 mb-10' />
+                    {address.length > 0 ? (
+                        <ul>
+                            {address.map((address) => (
+                                <AddressCard
+                                    key={address.id}
+                                    address={address}
+                                />
+                            ))}
+                        </ul>
+                    ) : (
+                        <div className='mt-10 '>
+                            <div className='flex flex-col justify-center items-center'>
+                                <img
+                                    src={Ubicacion}
+                                    alt='ubicacion'
+                                    className='size-32'
+                                />
+                                <p className='py-4 font-medium font-outfit'>
+                                    No hay platos registrados en este momento.
+                                </p>
+                            </div>
+                        </div>
+                    )}
+
+                    <div className='flex justify-center mt-10'>
+                        <button
+                            type='button'
+                            onClick={() => setIsOpenModal(true)}
+                            className='w-full md:w-1/4  rounded-md py-2 text-sm font-semibold leading-6 focus:outline-none transition-all bg-orange-500 text-white hover:bg-orange-600'>
+                            Agregar dirección
+                        </button>
+                        {/* <Button
+                            type='button'
+                            onClick={() => setIsOpenModal(true)}
+                            width='w-1/4'>
+                            Agregar dirección
+                        </Button> */}
+                    </div>
+                </section>
+
+                {isOpenModal && (
+                    <Modal closeModal={() => setIsOpenModal(false)}>
+                        <AddressForm
+                            setIsOpenModal={() => setIsOpenModal(false)}
+                        />
+                    </Modal>
+                )}
+            </>
+        );
 }

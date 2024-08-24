@@ -1,53 +1,48 @@
-import { HiOutlineLocationMarker } from 'react-icons/hi';
-import { Button, Input, Label } from '../../../ui';
-import { useForm } from 'react-hook-form';
-import { AddressFormData } from '../../../types/auth';
 import { ErrorMessage } from '../../../admin/components/ErrorMessage';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createAddress } from '../../../services/apiAddress';
-import toast from 'react-hot-toast';
+import { useForm } from 'react-hook-form';
+import { AddressFormData, Address } from '../../../types/auth';
+import { Button, Input, Label } from '../../../ui';
+import { HiOutlineLocationMarker } from 'react-icons/hi';
+import { useAddress } from './useAddress';
 import SpinnerMini from '../../../ui/SpinnerMini';
 
-type AddressFormProps = {
-    setIsOpenModal: (value: React.SetStateAction<boolean>) => void;
+type EditAddressFormProps = {
+    data: Address;
+    setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+    // addressId: Address['id'];
 };
 
-export default function AddressForm({ setIsOpenModal }: AddressFormProps) {
+export default function EditAddressForm({
+    data,
+    setIsOpenModal,
+}: EditAddressFormProps) {
+    const addressId = data.id;
     const initialValues: AddressFormData = {
-        department: '',
-        provinces: '',
-        street: '',
-        number: '',
-        district: '',
-        references: '',
+        department: data.department,
+        provinces: data.provinces,
+        district: data.district,
+        street: data.street,
+        number: data.number,
+        references: data.references,
     };
     const {
         register,
         handleSubmit,
         formState: { errors, isValid },
         reset,
-        watch,
     } = useForm({ defaultValues: initialValues, mode: 'onBlur' });
-    const selectedDepartment = watch('department');
-    const selectedProvinces = watch('provinces');
-    const selectedDistrict = watch('district');
 
-    const queryClient = useQueryClient();
-    const { mutate, isPending } = useMutation({
-        mutationFn: createAddress,
-        onError: (error) => {
-            toast.error(error.message);
-        },
-        onSuccess: (data) => {
-            queryClient.invalidateQueries({ queryKey: ['address'] });
-            toast.success(data.message);
-            setIsOpenModal(false);
-            reset();
-        },
-    });
+    const { update, isPending } = useAddress();
 
-    const onSubmit = (data: AddressFormData) => {
-        mutate(data);
+    const onSubmit = (formData: AddressFormData) => {
+        const data = { formData, addressId: addressId };
+        console.log(data);
+        update(data, {
+            onSuccess: () => {
+                setIsOpenModal(false);
+                reset();
+            },
+        });
     };
 
     return (
@@ -55,10 +50,10 @@ export default function AddressForm({ setIsOpenModal }: AddressFormProps) {
             <div>
                 <div className='flex justify-start items-center'>
                     <HiOutlineLocationMarker className='text-4xl' />
-                    <h1 className='text-2xl'>Agregar dirección</h1>
+                    <h1 className='text-2xl'>Actualizar dirección</h1>
                 </div>
                 <div className='mt-4'>
-                    <h2>Información de quien recibe</h2>
+                    <h2>Información de quien recibe.</h2>
                 </div>
                 <form
                     onSubmit={handleSubmit(onSubmit)}
@@ -70,6 +65,7 @@ export default function AddressForm({ setIsOpenModal }: AddressFormProps) {
                             <Input
                                 type='text'
                                 id='department'
+                                disabled
                                 register={register('department', {
                                     required:
                                         'Recuerda ingresar tu departamento.',
@@ -86,7 +82,7 @@ export default function AddressForm({ setIsOpenModal }: AddressFormProps) {
                             <Input
                                 type='text'
                                 id='provinces'
-                                disabled={!selectedDepartment}
+                                disabled
                                 register={register('provinces', {
                                     required: 'Recuerda ingresar tu provincia.',
                                 })}
@@ -102,7 +98,7 @@ export default function AddressForm({ setIsOpenModal }: AddressFormProps) {
                             <Input
                                 type='text'
                                 id='district'
-                                disabled={!selectedProvinces}
+                                disabled
                                 register={register('district', {
                                     required: 'Recuerda ingresar tu distrito.',
                                 })}
@@ -121,7 +117,7 @@ export default function AddressForm({ setIsOpenModal }: AddressFormProps) {
                             <Input
                                 type='text'
                                 id='street'
-                                disabled={!selectedDistrict}
+                                disabled
                                 register={register('street', {
                                     required: 'Recuerda ingresar tu dirección.',
                                 })}
@@ -137,7 +133,7 @@ export default function AddressForm({ setIsOpenModal }: AddressFormProps) {
                             <Input
                                 type='text'
                                 id='number'
-                                disabled={!selectedDistrict}
+                                disabled
                                 register={register('number', {
                                     required: 'Recuerda ingresar tu número.',
                                 })}
@@ -180,7 +176,7 @@ export default function AddressForm({ setIsOpenModal }: AddressFormProps) {
                                     <SpinnerMini />
                                 </div>
                             ) : (
-                                'Guardar'
+                                'Guardar cambios'
                             )}
                         </button>
                     </div>

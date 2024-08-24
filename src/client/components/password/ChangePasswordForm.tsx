@@ -47,6 +47,7 @@ export default function ChangePasswordForm() {
                         <Input
                             type='password'
                             id='current_password'
+                            autoComplete='off'
                             register={register('current_password', {
                                 required: 'Este campo es requerido',
                                 minLength: {
@@ -71,6 +72,7 @@ export default function ChangePasswordForm() {
                         <Input
                             type='password'
                             id='password'
+                            autoComplete='off'
                             register={register('password', {
                                 required: 'Este campo es requerido',
                                 minLength: {
@@ -98,6 +100,7 @@ export default function ChangePasswordForm() {
                         <Input
                             id='confirmPassword'
                             type='password'
+                            autoComplete='off'
                             register={register('confirmPassword', {
                                 required: 'Este campo es requerido',
                                 minLength: {

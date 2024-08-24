@@ -3,10 +3,14 @@ export type Address = {
   id:        string;
   street:    string;
   district:  string;
-  deparment: string;
+  department: string;
   number:    string;
-
+  provinces: string;
+  references?: string;
 }
+
+export type AddressFormData = Pick<Address, 'street' | 'district' | 'department' | 'number' | 'provinces' | 'references'>
+
 export type Authentication = {
   email:    string;
   password: string;
