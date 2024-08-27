@@ -24,8 +24,11 @@ export default function LoginForm() {
     });
     const { login, isPending } = useLogin();
     const onSubmit = (data: AuthLoginForm) => {
-        login(data);
-        reset();
+        login(data,{
+            onSuccess: () => {
+                reset();
+            },
+        });
     };
 
     return (

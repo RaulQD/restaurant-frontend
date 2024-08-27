@@ -7,7 +7,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { createDishes } from '../../../services/apiDishes';
 
-export default function CreateProductsPage() {
+export default function CreateDishesPage() {
 
     const navigate = useNavigate();
     const initialValues: DishFormData = {
@@ -33,7 +33,7 @@ export default function CreateProductsPage() {
         onSuccess: (data) => {
             queryClient.invalidateQueries({ queryKey: ['dishes'] });
             toast.success(data.message);
-            navigate('/dashboard/products');
+            navigate('/dashboard/dishes');
             reset();
         },
     });
@@ -41,34 +41,9 @@ export default function CreateProductsPage() {
     const handleForm = async (data: DishFormData) => {
         await mutation.mutateAsync(data);
     };
-    // const handleImage = (e: React.FormEvent<HTMLInputElement>) => {
-    //     const target = e.target as HTMLInputElement & {
-    //         files: FileList;
-    //     };
-    //     const selectedFile = target.files[0];
-    //     setFile(selectedFile);
-    // };
-
-    // const handleForm = async (data: DishFormData) => {
-    //     const formData = new FormData();
-    //     formData.append('name', data.name);
-    //     formData.append('description', data.description);
-    //     formData.append('originalPrice', data.originalPrice?.toString() || '');
-    //     formData.append('category', data.category);
-    //     if (data.images && data.images.length > 0) {
-    //         formData.append('images', data.images[0]);
-    //     }
-    //     console.log(data);
-    //     console.log(data.images ? data.images[0] : 'No images');
-    //     await mutation.mutateAsync(formData);
-    // };
-
-    // const submitForm = async (formData: FormData) => {
-    //     console.log(formData);
-    // };
 
     const redirectTo = () => {
-        navigate('/dashboard/products/');
+        navigate('/dashboard/dishes');
     };
     return (
         <>

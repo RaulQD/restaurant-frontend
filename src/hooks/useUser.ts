@@ -4,6 +4,7 @@ import { currentUser } from "../services/apiUser"
 
 
 export const useUser = () => {
+  const isAuthenticated = !!localStorage.getItem('token');
   const { data: user, isError, isLoading } = useQuery({
     queryKey: ['user'],
     queryFn: currentUser,
@@ -15,7 +16,7 @@ export const useUser = () => {
   // VERIFICAR SI EL USUARIO ES ADMINISTRADOR O CLIENTE
   const isAdmin = roles.some(role => role.name === 'ADMIN_ROLE');
   const isUser = roles.some(role => role.name === 'USER_ROLE');
-  
 
-  return { user, isError, isLoading, isAdmin, isUser };
+
+  return { user, isError, isLoading, isAdmin, isUser, isAuthenticated };
 }

@@ -34,10 +34,10 @@ export default function Sidebar() {
                         <ul className='font-outfit'>
                             <SidebarItems path='/dashboard' label='Dashboard' Icon={BiSolidDashboard}/>
                             <SidebarDropdown label='Catalogo' Icon={BiSolidReport} menuItems={[
-                                { path: '/dashboard/products', label: 'Productos' },
-                                { path: '/dashboard/products/add', label: 'Añadir Producto' },
+                                { path: '/dashboard/dishes', label: 'Platos' },
+                                { path: '/dashboard/dishes/add', label: 'Añadir Platos' },
                                 { path: '/dashboard/category', label: 'Categorias'},
-                                { path: '/dashboard/category/add', label: 'Categoría de Productos', },
+                                { path: '/dashboard/category/add', label: 'Categoría de Platos', },
                             ]}/>
                             <SidebarItems path='/dashboard/orders' label='Ordenes' Icon={BiFile}/>
                             <SidebarDropdown label='Clientes' Icon={FaUsers} menuItems={[

@@ -3,7 +3,7 @@ import EditDishesform from '../../components/dishes/EditDishesform';
 import { useQuery } from '@tanstack/react-query';
 import { getDishesById } from '../../../services/apiDishes';
 
-export default function EditProductsPage() {
+export default function EditDishesPage() {
     const params = useParams();
     const dishesId = params.id!;
 

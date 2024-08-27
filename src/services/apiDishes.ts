@@ -6,7 +6,6 @@ import { Dish, DishFormData } from '../types/dishes';
 export const createDishes = async (formData: DishFormData) => {
   try {
     const { data } = await api.post('/dishes', formData);
-    console.log(data);
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {
@@ -19,11 +18,26 @@ export const createDishes = async (formData: DishFormData) => {
 export type GetDishesAPIType = {
   page: number;
   limit: number;
+  keyword?: string;
+  category: string;
 }
 
-export const getDishes = async (params: GetDishesAPIType) => {
+export const getDishes = async ({ page, limit, category, keyword }: GetDishesAPIType) => {
   try {
-    const { data } = await api.get('/dishes', { params });
+    const { data } = await api.get('/dishes', { params: { page, limit, category, keyword } });
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error)
+    } else {
+      throw new Error('Error desconocido al obtener una plato');
+    }
+  }
+}
+
+export const getDishesClient = async ({ pageParam = 0 }: { pageParam?: number }) => {
+  try {
+    const { data } = await api.get('/dishes', { params: { page: pageParam, limit: 10 } });
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {

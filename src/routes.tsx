@@ -9,13 +9,11 @@ import LayoutAdmin from './admin/layout/LayoutAdmin';
 import DashboardPage from './admin/pages/dashboard/DashboardPage';
 import CustomersPage from './admin/pages/Customer/CustomersPages';
 import Orders from './admin/pages/orders/Orders';
-import CreateProductsPage from './admin/pages/dishes/CreateProductsPage';
-import EditProductsPage from './admin/pages/dishes/EditProductsPage';
-import ProductsPage from './admin/pages/dishes/ProductsPage';
-import NotFound from './shared/NotFound';
+import DishesPage from './admin/pages/dishes/DishesPage';
+import CreateDishesPage from './admin/pages/dishes/CreateDishesPage';
+import EditDishesPage from './admin/pages/dishes/EditDishesPage';
 import { CategoryPages } from './admin/pages/category/CategoryPages';
 import EmployeesPages from './admin/pages/employee/EmployeesPages';
-// import { CreateEmployeesPage } from './admin/pages/CreateEmployeesPage';
 import { CreateCategoryPage } from './admin/pages/category/CreateCategoryPage';
 import AuthLayout from './auth/layout/AuthLayout';
 import Login from './auth/pages/Login';
@@ -28,6 +26,8 @@ import ProfileLayout from './client/layouts/ProfileLayout';
 import AddressPage from './client/page/AddressPage';
 import ShoppingPage from './client/page/ShoppingPage';
 
+import NotFound from './shared/NotFound';
+
 export default function AppRoutes() {
     return (
         <BrowserRouter>
@@ -36,11 +36,28 @@ export default function AppRoutes() {
                     <Route path='/' element={<HomePage />} index />
                     <Route path='/our-dishes' element={<MenuPage />} />
                     <Route path='/about' element={<AboutPage />} />
-                    <Route element={<ProfileLayout />}>
-                        <Route path='/account/profile' element={<ProfilePage />} />
-                        <Route path='/account/password' element={<ChangePasswordPage />} />
-                        <Route path='/account/address' element={<AddressPage />} />
-                        <Route path='/account/my-shoppings' element={<ShoppingPage />} />
+                    <Route
+                        element={
+                            <ProtectedRoute >
+                                <ProfileLayout />
+                            </ProtectedRoute>
+                        }>
+                        <Route
+                            path='/account/profile'
+                            element={<ProfilePage />}
+                        />
+                        <Route
+                            path='/account/password'
+                            element={<ChangePasswordPage />}
+                        />
+                        <Route
+                            path='/account/address'
+                            element={<AddressPage />}
+                        />
+                        <Route
+                            path='/account/my-shoppings'
+                            element={<ShoppingPage />}
+                        />
                     </Route>
                 </Route>
                 <Route
@@ -51,16 +68,16 @@ export default function AppRoutes() {
                     }>
                     <Route path='/dashboard' element={<DashboardPage />} />
                     <Route
-                        path='/dashboard/products'
-                        element={<ProductsPage />}
+                        path='/dashboard/dishes'
+                        element={<DishesPage />}
                     />
                     <Route
-                        path='/dashboard/products/add'
-                        element={<CreateProductsPage />}
+                        path='/dashboard/dishes/add'
+                        element={<CreateDishesPage />}
                     />
                     <Route
-                        path='/dashboard/products/:id/edit'
-                        element={<EditProductsPage />}
+                        path='/dashboard/dishes/:id/edit'
+                        element={<EditDishesPage />}
                     />
                     <Route
                         path='/dashboard/category'

@@ -1,15 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import CardList from './CardList';
-import { useAppStore } from '../../store/useAppStore';
-import { useEffect } from 'react';
 
 export default function PopularDishes() {
     const navigate = useNavigate();
-    const dishes = useAppStore((state) => state.dishes);
-    const fetchDishes = useAppStore((state) => state.fetchDishes);
-    useEffect(() => {
-        fetchDishes();
-    }, [fetchDishes]);
+
+
     const redirecToMenu = () => {
         // Redirect to menu page
         navigate('/our-dishes');

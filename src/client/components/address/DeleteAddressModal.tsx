@@ -9,7 +9,6 @@ import {
 import { useNavigate, useLocation } from 'react-router-dom';
 import { BiErrorCircle } from 'react-icons/bi';
 import { Address } from '../../../types/auth';
-import toast from 'react-hot-toast';
 import { useDeleteAddress } from './useDeleteAddress';
 
 type DeleteProjectModalProps = {
@@ -27,12 +26,8 @@ export default function DeleteAddressModal({ data }: DeleteProjectModalProps) {
 
     const { mutate } = useDeleteAddress();
     const handleForm = () => {
-        mutate(data.id, {
-            onSuccess: (data) => {
-                toast.success(data.message);
-                navigate(location.pathname, { replace: true });
-            },
-        });
+        mutate(data.id);
+        navigate(location.pathname, { replace: true });
     };
 
     return (
@@ -82,13 +77,13 @@ export default function DeleteAddressModal({ data }: DeleteProjectModalProps) {
                                                 replace: true,
                                             })
                                         }
-                                        className='bg-gray-300 text-gray-700 px-4 py-2 rounded-md font-semibold focus:outline-none transition-all'>
+                                        className='bg-gray-300 text-black px-4 py-2 rounded-md font-medium focus:outline-none transition-all font-outfit'>
                                         Cancelar
                                     </button>
                                     <button
                                         type='button'
                                         onClick={handleForm}
-                                        className='bg-orange-500 text-white px-4 py-2 rounded-md font-semibold focus:outline-none transition-all'>
+                                        className='bg-orange-500 text-white px-4 py-2 rounded-md font-medium focus:outline-none   transition-all font-outfit'>
                                         Eliminar
                                     </button>
                                 </div>

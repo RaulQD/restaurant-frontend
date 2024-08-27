@@ -18,16 +18,22 @@ import AddImageForm from './AddImageForm';
 import NoImage from '../../../assets/no-image.jpg';
 import Spinner from '../../../ui/Spinner';
 
-export default function TableProduct() {
+type TableProductProps = {
+    category: string;
+    keyword: string;
+    page: number;
+    setPageQuery: React.Dispatch<React.SetStateAction<number>>
+}
+export default function TableProduct({ category, keyword, page, setPageQuery }: TableProductProps) {
     const [selectedDishId, setSelectedDishId] = useState<string>('');
     const [modal, setModal] = useState(false);
-    const [page, setPage] = useState(1);
+   
     const limit = 10;
 
     // VALIDAR SI MI PLATO NO TIENE UNA IMAGEN , PONER UNA IMAGEN POR DEFECTO
     const { data, isLoading, isError, error } = useQuery<DishesResponseType>({
-        queryKey: ['dishes', page, limit],
-        queryFn: () => getDishes({ page, limit }),
+        queryKey: ['dishes',{ page, limit, category, keyword}],
+        queryFn: () => getDishes({ page, limit, category, keyword }),
         placeholderData: keepPreviousData,
     });
 
@@ -177,7 +183,7 @@ export default function TableProduct() {
                         <Pagination
                             page={page}
                             totalItems={data?.pagination.totalDishes || 0}
-                            onPageChange={setPage}
+                            onPageChange={setPageQuery}
                             itemsPerPage={limit}
                         />
                     </div>

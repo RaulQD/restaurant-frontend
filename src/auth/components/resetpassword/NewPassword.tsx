@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { Button, Input, Label } from '../../../ui';
 import { useNewPassword } from './useNewPassword';
 import SpinnerMini from '../../../ui/SpinnerMini';
+import Spinner from '../../../ui/Spinner';
 
 type NewPasswordProps = {
     token: string;
@@ -40,6 +41,9 @@ export default function NewPassword({ token }: NewPasswordProps) {
             },
         });
     };
+    if (isPending) {
+        return <Spinner />;
+    }
     const password = watch('password');
 
     return (
@@ -63,10 +67,7 @@ export default function NewPassword({ token }: NewPasswordProps) {
                         onSubmit={handleSubmit(onSubmit)}
                         noValidate>
                         <div>
-                            <Label
-                                htmlFor='password'
-                                text='Nueva contraseña'
-                            />
+                            <Label htmlFor='password' text='Nueva contraseña' />
                             <div className='mt-2'>
                                 <Input
                                     id='password'
