@@ -1,41 +1,29 @@
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
-import { useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 type PaginationProps = {
-    page: number;
     totalItems: number;
-    itemsPerPage: number;
-    onPageChange: (page: number) => void;
 };
 
-export default function Pagination({
-    page,
-    totalItems,
-    itemsPerPage,
-    onPageChange,
-}: PaginationProps) {
-    const navigate = useNavigate();
+export default function Pagination({ totalItems }: PaginationProps) {
+    const itemsPerPage = 10;
+    const [searchParams, setSearchParams] = useSearchParams();
+    const currentPage = !searchParams.get('page')
+        ? 1
+        : Number(searchParams.get('page'));
+
     const pageCount = Math.ceil(totalItems / itemsPerPage);
 
-    const currentPage = page;
-
     const nextPage = () => {
-        if (currentPage === pageCount) {
-            onPageChange(currentPage);
-        } else {
-            onPageChange(currentPage + 1);
-        }
-        navigate(`?page=${currentPage + 1}&limit=${itemsPerPage}`);
+        const next = currentPage === pageCount ? currentPage : currentPage + 1;
+        searchParams.set('page', next.toString());
+        setSearchParams(searchParams);
     };
     const prevPage = () => {
-        if (currentPage === 1) {
-            onPageChange(currentPage);
-        } else {
-            onPageChange(currentPage - 1);
-        }
-        navigate(`?page=${currentPage - 1}&limit=${itemsPerPage}`);
+        const prev = currentPage === 1 ? currentPage : currentPage - 1;
+        searchParams.set('page', prev.toString());
+        setSearchParams(searchParams);
     };
-
 
     if (pageCount <= 1) return null;
 
@@ -54,9 +42,9 @@ export default function Pagination({
                 <button
                     type='button'
                     onClick={prevPage}
-                    disabled={page === 1}
+                    disabled={currentPage === 1}
                     className={`p-2 flex justify-center items-center rounded-md transition-all ${
-                        page === 1
+                        currentPage === 1
                             ? ''
                             : 'hover:bg-orange-500  hover:text-white'
                     }`}>
