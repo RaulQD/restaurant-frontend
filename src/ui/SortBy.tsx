@@ -29,7 +29,7 @@ export default function SortBy({ sortByCategory }: { sortByCategory: string }) {
                 name='category'
                 id='category'
                 className=' py-2 px-4 focus:outline-none bg-[#f9f9f9] rounded-lg text-sm w-full'
-                value={currentFilter}
+                value={currentFilter!}
                 onChange={(e) => handleFilterChange(e.target.value)}>
                 <option value='todos'>Todos</option>
                 {categories &&

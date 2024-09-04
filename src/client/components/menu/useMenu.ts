@@ -7,8 +7,8 @@ import { DishesType } from "../../../types/dishes";
 export const useMenu = () => {
 
   const [searchParams] = useSearchParams();
-  const filterValue = searchParams.get('category') || 'platos principales';
-  const category = !filterValue || filterValue === 'platos principales' ? null : filterValue;
+  const filterValue = searchParams.get('category');
+  const category = !filterValue || filterValue === 'todos' ? null : filterValue;
 
   const { data: dishes, isLoading, isError, error } = useQuery<DishesType[]>({
     queryKey: ['dishesByCategory', category],

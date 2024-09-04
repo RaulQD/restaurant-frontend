@@ -10,6 +10,8 @@ export const currentUser = async () => {
   } catch (error) {
     if (isAxiosError(error) && error.response) {
       throw new Error(error.response.data.error);
+    } else {
+      throw new Error('An error occurred. Please try again later.');
     }
   }
 }
