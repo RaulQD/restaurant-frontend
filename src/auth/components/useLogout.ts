@@ -9,7 +9,7 @@ export const useLogout = () => {
   const logout = () => {
     queryClient.removeQueries();
     localStorage.removeItem('AUTHENTICATION');
-    navigate('/auth/login');
+    navigate('/');
   };
   return logout;
 }

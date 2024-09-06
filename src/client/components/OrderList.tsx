@@ -1,13 +1,24 @@
 import { BiX } from 'react-icons/bi';
 import { CiShoppingBasket } from 'react-icons/ci';
 import CardOrderList from './CardOrderList';
+import { CartItemsList } from '../../types/cart';
 
 type OrderProps = {
     isOrderOpen: boolean;
     handleOrder: (value: boolean) => void;
+    cartData: CartItemsList;
+    isLoading: boolean;
+    isError: boolean;
 };
 
-export default function OrderList({ isOrderOpen, handleOrder }: OrderProps) {
+export default function OrderList({
+    isOrderOpen,
+    handleOrder,
+    cartData,
+}: OrderProps) {
+    
+    const isCartEmpty = !cartData?.items || cartData.items.length === 0;
+
     return (
         <div
             className={`fixed h-full w-screen bg-black/50 top-0 right-0 backdrop-blur-sm transition-opacity duration-300 z-10 ${
@@ -25,19 +36,15 @@ export default function OrderList({ isOrderOpen, handleOrder }: OrderProps) {
                         }}
                     />
                 </div>
-                {isOrderOpen ? (
+                {isOrderOpen && !isCartEmpty ? (
                     <div className='mt-3 flex flex-col gap-7 md:gap-2'>
                         <h2 className='text-lg font-medium text-center mb-2'>
                             Tu Carrito
                         </h2>
                         <div className='flex flex-col gap-4 h-[430px] md:h-[460px] lg:h-[450px] overflow-y-auto'>
-                            <CardOrderList />
-                            <CardOrderList />
-                            <CardOrderList />
-                            <CardOrderList />
-                            <CardOrderList />
-                            <CardOrderList />
-                            <CardOrderList />
+                            {cartData?.items.map((item) => (
+                                <CardOrderList key={item.dishId} data={item}/>
+                            ))}
                         </div>
                         {/* Payment */}
                         <div className='flex flex-col gap-2 mt-5 pr-4'>
@@ -66,7 +73,7 @@ export default function OrderList({ isOrderOpen, handleOrder }: OrderProps) {
                         </div>
                     </div>
                 ) : (
-                    <div className='flex flex-col justify-center items-center h-screen'>
+                    <div className='flex flex-col justify-center items-center h-2/3'>
                         <CiShoppingBasket className='text-7xl text-orange-500' />
                         <span className='text-sm text-gray-400'>
                             Tu canasta está vacía

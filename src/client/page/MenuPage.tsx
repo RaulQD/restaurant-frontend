@@ -1,4 +1,4 @@
-import CardMenuList from '../components/CardMenuList';
+import CardMenuList from '../components/menu/CardMenuList';
 import FilterButton from '../../ui/FilterButton';
 import { useMenu } from '../components/menu/useMenu';
 import Spinner from '../../ui/Spinner';
@@ -41,7 +41,7 @@ export default function MenuPage() {
                     onCategoryChange={setSelectedCategory}
                 />
             </div>
-            <h2 className='text-2xl uppercase font-semibold font-outfit mt-10'>
+            <h2 className='text-2xl uppercase font-semibold font-outfit mt-10 mx-[120px]'>
                 Conoce nuestros {selectedCategory}
             </h2>
             {/*Lista de platos*/}
@@ -50,7 +50,7 @@ export default function MenuPage() {
                     <Spinner />
                 </div>
             ) : (
-                <div className='pt-16 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8'>
+                <div className='pt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-[120px]'>
                     {dishes?.map((dishes) => (
                         <CardMenuList key={dishes.id} dishes={dishes} />
                     ))}

@@ -8,7 +8,6 @@ export const useProfile = () => {
   const { mutate: profile, isPending } = useMutation({
     mutationFn: updateProfile,
     onError: (error) => {
-      console.log(error);
       toast.error(error.message);
     },
     onSuccess: (data) => {

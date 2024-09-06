@@ -46,19 +46,6 @@ export const getDishesByCategory = async (category: string) => {
   }
 }
 
-// export const getDishesClient = async ({ pageParam = 0 }: { pageParam?: number }) => {
-//   try {
-//     const { data } = await api.get('/dishes', { params: { page: pageParam, limit: 10 } });
-//     return data;
-//   } catch (error) {
-//     if (isAxiosError(error) && error.response) {
-//       throw new Error(error.response.data.error)
-//     } else {
-//       throw new Error('Error desconocido al obtener una plato');
-//     }
-//   }
-// }
-
 export const getDishesById = async (id: Dish['id']) => {
   try {
     const { data } = await api.get(`/dishes/${id}`);

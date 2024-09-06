@@ -4,16 +4,20 @@ import { NavLink } from 'react-router-dom';
 import OrderList from './OrderList';
 import { CiShoppingBasket } from 'react-icons/ci';
 import Logo from '../../assets/logo-icon.svg';
-import { NavLinks } from '../../types';
 import { useUser } from '../../hooks/useUser';
 import Header from '../../ui/Header';
+import { useCarts } from './cart/useCarts';
 
 type NavbarProps = {
     handleRouteChange: () => void;
 };
+export type NavLinks = {
+    name: string;
+    path: string;
+}; 
 
 export default function Navbar({ handleRouteChange }: NavbarProps) {
-    const { isUser } = useUser();
+    const { user,  isUser } = useUser();
 
     const [showMenu, setShowMenu] = useState(false);
     const [isOrderOpen, setIsOrderOpen] = useState(false);
@@ -23,6 +27,10 @@ export default function Navbar({ handleRouteChange }: NavbarProps) {
         { name: 'Nuestros platos', path: '/our-dishes' },
         { name: 'Sobre Nosotros', path: '/about' },
     ];
+    const { cartData, isLoading, isError } = useCarts(user?.id);
+    // Mostrar el numero de items en el carrito
+    const totalItems = cartData ? cartData.items.reduce((total, item) => total + item.quantity, 0) : 0;
+
     // Evitar el scroll en el body cuando el menu lateral esté abierto
     useEffect(() => {
         const handleResize = () => {
@@ -151,12 +159,15 @@ export default function Navbar({ handleRouteChange }: NavbarProps) {
                             className='flex justify-center items-center'>
                             <CiShoppingBasket className='text-2xl  cursor-pointer ' />
                             <p className='text-[12px] font-medium font-poppins absolute -top-1 -right-1.5 w-4 h-4 bg-orange-500 flex justify-center items-center text-white rounded-full'>
-                                1
+                              {totalItems}
                             </p>
                         </button>
                         <OrderList
                             isOrderOpen={isOrderOpen}
                             handleOrder={handleOrder}
+                            cartData={cartData!}
+                            isLoading={isLoading}
+                            isError={isError}
                         />
                     </div>
 
