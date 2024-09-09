@@ -1,7 +1,8 @@
 import { BiX } from 'react-icons/bi';
 import { CiShoppingBasket } from 'react-icons/ci';
 import CardOrderList from './CardOrderList';
-import { CartItemsList } from '../../types/cart';
+import { CartItemsList } from '../../../types/cart';
+import { formatCurrency } from '../../../helpers/index';
 
 type OrderProps = {
     isOrderOpen: boolean;
@@ -16,8 +17,8 @@ export default function OrderList({
     handleOrder,
     cartData,
 }: OrderProps) {
-    
     const isCartEmpty = !cartData?.items || cartData.items.length === 0;
+    const totalPayment = cartData?.items.reduce((total, items) => total + (items.quantity * items.price), 0 );
 
     return (
         <div
@@ -43,7 +44,7 @@ export default function OrderList({
                         </h2>
                         <div className='flex flex-col gap-4 h-[430px] md:h-[460px] lg:h-[450px] overflow-y-auto'>
                             {cartData?.items.map((item) => (
-                                <CardOrderList key={item.dishId} data={item}/>
+                                <CardOrderList key={item.dishId} data={item} />
                             ))}
                         </div>
                         {/* Payment */}
@@ -58,7 +59,7 @@ export default function OrderList({
                             </div>
                             <div className='flex justify-between text-sm lg:text-base'>
                                 <span>Total</span>
-                                <span>S/ 64.90</span>
+                                <span>{formatCurrency(totalPayment)}</span>
                             </div>
                             <button className='text-sm md:text-base bg-orange-500 text-white py-2 rounded-md'>
                                 Pagar

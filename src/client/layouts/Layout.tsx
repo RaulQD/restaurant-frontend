@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
-import Hero from '../components/Hero';
+import Hero from '../../ui/Hero';
 
 export default function Layout() {
     const handleRouteChange = () => {

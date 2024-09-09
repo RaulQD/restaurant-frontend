@@ -32,23 +32,23 @@ export default function Sidebar() {
                     </div>
                     <nav className=''>
                         <ul className='font-outfit'>
-                            <SidebarItems path='/dashboard' label='Dashboard' Icon={BiSolidDashboard}/>
+                            <SidebarItems path='/admin/dashboard' label='Dashboard' Icon={BiSolidDashboard}/>
                             <SidebarDropdown label='Catalogo' Icon={BiSolidReport} menuItems={[
-                                { path: '/dashboard/dishes', label: 'Platos' },
-                                { path: '/dashboard/dishes/add', label: 'Añadir Platos' },
-                                { path: '/dashboard/category', label: 'Categorias'},
-                                { path: '/dashboard/category/add', label: 'Categoría de Platos', },
+                                { path: '/admin/dashboard/dishes', label: 'Platos' },
+                                { path: '/admin/dashboard/dishes/add', label: 'Añadir Platos' },
+                                { path: '/admin/dashboard/category', label: 'Categorias'},
+                                { path: '/admin/dashboard/category/add', label: 'Categoría de Platos', },
                             ]}/>
-                            <SidebarItems path='/dashboard/orders' label='Ordenes' Icon={BiFile}/>
+                            <SidebarItems path='/admin/dashboard/orders' label='Ordenes' Icon={BiFile}/>
                             <SidebarDropdown label='Clientes' Icon={FaUsers} menuItems={[
-                                { path: '/dashboard/customers', label: 'Lista de clientes' },
+                                { path: '/admin/dashboard/customers', label: 'Lista de clientes' },
                             ]}/>
                             <SidebarDropdown label='Empleados' Icon={FaBuildingUser} menuItems={[
-                                { path: '/dashboard/employees', label: 'Empleados' }
+                                { path: '/admin/dashboard/employees', label: 'Empleados' }
                             ]}/>
                             <SidebarDropdown label='Reportes' Icon={BiSolidReport} menuItems={ [
-                                { path: '/dashboard/orders', label: 'Reporte de ordenes' },
-                                { path: '/dashboard/sales', label: 'Reporte de ventas' },
+                                { path: '/admin/dashboard/orders', label: 'Reporte de ordenes' },
+                                { path: '/admin/dashboard/sales', label: 'Reporte de ventas' },
                             ]}/>
                             
                         </ul>

@@ -16,12 +16,6 @@ export const useLogin = () => {
       if (data) {
         localStorage.setItem('AUTHENTICATION', JSON.stringify({
           token: data.token,
-          // user: {
-          //   firstName: data.firstName,
-          //   lastName: data.lastName,
-          //   email: data.email,
-          //   rol: data.rol,
-          // },
         }));
       }
       //  permite actualizar manualmente los datos almacenados en la cache para una consulta específica.
@@ -31,7 +25,7 @@ export const useLogin = () => {
         (role: { name: string }) => role.name === 'ADMIN_ROLE'
       );
       if (isAdmin) {
-        navigate('/dashboard');
+        navigate('/admin/dashboard');
       } else {
         navigate('/');
       }

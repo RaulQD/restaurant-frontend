@@ -1,24 +1,46 @@
 import { ReactNode, useEffect } from 'react';
 import { useUser } from '../hooks/useUser';
 import Spinner from './Spinner';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 type ProtectedRouteProps = {
     children: ReactNode;
+    requiresAdmin?: boolean;
 };
 
-export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-    const navigate = useNavigate();
-
+export default function ProtectedRoute({
+    children,
+    requiresAdmin = false,
+}: ProtectedRouteProps) {
     // 1. Cargar el usuario autenticado+
     const { isLoading, isAdmin, isUser } = useUser();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     // 3. Si el usuario no está autenticado, redirigir a la página de inicio de sesión /logion
     useEffect(() => {
-        if (!isAdmin && !isUser && !isLoading) {
-            navigate('/auth/login');
+        if (!isLoading) {
+            if (!isAdmin && requiresAdmin) {
+                // Redirigir a /unauthorized y pasar la ruta actual como estado
+                navigate('/not-found', {
+                    replace: true,
+                    state: { from: location.pathname },
+                });
+            } else if (!isUser && !isAdmin) {
+                // Redirigir a la página de login
+                navigate('/auth/login', {
+                    replace: true,
+                    state: { from: location.pathname },
+                });
+            }
         }
-    }, [isAdmin, isUser, isLoading, navigate]);
+        if (!isAdmin && !isUser && !isLoading) {
+            navigate('/auth/login', {
+                replace: true,
+                state: { from: location.pathname },
+            });
+        }
+    }, [isAdmin, isUser, isLoading, navigate, requiresAdmin, location]);
 
     // 2. mientras carga el usuario, mostrar un spinner
     if (isLoading)
@@ -28,5 +50,5 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
             </div>
         );
     //  4. Si el usuario está autenticado, mostrar el contenido de la ruta protegida
-    if (isAdmin || isUser) return children;
+    return <>{children}</>;
 }

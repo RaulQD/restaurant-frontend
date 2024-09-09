@@ -1,11 +1,12 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function NotFound() {
     const navigate = useNavigate();
+    const location = useLocation();
+    
+    // Obtener la ruta anterior desde el estado de la navegación
+    const from = location.state?.from?.pathname || '/';
 
-    const handleClick = () => {
-        navigate('/dashboard');
-    };
 
     return (
         <main className='grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8'>
@@ -20,7 +21,7 @@ export default function NotFound() {
                 <div className='mt-10 flex items-center justify-center gap-x-6'>
                     <button
                         className='rounded-md bg-orange-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600'
-                        onClick={handleClick}>
+                        onClick={ () => navigate(from,{ replace: true })} >
                         Go back home
                     </button>
                 </div>

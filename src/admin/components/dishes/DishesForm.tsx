@@ -57,7 +57,7 @@ export const DishesForm = ({
                                                 'El nombre de plato debe tener al menos 5 caracteres.',
                                         },
                                         pattern: {
-                                            value: /^[A-Za-z\s]+$/i,
+                                            value: /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$/i,
                                             message:
                                                 'El nombre del plato solo debe contener letras',
                                         },

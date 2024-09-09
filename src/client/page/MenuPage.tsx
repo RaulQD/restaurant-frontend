@@ -1,21 +1,14 @@
-import CardMenuList from '../components/menu/CardMenuList';
 import FilterButton from '../../ui/FilterButton';
 import { useMenu } from '../components/menu/useMenu';
 import Spinner from '../../ui/Spinner';
 import { useState } from 'react';
+import CardMenu from '../components/menu/CardMenu';
 
 export default function MenuPage() {
     const { isLoading, dishes, error, isError } = useMenu();
     const [selectedCategory, setSelectedCategory] = useState('todos');
 
-    // if (isLoading) {
-    //     return (
-    //         <div className='flex justify-center items-center h-screen'>
-    //             <Spinner />
-    //         </div>
-    //     );
-    // }
-    if (isError) return <p>Error: {error?.message}</p>;
+    // if (isError) return <p>Error: {error?.message}</p>;
 
     return (
         <section className='mt-14 mb-48 px-5 md:px-16 lg:px-32 xl:px-44'>
@@ -41,7 +34,8 @@ export default function MenuPage() {
                     onCategoryChange={setSelectedCategory}
                 />
             </div>
-            <h2 className='text-2xl uppercase font-semibold font-outfit mt-10 mx-[120px]'>
+
+            <h2 className='text-2xl uppercase font-semibold font-outfit mt-10 '>
                 Conoce nuestros {selectedCategory}
             </h2>
             {/*Lista de platos*/}
@@ -50,9 +44,9 @@ export default function MenuPage() {
                     <Spinner />
                 </div>
             ) : (
-                <div className='pt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-[120px]'>
+                <div className='pt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
                     {dishes?.map((dishes) => (
-                        <CardMenuList key={dishes.id} dishes={dishes} />
+                        <CardMenu key={dishes.id} dishes={dishes} />
                     ))}
                 </div>
             )}

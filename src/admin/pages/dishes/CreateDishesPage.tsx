@@ -33,7 +33,7 @@ export default function CreateDishesPage() {
         onSuccess: (data) => {
             queryClient.invalidateQueries({ queryKey: ['dishes'] });
             toast.success(data.message);
-            navigate('/dashboard/dishes');
+            navigate('/admin/dashboard/dishes');
             reset();
         },
     });
@@ -43,7 +43,7 @@ export default function CreateDishesPage() {
     };
 
     const redirectTo = () => {
-        navigate('/dashboard/dishes');
+        navigate('/admin/dashboard/dishes');
     };
     return (
         <>

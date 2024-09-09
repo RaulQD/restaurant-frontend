@@ -36,12 +36,7 @@ export default function AppRoutes() {
                     <Route path='/' element={<HomePage />} index />
                     <Route path='/our-dishes' element={<MenuPage />} />
                     <Route path='/about' element={<AboutPage />} />
-                    <Route
-                        element={
-                            <ProtectedRoute >
-                                <ProfileLayout />
-                            </ProtectedRoute>
-                        }>
+                    <Route element={<ProfileLayout />}>
                         <Route
                             path='/account/profile'
                             element={<ProfilePage />}
@@ -61,56 +56,54 @@ export default function AppRoutes() {
                     </Route>
                 </Route>
                 <Route
+                    path='/admin/'
                     element={
-                        <ProtectedRoute>
+                        <ProtectedRoute requiresAdmin={true}>
                             <LayoutAdmin />
                         </ProtectedRoute>
                     }>
-                    <Route path='/dashboard' element={<DashboardPage />} />
+                    <Route path='dashboard' element={<DashboardPage />} />
+                    <Route path='dashboard/dishes' element={<DishesPage />} />
                     <Route
-                        path='/dashboard/dishes'
-                        element={<DishesPage />}
-                    />
-                    <Route
-                        path='/dashboard/dishes/add'
+                        path='dashboard/dishes/add'
                         element={<CreateDishesPage />}
                     />
                     <Route
-                        path='/dashboard/dishes/:id/edit'
+                        path='dashboard/dishes/:id/edit'
                         element={<EditDishesPage />}
                     />
                     <Route
-                        path='/dashboard/category'
+                        path='dashboard/category'
                         element={<CategoryPages />}
                     />
                     <Route
-                        path='/dashboard/category/add'
+                        path='dashboard/category/add'
                         element={<CreateCategoryPage />}
                     />
                     <Route
-                        path='/dashboard/customers'
+                        path='dashboard/customers'
                         element={<CustomersPage />}
                     />
-                    <Route path='/dashboard/orders' element={<Orders />} />
+                    <Route path='dashboard/orders' element={<Orders />} />
                     <Route
-                        path='/dashboard/employees'
+                        path='dashboard/employees'
                         element={<EmployeesPages />}
                     />
                     {/* <Route path ='/dashboard/employees/add' element={<CreateEmployeesPage/>}/> */}
                 </Route>
-                <Route element={<AuthLayout />}>
-                    <Route path='/auth/login' element={<Login />} />
-                    <Route path='/auth/register' element={<SignUp />} />
+                <Route path='/auth/' element={<AuthLayout />}>
+                    <Route path='login' element={<Login />} />
+                    <Route path='register' element={<SignUp />} />
                     <Route
-                        path='/auth/forgot-password'
+                        path='forgot-password'
                         element={<ForgotPassword />}
                     />
                     <Route
-                        path='/auth/update-password/:token'
+                        path='update-password/:token'
                         element={<NewPasswordPage />}
                     />
                 </Route>
-                <Route path='*' element={<NotFound />} />
+                <Route path='/not-found' element={<NotFound />} />
             </Routes>
         </BrowserRouter>
     );

@@ -1,5 +1,5 @@
 import { BiHeart, BiPlus } from 'react-icons/bi';
-import NoImage from '../../../assets/no-image.jpg';
+import NoImage from '../../../assets/no-image-found.png';
 import { formatCurrency } from '../../../helpers';
 import { DishesType } from '../../../types/dishes';
 import { CartForm } from '../../../types/cart';
@@ -12,9 +12,10 @@ type CardMenuListProps = {
     dishes: DishesType;
 };
 
-export default function CardMenuList({ dishes }: CardMenuListProps) {
+export default function CardMenu({ dishes }: CardMenuListProps) {
     const { user } = useUser();
     const queryClient = useQueryClient();
+
     const { mutate } = useMutation({
         mutationFn: createCart,
         onError: (error) => {
@@ -31,7 +32,6 @@ export default function CardMenuList({ dishes }: CardMenuListProps) {
             toast.error('Debes estar logueado para agregar plato al carrito.');
             return;
         }
-
         //SE IMPLEMENTA LA FUNCIONALIDAD DE AGREGAR AL CARRITO
         if (user) {
             const formData: CartForm = {
@@ -44,12 +44,12 @@ export default function CardMenuList({ dishes }: CardMenuListProps) {
     };
 
     return (
-        <div className='bg-slate-100 rounded-md'>
+        <div className='max-w-xs mx-auto bg-slate-100 rounded-lg overflow-hidden'>
             <div className=''>
                 {dishes?.images ? (
-                    <img src={dishes?.images} alt={dishes?.name} />
+                    <img src={dishes?.images} alt={dishes?.name} className='size-74 object-cover' />
                 ) : (
-                    <img src={NoImage} alt={dishes?.name}/>
+                    <img src={NoImage} alt={dishes?.name} className='size-74 object-cover' />
                 )}
             </div>
             <div className='p-4 flex flex-col gap-2 '>
@@ -73,5 +73,34 @@ export default function CardMenuList({ dishes }: CardMenuListProps) {
                 </div>
             </div>
         </div>
+        // <div className='bg-slate-100 rounded-md'>
+        //     <div className=''>
+        //         {dishes?.images ? (
+        //             <img src={dishes?.images} alt={dishes?.name} />
+        //         ) : (
+        //             <img src={NoImage} alt={dishes?.name}/>
+        //         )}
+        //     </div>
+        //     <div className='p-4 flex flex-col gap-2 '>
+        //         <div className='flex justify-between items-center'>
+        //             <h3 className='font-bold'>{dishes?.name}</h3>
+        //             <BiHeart className='text-red-700 text-xl' />
+        //         </div>
+        //         <p className='text-sm font-medium text-[#444341]'>
+        //             {dishes?.description}
+        //         </p>
+        //         <div className='flex justify-between items-center gap-20'>
+        //             <span className='text-lg text-red-700 font-extrabold'>
+        //                 {formatCurrency(dishes?.originalPrice || 0)}
+        //             </span>
+        //             <button
+        //                 type='button'
+        //                 className='bg-orange-500 p-2 rounded-md flex items-center justify-center hover:bg-orange-600 transition-all duration-200 ease-in-out'
+        //                 onClick={handleAddToCart}>
+        //                 <BiPlus className='text-xl text-white' />
+        //             </button>
+        //         </div>
+        //     </div>
+        // </div>
     );
 }

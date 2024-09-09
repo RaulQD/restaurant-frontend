@@ -1,6 +1,6 @@
 // import { useState } from 'react';
 // import Navbar from './Navbar';
-import background from '../../assets/foodhero5.webp';
+import background from '../assets/foodhero5.webp';
 import { useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 

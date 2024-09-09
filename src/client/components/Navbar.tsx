@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { BiMenu, BiX } from 'react-icons/bi';
 import { NavLink } from 'react-router-dom';
-import OrderList from './OrderList';
+import OrderList from './cart/OrderList';
 import { CiShoppingBasket } from 'react-icons/ci';
 import Logo from '../../assets/logo-icon.svg';
 import { useUser } from '../../hooks/useUser';
@@ -158,7 +158,7 @@ export default function Navbar({ handleRouteChange }: NavbarProps) {
                             onClick={handleOrder}
                             className='flex justify-center items-center'>
                             <CiShoppingBasket className='text-2xl  cursor-pointer ' />
-                            <p className='text-[12px] font-medium font-poppins absolute -top-1 -right-1.5 w-4 h-4 bg-orange-500 flex justify-center items-center text-white rounded-full'>
+                            <p className='text-xs font-medium font-poppins absolute -top-1 -right-1.5 w-[18px] h-[18px] bg-orange-500 flex justify-center items-center text-white rounded-full '>
                               {totalItems}
                             </p>
                         </button>

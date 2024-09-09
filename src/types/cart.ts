@@ -4,7 +4,7 @@ export type CartForm = {
   dishId: string;
   quantity: number;
 }
-
+export type CartDelete = Pick<CartForm, 'userId' | 'dishId'>;
 
 export type Cart = {
   _id: string;
@@ -24,4 +24,6 @@ export type CartItem = {
   price: number;
   quantity: number;
 }
+export type UpdateCartItems = Pick<CartItem, 'dishId' | 'quantity'>;
+
 

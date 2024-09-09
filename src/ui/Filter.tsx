@@ -5,7 +5,7 @@ import SortBy from './SortBy';
 export default function Filter() {
     const navigate = useNavigate();
     const redirectTo = () => {
-        navigate('/dashboard/dishes/add');
+        navigate('/admin/dashboard/dishes/add');
     };
     return (
         <div className='flex flex-col md:flex-row md:justify-between md:items-center gap-y-4 mb-5 py-5 px-8 bg-white shadow-md rounded-lg'>

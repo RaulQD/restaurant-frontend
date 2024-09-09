@@ -8,7 +8,7 @@ import {
 import { BiChevronDown } from 'react-icons/bi';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
-import Pagination from '../Pagination';
+import Pagination from '../../../ui/Pagination';
 import { formatCurrency, transformId } from '../../../helpers';
 import { Modal } from '../../../ui/Modal';
 import AddImageForm from './AddImageForm';
