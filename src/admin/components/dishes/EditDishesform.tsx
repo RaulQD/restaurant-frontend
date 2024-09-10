@@ -43,7 +43,7 @@ export default function EditDishesform({
             // INVALIDA LA CACHE DE LA QUERY DE EDITAR PLATOS
             queryClient.invalidateQueries({ queryKey: ['editDishes'] });
             toast.success(data.message);
-            navigate('/dashboard/products');
+            navigate('/admin/dashboard/dishes/');
         },
     });
 
@@ -55,7 +55,7 @@ export default function EditDishesform({
         await mutation.mutateAsync(data);
     };
     const redirectTo = () => {
-        navigate('/dashboard/products/');
+        navigate('/admin/dashboard/dishes/');
     };
     return (
         <>

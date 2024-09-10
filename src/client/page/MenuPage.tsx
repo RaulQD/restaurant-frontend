@@ -5,7 +5,7 @@ import { useState } from 'react';
 import CardMenu from '../components/menu/CardMenu';
 
 export default function MenuPage() {
-    const { isLoading, dishes, error, isError } = useMenu();
+    const { isLoading, dishes, error } = useMenu();
     const [selectedCategory, setSelectedCategory] = useState('todos');
 
     // if (isError) return <p>Error: {error?.message}</p>;
@@ -44,11 +44,19 @@ export default function MenuPage() {
                     <Spinner />
                 </div>
             ) : (
-                <div className='pt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-                    {dishes?.map((dishes) => (
-                        <CardMenu key={dishes.id} dishes={dishes} />
-                    ))}
-                </div>
+                <>
+                    {!dishes ? (
+                        <div className='flex justify-center items-center pt-20'>
+                            <p className='text-lg'>{error?.message}</p>
+                        </div>
+                    ):(
+                        <div className='pt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full'>
+                        {dishes?.map((dishes) => (
+                            <CardMenu key={dishes.id} dishes={dishes} />
+                        ))}
+                    </div>
+                    )}
+                </>
             )}
         </section>
     );

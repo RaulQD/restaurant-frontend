@@ -1,5 +1,5 @@
 import { BiHeart, BiPlus } from 'react-icons/bi';
-import NoImage from '../../../assets/no-image-found.png';
+import NoImage from '../../../assets/not-image-found.png';
 import { formatCurrency } from '../../../helpers';
 import { DishesType } from '../../../types/dishes';
 import { CartForm } from '../../../types/cart';
@@ -44,63 +44,44 @@ export default function CardMenu({ dishes }: CardMenuListProps) {
     };
 
     return (
-        <div className='max-w-xs mx-auto bg-slate-100 rounded-lg overflow-hidden'>
-            <div className=''>
-                {dishes?.images ? (
-                    <img src={dishes?.images} alt={dishes?.name} className='size-74 object-cover' />
-                ) : (
-                    <img src={NoImage} alt={dishes?.name} className='size-74 object-cover' />
-                )}
-            </div>
-            <div className='p-4 flex flex-col gap-2 '>
+        <div className='bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between'>
+            {/* Imagen del plato */}
+            <img
+                src={dishes?.images || NoImage}
+                alt={dishes?.name}
+                className='w-full h-60 object-cover'
+            />
+
+            <div className='p-5'>
+                {/* Título del plato */}
                 <div className='flex justify-between items-center'>
                     <h3 className='font-bold'>{dishes?.name}</h3>
                     <BiHeart className='text-red-700 text-xl' />
                 </div>
-                <p className='text-sm font-medium text-[#444341]'>
+
+                {/* Descripción del plato */}
+                <p className='text-sm text-gray-600 mt-2'>
                     {dishes?.description}
                 </p>
-                <div className='flex justify-between items-center gap-20'>
-                    <span className='text-lg text-red-700 font-extrabold'>
-                        {formatCurrency(dishes?.originalPrice || 0)}
+
+                {/* Precio */}
+                <div className='flex justify-between items-center mt-4'>
+                    <span className='text-lg font-semibold text-red-700'>
+                    {formatCurrency(dishes?.originalPrice || 0)}
                     </span>
-                    <button
-                        type='button'
-                        className='bg-orange-500 p-2 rounded-md flex items-center justify-center hover:bg-orange-600 transition-all duration-200 ease-in-out'
-                        onClick={handleAddToCart}>
-                        <BiPlus className='text-xl text-white' />
-                    </button>
+                    {/* Botones */}
+                    <div className='flex space-x-2'>
+                        {/* Botón para agregar al carrito */}
+                        <button
+                            type='button'
+                            className='bg-orange-500 p-2 rounded-md flex items-center justify-center hover:bg-orange-600 transition-all duration-200 ease-in-out'
+                            onClick={handleAddToCart}>
+                            <BiPlus className='text-xl text-white' />
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-        // <div className='bg-slate-100 rounded-md'>
-        //     <div className=''>
-        //         {dishes?.images ? (
-        //             <img src={dishes?.images} alt={dishes?.name} />
-        //         ) : (
-        //             <img src={NoImage} alt={dishes?.name}/>
-        //         )}
-        //     </div>
-        //     <div className='p-4 flex flex-col gap-2 '>
-        //         <div className='flex justify-between items-center'>
-        //             <h3 className='font-bold'>{dishes?.name}</h3>
-        //             <BiHeart className='text-red-700 text-xl' />
-        //         </div>
-        //         <p className='text-sm font-medium text-[#444341]'>
-        //             {dishes?.description}
-        //         </p>
-        //         <div className='flex justify-between items-center gap-20'>
-        //             <span className='text-lg text-red-700 font-extrabold'>
-        //                 {formatCurrency(dishes?.originalPrice || 0)}
-        //             </span>
-        //             <button
-        //                 type='button'
-        //                 className='bg-orange-500 p-2 rounded-md flex items-center justify-center hover:bg-orange-600 transition-all duration-200 ease-in-out'
-        //                 onClick={handleAddToCart}>
-        //                 <BiPlus className='text-xl text-white' />
-        //             </button>
-        //         </div>
-        //     </div>
-        // </div>
+       
     );
 }

@@ -12,7 +12,7 @@ import Pagination from '../../../ui/Pagination';
 import { formatCurrency, transformId } from '../../../helpers';
 import { Modal } from '../../../ui/Modal';
 import AddImageForm from './AddImageForm';
-import NoImage from '../../../assets/no-image.jpg';
+import NoImage from '../../../assets/not-image-found.png';
 import Spinner from '../../../ui/Spinner';
 import { useDishes } from './useDishes';
 
@@ -58,7 +58,7 @@ export default function TableProduct() {
                                         Precio
                                     </th>
                                     <th className='font-medium px-3 py-3.5 text-sm'>
-                                        Categoría
+                                        Descripción
                                     </th>
                                     <th className='font-medium px-3 py-3.5 text-sm'>
                                         Disponibilidad
@@ -77,22 +77,18 @@ export default function TableProduct() {
                                                 onClick={() =>
                                                     handleImageClick(dish.id)
                                                 }>
-                                                {dish.images ? (
-                                                    <img
-                                                        src={dish.images}
-                                                        alt={dish.name}
-                                                        className='size-12'
-                                                    />
-                                                ) : (
-                                                    <img
-                                                        src={NoImage}
-                                                        alt={dish.name}
-                                                        className='size-12'
-                                                    />
-                                                )}
+                                                <img
+                                                    src={
+                                                        dish?.images || NoImage
+                                                    }
+                                                    alt={dish.name}
+                                                    className='size-12 object-cover'
+                                                />
                                             </button>
-                                            <div className='flex flex-col '>
-                                                <p>{dish.name}</p>
+                                            <div className='flex flex-col'>
+                                                <p className='whitespace-nowrap truncate max-w-xl'>
+                                                    {dish.name}
+                                                </p>
                                                 <span className='text-sm text-gray-500'>
                                                     {dish.category.name}
                                                 </span>
@@ -139,7 +135,7 @@ export default function TableProduct() {
                                                         className='py-4 px-2 bg-white rounded-lg shadow-lg w-36'>
                                                         <MenuItem>
                                                             <NavLink
-                                                                to={`/dashboard/products/${dish.id}/edit`}
+                                                                to={`/admin/dashboard/dishes/${dish.id}/edit`}
                                                                 className='text-xs flex items-center gap-x-2 rounded-lg transition-colors hover:bg-orange-100 py-2 px-4 mb-1 text-gray-400 font-medium hover:text-orange-600'>
                                                                 Editar
                                                             </NavLink>
@@ -147,7 +143,7 @@ export default function TableProduct() {
                                                         <MenuItem>
                                                             <NavLink
                                                                 to={
-                                                                    '/dashboard/products/delete'
+                                                                    '/admin/dashboard/dishes/delete'
                                                                 }
                                                                 className='text-xs flex items-center gap-x-2 rounded-lg transition-colors hover:bg-orange-100 py-2 px-4 mb-1 text-gray-400 font-medium hover:text-orange-600'>
                                                                 Eliminar
