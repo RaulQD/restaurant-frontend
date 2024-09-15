@@ -6,6 +6,7 @@ import { ErrorMessage } from '../ErrorMessage';
 import { getCategories } from '../../../services/apiCategory';
 import { DishFormData } from '../../../types/dishes';
 import { BiPlus } from 'react-icons/bi';
+import { Categories } from '../../../types/category';
 
 type DishesFormProps = {
     register: UseFormRegister<DishFormData>;
@@ -20,9 +21,9 @@ export const DishesForm = ({
 }: DishesFormProps) => {
     const navigate = useNavigate();
     const redirectTo = () => {
-        navigate('/dashboard/category/add');
+        navigate('/admin/dashboard/category/add');
     };
-    const { data } = useQuery({
+    const { data } = useQuery<Categories[]>({
         queryKey: ['category'],
         queryFn: getCategories,
     });

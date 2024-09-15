@@ -1,41 +1,6 @@
-// import { z } from "zod";
+
 import { Categories } from "./category";
 
-// export const ResultSchema = z.object({
-//   "id": z.string(),
-//   "name": z.string(),
-//   "description": z.string(),
-//   "originalPrice": z.number(),
-//   "available": z.boolean(),
-//   "category": categorySchema,
-//   "images": z.string().optional(),
-// })
-// export const PaginationInfoSchema = z.object({
-//   "page": z.number(),
-//   "limit": z.number(),
-//   "totalDishes": z.number(),
-// });
-// export type Pagination = z.infer<typeof PaginationInfoSchema>;
-// export const DishesSchema = z.object({
-//   result: z.array(ResultSchema),
-//   info: PaginationInfoSchema,
-// });
-// export const DishesListSchema = z.array(DishesSchema);
-// export type Result = z.infer<typeof ResultSchema>;
-
-// export type Dishes = z.infer<typeof DishesSchema>;
-// export type DishesList = z.infer<typeof DishesListSchema>
-
-// export const DishSchema = z.object({
-//   "id": z.string(),
-//   "name": z.string(),
-//   "description": z.string(),
-//   "originalPrice": z.number(),
-//   "available": z.boolean(),
-//   "category": z.string(),
-//   "images": z.string(),
-// });
-// export type Dish = z.infer<typeof DishSchema>;
 
 
 export type Dish = {
@@ -58,6 +23,7 @@ export type DishesType = {
   category: Categories;
   images: string;
 }
+
 export type PaginationInfoType = {
   page: number;
   limit: number;

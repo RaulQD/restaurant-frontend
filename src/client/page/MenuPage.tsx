@@ -2,13 +2,12 @@ import FilterButton from '../../ui/FilterButton';
 import { useMenu } from '../components/menu/useMenu';
 import Spinner from '../../ui/Spinner';
 import { useState } from 'react';
-import CardMenu from '../components/menu/CardMenu';
+import CardMenu from '../components/menu/CardDish';
 
 export default function MenuPage() {
     const { isLoading, dishes, error } = useMenu();
     const [selectedCategory, setSelectedCategory] = useState('todos');
-
-    // if (isError) return <p>Error: {error?.message}</p>;
+   
 
     return (
         <section className='mt-14 mb-48 px-5 md:px-16 lg:px-32 xl:px-44'>
@@ -36,7 +35,7 @@ export default function MenuPage() {
             </div>
 
             <h2 className='text-2xl uppercase font-semibold font-outfit mt-10 '>
-                Conoce nuestros {selectedCategory}
+                Conoce nuestros {selectedCategory === 'todos' ? 'platos' : selectedCategory}
             </h2>
             {/*Lista de platos*/}
             {isLoading ? (
@@ -49,12 +48,12 @@ export default function MenuPage() {
                         <div className='flex justify-center items-center pt-20'>
                             <p className='text-lg'>{error?.message}</p>
                         </div>
-                    ):(
+                    ) : (
                         <div className='pt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full'>
-                        {dishes?.map((dishes) => (
-                            <CardMenu key={dishes.id} dishes={dishes} />
-                        ))}
-                    </div>
+                            {dishes?.map((dishes) => (
+                                <CardMenu key={dishes.id} dishes={dishes} />
+                            ))}
+                        </div>
                     )}
                 </>
             )}

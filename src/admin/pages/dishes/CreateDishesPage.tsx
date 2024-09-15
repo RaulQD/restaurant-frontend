@@ -16,7 +16,6 @@ export default function CreateDishesPage() {
         originalPrice: undefined,
         category: '',
         images: '',
-        // available: true,
     };
     const {
         register,

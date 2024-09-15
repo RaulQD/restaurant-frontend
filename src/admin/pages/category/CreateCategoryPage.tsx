@@ -27,7 +27,7 @@ export const CreateCategoryPage = () => {
         },
         onSuccess: (data) => {
             toast.success(data.message);
-            navigate('/dashboard/category');
+            navigate('/admin/dashboard/category');
         },
     });
 
@@ -52,7 +52,7 @@ export const CreateCategoryPage = () => {
                         <button
                             type='button'
                             className='hover:bg-gray-200 py-2 px-4 transition-all ease-in rounded-lg font-outfit'
-                            onClick={() => navigate('/dashboard/category')}>
+                            onClick={() => navigate('/admin/dashboard/category')}>
                             Cancelar
                         </button>
                         <button

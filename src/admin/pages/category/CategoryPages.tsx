@@ -3,15 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import TableCategory from '../../components/category/TableCategory';
 
 
-const categoryActions = [
-    { to: '/admin/employees/view', label: 'Ver' },
-    { to: '/admin/employees/delete', label: 'Eliminar' },
-];
 export const CategoryPages = () => {
     const navigate = useNavigate();
 
     const redirectTo = () => {
-        navigate('/dashboard/category/add');
+        navigate('/admin/dashboard/category/add');
     };
 
     return (
@@ -34,9 +30,6 @@ export const CategoryPages = () => {
                             placeholder='Buscar categorias'
                             className='bg-[#F9F9F9]  w-full py-2 px-4 rounded-lg outline-none focus:bg-gray-100 transition-all ease-in-out text-sm'
                         />
-                        {/* <label htmlFor='search' className='absolute right-4 translate-x-1/2'>
-                        <BiSearch className='text-lg' />
-                    </label> */}
                     </div>
                     <div className='flex flex-col md:flex-row md:justify-between md:items-center gap-4'>
                         <button
@@ -49,7 +42,7 @@ export const CategoryPages = () => {
                 </div>
             </div>
             <div className='px-4 md:px-6 xl:px-8'>
-                <TableCategory navAction={categoryActions} />
+                <TableCategory />
             </div>
         </>
     );

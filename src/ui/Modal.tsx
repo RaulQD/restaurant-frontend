@@ -1,29 +1,57 @@
-import { BiX } from 'react-icons/bi';
+import {
+    Dialog,
+    DialogBackdrop,
+    DialogPanel,
+    DialogTitle,
+} from '@headlessui/react';
+import React from 'react';
 
-type ModalProps = {
-    children: React.ReactNode;
-    // title: string;
-    closeModal: () => void;
+type DialogsProps = {
+    show:boolean;
+    onClose: () => void;
+    onConfirm?: () => void;
+    icon?: React.ReactNode;
+    title: string;
+    children:React.ReactNode
+    size?: 'sm' | 'md' | 'lg' | 'xl';
 };
 
-export const Modal = ({ children, closeModal}: ModalProps) => {
+export default function Modal({
+    show,
+    onClose,
+    title,
+    children,
+    icon,
+    size = 'md',
+}: DialogsProps) {
+    
+    const sizeClass = {
+        sm: 'max-w-md',   // Tamaño pequeño
+        md: 'max-w-3xl',  // Tamaño mediano
+        lg: 'max-w-5xl',  // Tamaño grande
+        xl: 'max-w-7xl', // Tamaño extra grande
+    }[size];
+
     return (
-        <div className='fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-end md:items-center z-50'>
-            <div className='w-full sm:w-[550px] md:w-[650px]'>
-                <div className='bg-white rounded flex flex-col'>
-                    <div className='flex justify-end items-end'>
-                        {/* <h1 className='pt-4 pl-4 font-medium font-outfit text-xl'>
+        <>
+            <Dialog open={show} onClose={onClose} className='relative z-50'>
+                <DialogBackdrop
+                    transition
+                    className='fixed inset-0 bg-black/30 duration-300 ease-out data-[closed]:opacity-0'
+                />
+                <div className='fixed inset-0 flex w-screen items-center justify-center p-4'>
+                    <DialogPanel
+                        transition
+                        className={`w-full ${sizeClass} rounded-xl bg-white p-10 duration-300 ease-out data-[closed]:scale-95 data-[closed]:opacity-0`}>
+                        <DialogTitle as='h3' className='font-medium font-outfit text-2xl mb-5 flex justify-start items-center gap-2'> 
+                            {icon}
                             {title}
-                        </h1> */}
-                        <button
-                            className='place-self-end pt-4 pr-4'
-                            onClick={closeModal}>
-                            <BiX className='text-2xl' />
-                        </button>
-                    </div>
-                    {children}
+                        </DialogTitle>
+                        <hr className='border-gray-300' />
+                        {children}
+                    </DialogPanel>
                 </div>
-            </div>
-        </div>
+            </Dialog>
+        </>
     );
-};
+}

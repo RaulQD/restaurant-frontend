@@ -10,7 +10,7 @@ import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import Pagination from '../../../ui/Pagination';
 import { formatCurrency, transformId } from '../../../helpers';
-import { Modal } from '../../../ui/Modal';
+import { Modal } from '../../../ui/Modal-v1';
 import AddImageForm from './AddImageForm';
 import NoImage from '../../../assets/not-image-found.png';
 import Spinner from '../../../ui/Spinner';

@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import AddressForm from '../components/address/AddressForm';
 import AddressCard from '../components/address/AddressCard';
-import { Modal } from '../../ui/Modal';
 import { Address } from '../../types/auth';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { getUserAddress } from '../../services/apiAddress';
 import Ubicacion from '../../assets/ubicación.png';
 import Spinner from '../../ui/Spinner';
+import Modal from '../../ui/Modal';
+import { HiOutlineLocationMarker } from 'react-icons/hi';
 
 export default function AddressPage() {
     const [isOpenModal, setIsOpenModal] = useState(false);
@@ -71,22 +72,25 @@ export default function AddressPage() {
                             className='w-full md:w-1/4  rounded-md py-2 text-sm font-semibold leading-6 focus:outline-none transition-all bg-orange-500 text-white hover:bg-orange-600'>
                             Agregar dirección
                         </button>
-                        {/* <Button
-                            type='button'
-                            onClick={() => setIsOpenModal(true)}
-                            width='w-1/4'>
-                            Agregar dirección
-                        </Button> */}
                     </div>
                 </section>
 
-                {isOpenModal && (
+                {/* {isOpenModal && (
                     <Modal closeModal={() => setIsOpenModal(false)}>
                         <AddressForm
                             setIsOpenModal={() => setIsOpenModal(false)}
                         />
                     </Modal>
-                )}
+                )} */}
+                <Modal
+                    onClose={() => setIsOpenModal(false)}
+                    show={isOpenModal}
+                    icon={<HiOutlineLocationMarker className='text-4xl' />}
+                    title='Agregar dirección'
+
+                >
+                    <AddressForm setIsOpenModal={() => setIsOpenModal(false)} />
+                </Modal>
             </>
         );
 }

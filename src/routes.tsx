@@ -27,6 +27,7 @@ import AddressPage from './client/page/AddressPage';
 import ShoppingPage from './client/page/ShoppingPage';
 
 import NotFound from './shared/NotFound';
+import EditCategoryPage from './admin/pages/category/EditCategoryPage';
 
 export default function AppRoutes() {
     return (
@@ -79,6 +80,10 @@ export default function AppRoutes() {
                     <Route
                         path='dashboard/category/add'
                         element={<CreateCategoryPage />}
+                    />
+                    <Route
+                        path='dashboard/category/:id/edit'
+                        element={<EditCategoryPage />}
                     />
                     <Route
                         path='dashboard/customers'

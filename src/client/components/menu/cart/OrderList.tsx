@@ -1,8 +1,8 @@
 import { BiX } from 'react-icons/bi';
 import { CiShoppingBasket } from 'react-icons/ci';
 import CardOrderList from './CardOrderList';
-import { CartItemsList } from '../../../types/cart';
-import { formatCurrency } from '../../../helpers/index';
+import { CartItemsList } from '../../../../types/cart';
+import { formatCurrency } from '../../../../helpers/index';
 
 type OrderProps = {
     isOrderOpen: boolean;
@@ -18,7 +18,8 @@ export default function OrderList({
     cartData,
 }: OrderProps) {
     const isCartEmpty = !cartData?.items || cartData.items.length === 0;
-    const totalPayment = cartData?.items.reduce((total, items) => total + (items.quantity * items.price), 0 );
+    const subtotalPayment = cartData?.items.reduce((total, items) => total + (items.quantity * items.price), 0 );
+    const totalPayment = subtotalPayment + 5;
 
     return (
         <div
@@ -51,7 +52,7 @@ export default function OrderList({
                         <div className='flex flex-col gap-2 mt-5 pr-4'>
                             <div className='flex justify-between text-sm lg:text-base'>
                                 <span>Subtotal</span>
-                                <span>S/ 59.90</span>
+                                <span>{formatCurrency(subtotalPayment)}</span>
                             </div>
                             <div className='flex justify-between text-sm lg:text-base'>
                                 <span>Delivery</span>
@@ -62,7 +63,7 @@ export default function OrderList({
                                 <span>{formatCurrency(totalPayment)}</span>
                             </div>
                             <button className='text-sm md:text-base bg-orange-500 text-white py-2 rounded-md'>
-                                Pagar
+                                Verificar
                             </button>
                             <button
                                 className='text-sm md:text-base text-orange-500 border border-orange-500 py-2 rounded-md'

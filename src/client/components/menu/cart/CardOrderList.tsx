@@ -1,10 +1,10 @@
 import { BiMinus, BiPlus, BiTrashAlt } from 'react-icons/bi';
-import { CartItem } from '../../../types/cart';
-import { formatCurrency } from '../../../helpers/index';
+import { CartItem } from '../../../../types/cart';
+import { formatCurrency } from '../../../../helpers/index';
 import { useIncrease } from './useIncrease';
 import { useDecrease } from './useDecrease';
 import { useDeleteCart } from './useDeleteCart';
-import { useUser } from '../../../hooks/useUser';
+import { useUser } from '../../../../hooks/useUser';
 
 type CardOrderListProps = {
     data: CartItem;

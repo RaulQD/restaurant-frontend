@@ -1,4 +1,3 @@
-import { HiOutlineLocationMarker } from 'react-icons/hi';
 import { Button, Input, Label } from '../../../ui';
 import { useForm } from 'react-hook-form';
 import { AddressFormData } from '../../../types/auth';
@@ -53,10 +52,7 @@ export default function AddressForm({ setIsOpenModal }: AddressFormProps) {
     return (
         <div className='px-4 pb-4'>
             <div>
-                <div className='flex justify-start items-center'>
-                    <HiOutlineLocationMarker className='text-4xl' />
-                    <h1 className='text-2xl'>Agregar dirección</h1>
-                </div>
+               
                 <div className='mt-4'>
                     <h2>Información de quien recibe</h2>
                 </div>

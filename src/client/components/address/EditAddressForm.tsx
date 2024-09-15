@@ -2,19 +2,17 @@ import { ErrorMessage } from '../../../admin/components/ErrorMessage';
 import { useForm } from 'react-hook-form';
 import { AddressFormData, Address } from '../../../types/auth';
 import { Button, Input, Label } from '../../../ui';
-import { HiOutlineLocationMarker } from 'react-icons/hi';
 import { useAddress } from './useAddress';
 import SpinnerMini from '../../../ui/SpinnerMini';
 
 type EditAddressFormProps = {
     data: Address;
-    setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-    // addressId: Address['id'];
+    onClose: () => void;
 };
 
 export default function EditAddressForm({
     data,
-    setIsOpenModal,
+    onClose,
 }: EditAddressFormProps) {
     const addressId = data.id;
     const initialValues: AddressFormData = {
@@ -33,13 +31,11 @@ export default function EditAddressForm({
     } = useForm({ defaultValues: initialValues, mode: 'onBlur' });
 
     const { update, isPending } = useAddress();
-
     const onSubmit = (formData: AddressFormData) => {
         const data = { formData, addressId: addressId };
-        console.log(data);
         update(data, {
             onSuccess: () => {
-                setIsOpenModal(false);
+                onClose();
                 reset();
             },
         });
@@ -48,10 +44,7 @@ export default function EditAddressForm({
     return (
         <div className='px-4 pb-4'>
             <div>
-                <div className='flex justify-start items-center'>
-                    <HiOutlineLocationMarker className='text-4xl' />
-                    <h1 className='text-2xl'>Actualizar dirección</h1>
-                </div>
+               
                 <div className='mt-4'>
                     <h2>Información de quien recibe.</h2>
                 </div>
@@ -160,7 +153,7 @@ export default function EditAddressForm({
                         <Button
                             type='button'
                             color='secondary'
-                            onClick={() => setIsOpenModal(false)}>
+                            onClick={onClose}>
                             Cancelar
                         </Button>
                         <button

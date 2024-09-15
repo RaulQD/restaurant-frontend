@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router-dom';
 import { getCategories } from '../services/apiCategory';
+import { Categories } from '../types/category';
 // import { useEffect } from 'react';
 
 export default function FilterButton({
@@ -13,7 +14,7 @@ export default function FilterButton({
     const [searchParams, setSearchParams] = useSearchParams();
     const currentFilter = searchParams.get(filterField) || 'todos';
 
-    const { data: categories } = useQuery({
+    const { data: categories } = useQuery<Categories[]>({
         queryKey: ['filterCategoryButton'],
         queryFn: getCategories,
     });

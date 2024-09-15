@@ -49,6 +49,7 @@ export const getDishesByCategory = async (category: string) => {
 export const getDishesById = async (id: Dish['id']) => {
   try {
     const { data } = await api.get(`/dishes/${id}`);
+    console.log(data);
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {

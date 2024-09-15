@@ -2,6 +2,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import EditDishesform from '../../components/dishes/EditDishesform';
 import { useQuery } from '@tanstack/react-query';
 import { getDishesById } from '../../../services/apiDishes';
+import Spinner from '../../../ui/Spinner';
 
 export default function EditDishesPage() {
     const params = useParams();
@@ -12,8 +13,10 @@ export default function EditDishesPage() {
         queryFn: () => getDishesById(dishesId),
         retry: false,
     });
-    if (isLoading) return <p>Cargando...</p>;
-    if (isError) return <Navigate to='/404' />;
+    if (isLoading) return <div className='flex justify-center items-center h-screen'>
+        <Spinner />
+    </div>;
+    if (isError) return <Navigate to='/not-found' />;
 
     if (data) return <EditDishesform data={data} dishesId={dishesId} />;
 }

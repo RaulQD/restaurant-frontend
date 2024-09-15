@@ -1,62 +1,56 @@
 import { BiChevronRight } from 'react-icons/bi';
-import { DishesForm } from './DishesForm';
-import { useForm } from 'react-hook-form';
-import { DishFormData } from '../../../types/dishes';
+import { CategoryFormData } from '../../../types/category';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateDishes } from '../../../services/apiDishes';
+import { updateCategory } from '../../../services/apiCategory';
 import toast from 'react-hot-toast';
+import { CategoryForm } from './CategoryForm';
 
-type EditDishesformProps = {
-    data: DishFormData;
-    dishesId: string;
-    
+type EditCategoryFormProps = {
+    data: CategoryFormData;
+    categoryId: string;
 };
 
-export default function EditDishesform({
+export default function EditCategoryForm({
     data,
-    dishesId,
-}: EditDishesformProps) {
+    categoryId,
+}: EditCategoryFormProps) {
     const navigate = useNavigate();
-    const initialValues: DishFormData = {
+    const initialValue: CategoryFormData = {
         name: data.name,
-        description: data.description,
-        originalPrice: data.originalPrice,
-        category: data.category,
-        available: data.available,
     };
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm({ defaultValues: initialValues });
+        reset,
+    } = useForm({ defaultValues: initialValue });
 
-    const queryClient = useQueryClient();
-    const mutation = useMutation({
-        mutationFn: updateDishes,
+    const queryCliente = useQueryClient();
+    const { mutate } = useMutation({
+        mutationFn: updateCategory,
         onError: (error) => {
             toast.error(error.message);
         },
         onSuccess: (data) => {
-            // INVALIDA LA CACHE DE LA QUERY DE PLATOS
-            queryClient.invalidateQueries({ queryKey: ['dishes'] });
-            // INVALIDA LA CACHE DE LA QUERY DE EDITAR PLATOS
-            queryClient.invalidateQueries({ queryKey: ['editDishes'] });
+            queryCliente.invalidateQueries({ queryKey: ['editCategory'] });
             toast.success(data.message);
-            navigate('/admin/dashboard/dishes/');
+            navigate('/admin/dashboard/category');
         },
     });
-
-    const handleForm = async (formData: DishFormData) => {
+    const handleForm = (formData: CategoryFormData) => {
         const data = {
             formData,
-            dishesId,
+            categoryId,
         };
-        await mutation.mutateAsync(data);
+        mutate(data);
+        reset();
     };
     const redirectTo = () => {
-        navigate('/admin/dashboard/dishes/');
+        navigate('/admin/dashboard/category');
     };
+
     return (
         <>
             <div className='mb-6 px-4 md:px-6 xl:px-8 pt-8'>
@@ -66,16 +60,12 @@ export default function EditDishesform({
                     <BiChevronRight />
                     <span>Platos</span>
                     <BiChevronRight />
-                    <span>Editar Platos</span>
+                    <span>Editar Categoria</span>
                 </div>
             </div>
             <div className='px-4 md:px-6 xl:px-8 mb-10'>
                 <form onSubmit={handleSubmit(handleForm)} noValidate>
-                    <DishesForm
-                        register={register}
-                        errors={errors}
-                        isEditMode={true}
-                    />
+                    <CategoryForm register={register} errors={errors} />
                     <div className='flex flex-col md:flex-row md:items-center md:justify-end gap-4 mt-5 w-full mb-20'>
                         <button
                             type='button'

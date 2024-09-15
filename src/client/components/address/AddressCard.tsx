@@ -1,22 +1,24 @@
-import { useState } from 'react';
 import { Address } from '../../../types/auth';
 import { BiEdit, BiTrash } from 'react-icons/bi';
-import { Modal } from '../../../ui/Modal';
+// import { Modal } from '../../../ui/Modal-v1';
 import EditAddressForm from './EditAddressForm';
-import DeleteAddressModal from './DeleteAddressModal';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import DeleteAddress from './DeleteAddress';
+import Modal from '../../../ui/Modal';
+import { HiOutlineLocationMarker } from 'react-icons/hi';
 
 type AddressCardProps = {
     address: Address;
 };
 
 export default function AddressCard({ address }: AddressCardProps) {
-    const [isOpenModal, setIsOpenModal] = useState(false);
-    const addressComplete = `${address.number} ${address.street}, ${address.district}, ${address.provinces}, ${address.department}`;
     const navigate = useNavigate();
-    const handleEditModal = () => {
-        setIsOpenModal(true);
-    };
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search)
+    const updateAddress = queryParams.get('updateAddress')
+    const show = updateAddress === address.id;
+    const addressComplete = `${address.number} ${address.street}, ${address.district}, ${address.provinces}, ${address.department}`;
+
 
     return (
         <li className='bg-gray-100 py-4 px-8 flex justify-between  gap-2 mb-4 last-of-type:mb-0'>
@@ -28,7 +30,7 @@ export default function AddressCard({ address }: AddressCardProps) {
                 <button type='button'>
                     <BiEdit
                         className='text-xl text-gray-500'
-                        onClick={handleEditModal}
+                        onClick={() => navigate(`?updateAddress=${address.id}`)}
                     />
                 </button>
                 <hr className='h-7 border-l mx-2 md:mx-6 border-gray-800' />
@@ -38,15 +40,18 @@ export default function AddressCard({ address }: AddressCardProps) {
                     <BiTrash className='text-xl text-gray-500' />
                 </button>
             </div>
-            {isOpenModal && (
-                <Modal closeModal={() => setIsOpenModal(false)}>
-                    <EditAddressForm
-                        data={address}
-                        setIsOpenModal={setIsOpenModal}
-                    />
-                </Modal>
-            )}
-            <DeleteAddressModal data={address} />
+            <Modal
+                onClose={() => navigate(location.pathname, {replace: true})}
+                show={show}
+                icon={<HiOutlineLocationMarker className='text-4xl' />}
+                title='Actualizar Dirección'>
+                <EditAddressForm
+                    data={address}
+                    onClose={() => navigate(location.pathname,{replace: true})}
+                />
+            </Modal>
+
+            <DeleteAddress data={address} />
         </li>
     );
 }
