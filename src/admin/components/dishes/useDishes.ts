@@ -28,7 +28,7 @@ export const useDishes = () => {
   })
 
   // PRE FETCH PAGE
-  const pageCount = Math.ceil(dishes?.pagination.totalDishes || 0 / 10);
+  const pageCount = Math.ceil((dishes?.pagination.totalDishes || 0) / 10);
 
   // PRE FETCH NEXT PAGE
   if (page < pageCount) {

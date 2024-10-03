@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 import { useState } from 'react';
 import DishDetails from './DishDetails';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useCreateCart } from './cart/useCreateCart';
+import { useCreateCart } from '../cart/useCreateCart';
 import Modal from '../../../ui/Modal';
 
 type CardMenuListProps = {
@@ -94,7 +94,6 @@ export default function CardDish({ dishes }: CardMenuListProps) {
                         <h3 className='font-bold'>{dishes?.name}</h3>
                         <BiHeart className='text-red-700 text-xl' />
                     </div>
-
                     {/* Descripción del plato */}
                     <p className='text-sm text-gray-600 mt-2'>
                         {dishes?.description}

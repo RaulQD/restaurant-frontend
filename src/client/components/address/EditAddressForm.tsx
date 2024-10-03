@@ -2,7 +2,7 @@ import { ErrorMessage } from '../../../admin/components/ErrorMessage';
 import { useForm } from 'react-hook-form';
 import { AddressFormData, Address } from '../../../types/auth';
 import { Button, Input, Label } from '../../../ui';
-import { useAddress } from './useAddress';
+import { useAddAddress } from './useAddAddress';
 import SpinnerMini from '../../../ui/SpinnerMini';
 
 type EditAddressFormProps = {
@@ -30,7 +30,7 @@ export default function EditAddressForm({
         reset,
     } = useForm({ defaultValues: initialValues, mode: 'onBlur' });
 
-    const { update, isPending } = useAddress();
+    const { update, isPending } = useAddAddress();
     const onSubmit = (formData: AddressFormData) => {
         const data = { formData, addressId: addressId };
         update(data, {

@@ -1,8 +1,9 @@
 import { BiX } from 'react-icons/bi';
 import { CiShoppingBasket } from 'react-icons/ci';
 import CardOrderList from './CardOrderList';
-import { CartItemsList } from '../../../../types/cart';
-import { formatCurrency } from '../../../../helpers/index';
+import { CartItemsList } from '../../../types/cart';
+import { formatCurrency } from '../../../helpers/index';
+import { useNavigate } from 'react-router-dom';
 
 type OrderProps = {
     isOrderOpen: boolean;
@@ -17,9 +18,19 @@ export default function OrderList({
     handleOrder,
     cartData,
 }: OrderProps) {
+    const navigate = useNavigate();
+
     const isCartEmpty = !cartData?.items || cartData.items.length === 0;
-    const subtotalPayment = cartData?.items.reduce((total, items) => total + (items.quantity * items.price), 0 );
+    const subtotalPayment = cartData?.items.reduce(
+        (total, items) => total + items.quantity * items.price,
+        0
+    );
     const totalPayment = subtotalPayment + 5;
+
+    const redirectToCheckout = () => {
+        handleOrder(false);
+        navigate('/checkout');
+    };
 
     return (
         <div
@@ -62,7 +73,9 @@ export default function OrderList({
                                 <span>Total</span>
                                 <span>{formatCurrency(totalPayment)}</span>
                             </div>
-                            <button className='text-sm md:text-base bg-orange-500 text-white py-2 rounded-md'>
+                            <button
+                                className='text-sm md:text-base bg-orange-500 text-white py-2 rounded-md'
+                                onClick={redirectToCheckout}>
                                 Verificar
                             </button>
                             <button

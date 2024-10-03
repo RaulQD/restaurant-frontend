@@ -2,7 +2,7 @@ import { BiMinus, BiPlus } from 'react-icons/bi';
 import { formatCurrency } from '../../../helpers';
 import { DishesType } from '../../../types/dishes';
 import NoImage from '../../../assets/not-image-found.png';
-import { useCreateCart } from './cart/useCreateCart';
+import { useCreateCart } from '../cart/useCreateCart';
 import toast from 'react-hot-toast';
 import { useUser } from '../../../hooks/useUser';
 import { useState } from 'react';
@@ -57,7 +57,7 @@ export default function DishDetails({ dishes, onCancel }: DishDetailsProps) {
                     {dishes.name}
                 </h1>
                 {/* Precio */}
-                <div className=' text-base lg:text-lg font-semibold text-orange-600 mb-6'>
+                <div className=' text-base lg:text-lg font-semibold text-orange-600 mb-4'>
                     Precio: {formatCurrency(dishes.originalPrice || 0)}
                 </div>
                 {/* Descripción */}

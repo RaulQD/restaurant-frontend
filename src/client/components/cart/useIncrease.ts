@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { increaseQuantity } from "../../../../services/apiCart";
+import { increaseQuantity } from "../../../services/apiCart";
 import toast from "react-hot-toast";
 
 
@@ -8,7 +8,7 @@ export const useIncrease = () => {
   const { mutate: increaseQty, isPending } = useMutation({
     mutationFn: increaseQuantity,
     onError: (error) => {
-      console.log(error);
+      toast.error(error.message);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cart'] });

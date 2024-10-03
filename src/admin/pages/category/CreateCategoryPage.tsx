@@ -8,7 +8,7 @@ import { CategoryFormData } from '../../../types/category';
 import { createCategory } from '../../../services/apiCategory';
 import toast from 'react-hot-toast';
 
-export const CreateCategoryPage = () => {
+export default function CreateCategoryPage() {
     const navigate = useNavigate();
 
     const initialValues: CategoryFormData = {
@@ -31,7 +31,8 @@ export const CreateCategoryPage = () => {
         },
     });
 
-    const handleForm = async (data: CategoryFormData) => await mutation.mutateAsync(data);
+    const handleForm = async (data: CategoryFormData) =>
+        await mutation.mutateAsync(data);
 
     return (
         <>
@@ -52,7 +53,9 @@ export const CreateCategoryPage = () => {
                         <button
                             type='button'
                             className='hover:bg-gray-200 py-2 px-4 transition-all ease-in rounded-lg font-outfit'
-                            onClick={() => navigate('/admin/dashboard/category')}>
+                            onClick={() =>
+                                navigate('/admin/dashboard/category')
+                            }>
                             Cancelar
                         </button>
                         <button
@@ -65,4 +68,4 @@ export const CreateCategoryPage = () => {
             </div>
         </>
     );
-};
+}

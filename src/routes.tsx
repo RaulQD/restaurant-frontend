@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './client/layouts/Layout';
-import SignUp from './auth/pages/SignUp';
 import MenuPage from './client/page/MenuPage';
 import HomePage from './client/page/HomePage';
 import AboutPage from './client/page/AboutPage';
+import CheckoutPage from './client/page/CheckoutPage';
 
 import LayoutAdmin from './admin/layout/LayoutAdmin';
 import DashboardPage from './admin/pages/dashboard/DashboardPage';
@@ -12,22 +12,26 @@ import Orders from './admin/pages/orders/Orders';
 import DishesPage from './admin/pages/dishes/DishesPage';
 import CreateDishesPage from './admin/pages/dishes/CreateDishesPage';
 import EditDishesPage from './admin/pages/dishes/EditDishesPage';
-import { CategoryPages } from './admin/pages/category/CategoryPages';
+import CategoryPages from './admin/pages/category/CategoryPages';
 import EmployeesPages from './admin/pages/employee/EmployeesPages';
-import { CreateCategoryPage } from './admin/pages/category/CreateCategoryPage';
+import CreateCategoryPage from './admin/pages/category/CreateCategoryPage';
+import EditCategoryPage from './admin/pages/category/EditCategoryPage';
+
 import AuthLayout from './auth/layout/AuthLayout';
+import SignUp from './auth/pages/SignUp';
 import Login from './auth/pages/Login';
 import ForgotPassword from './auth/components/resetpassword/ForgotPassword';
 import NewPasswordPage from './auth/pages/NewPasswordPage';
-import ProtectedRoute from './ui/ProtectedRoute';
-import ProfilePage from './client/page/ProfilePage';
-import ChangePasswordPage from './client/page/ChangePasswordPage';
-import ProfileLayout from './client/layouts/ProfileLayout';
-import AddressPage from './client/page/AddressPage';
-import ShoppingPage from './client/page/ShoppingPage';
 
-import NotFound from './shared/NotFound';
-import EditCategoryPage from './admin/pages/category/EditCategoryPage';
+import ProfilePage from './client/page/ProfilePage';
+import ProfileLayout from './client/layouts/ProfileLayout';
+import ChangePasswordPage from './client/page/ChangePasswordPage';
+import AddressPage from './client/page/AddressPage';
+
+import ProtectedRoute from './ui/ProtectedRoute';
+
+import NotFound from './ui/NotFound';
+import ShoppingPage from './client/page/ShoppingPage';
 
 export default function AppRoutes() {
     return (
@@ -56,6 +60,7 @@ export default function AppRoutes() {
                         />
                     </Route>
                 </Route>
+                <Route path='/checkout' element={<CheckoutPage />} />
                 <Route
                     path='/admin/'
                     element={

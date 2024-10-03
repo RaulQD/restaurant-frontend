@@ -1,27 +1,15 @@
 import { useState } from 'react';
 import AddressForm from '../components/address/AddressForm';
 import AddressCard from '../components/address/AddressCard';
-import { Address } from '../../types/auth';
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import { getUserAddress } from '../../services/apiAddress';
 import Ubicacion from '../../assets/ubicación.png';
 import Spinner from '../../ui/Spinner';
 import Modal from '../../ui/Modal';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
+import { useAddress } from '../components/address/useAddress';
 
 export default function AddressPage() {
     const [isOpenModal, setIsOpenModal] = useState(false);
-    const {
-        data: address,
-        isError,
-        isLoading,
-        error,
-    } = useQuery<Address[]>({
-        queryKey: ['address'],
-        queryFn: getUserAddress,
-        placeholderData: keepPreviousData,
-        retry: false,
-    });
+    const { address, isLoading, isError, error } = useAddress();
 
     if (isLoading)
         return (
@@ -32,7 +20,7 @@ export default function AddressPage() {
     if (isError)
         return (
             <div className='flex items-center justify-center '>
-                <p className='text-red-500'>{error.message}</p>
+                <p className='text-red-500'>{error?.message}</p>
             </div>
         );
     if (address)
@@ -75,20 +63,11 @@ export default function AddressPage() {
                     </div>
                 </section>
 
-                {/* {isOpenModal && (
-                    <Modal closeModal={() => setIsOpenModal(false)}>
-                        <AddressForm
-                            setIsOpenModal={() => setIsOpenModal(false)}
-                        />
-                    </Modal>
-                )} */}
                 <Modal
                     onClose={() => setIsOpenModal(false)}
                     show={isOpenModal}
                     icon={<HiOutlineLocationMarker className='text-4xl' />}
-                    title='Agregar dirección'
-
-                >
+                    title='Agregar dirección'>
                     <AddressForm setIsOpenModal={() => setIsOpenModal(false)} />
                 </Modal>
             </>

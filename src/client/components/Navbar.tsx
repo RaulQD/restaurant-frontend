@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { BiMenu, BiX } from 'react-icons/bi';
 import { NavLink } from 'react-router-dom';
-import OrderList from './menu/cart/OrderList';
+import OrderList from './cart/OrderList';
 import { CiShoppingBasket } from 'react-icons/ci';
 import Logo from '../../assets/logo-icon.svg';
 import { useUser } from '../../hooks/useUser';
 import Header from '../../ui/Header';
-import { useCarts } from './menu/cart/useCarts';
+import { useCarts } from './cart/useCarts';
 
 type NavbarProps = {
     handleRouteChange: () => void;

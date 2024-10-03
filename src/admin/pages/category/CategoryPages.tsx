@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import TableCategory from '../../components/category/TableCategory';
 
 
-export const CategoryPages = () => {
+export default function CategoryPages (){
     const navigate = useNavigate();
 
     const redirectTo = () => {
@@ -46,4 +46,4 @@ export const CategoryPages = () => {
             </div>
         </>
     );
-};
+}

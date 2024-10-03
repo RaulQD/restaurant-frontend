@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { decreaseQuantity } from "../../../../services/apiCart";
+import { decreaseQuantity } from "../../../services/apiCart";
 import toast from "react-hot-toast";
 
 

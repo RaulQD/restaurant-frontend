@@ -1,19 +1,18 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { updateAddress } from "../../../services/apiAddress"
-import toast from "react-hot-toast"
-
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { Address } from "../../../types/auth";
+import { getUserAddress } from "../../../services/apiAddress";
 
 export const useAddress = () => {
-  const queryClient = useQueryClient()
-  const { mutate: update, isPending } = useMutation({
-    mutationFn: updateAddress,
-    onError: (error) => {
-      toast.error(error.message)
-    },
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ['address'] })
-      toast.success(data.message)
-    },
-  })
-  return { update, isPending }
+  const {
+    data: address,
+    isError,
+    isLoading,
+    error,
+  } = useQuery<Address[]>({
+    queryKey: ['address'],
+    queryFn: getUserAddress,
+    placeholderData: keepPreviousData,
+    retry: false,
+  });
+  return { address, isError, isLoading, error };
 }
