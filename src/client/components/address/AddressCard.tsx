@@ -5,11 +5,11 @@ import EditAddressForm from './EditAddressForm';
 import { useLocation, useNavigate } from 'react-router-dom';
 import DeleteAddress from './DeleteAddress';
 import Modal from '../../../ui/Modal';
-import { HiOutlineLocationMarker } from 'react-icons/hi';
+import { HiOutlineLocationMarker } from 'react-icons/hi',
 
 type AddressCardProps = {
     address: Address;
-    onSelect?: (address: Address) => void;
+    onSelect?: (address: Address) => void,
 };
 
 export default function AddressCard({ address }: AddressCardProps) {
@@ -21,7 +21,7 @@ export default function AddressCard({ address }: AddressCardProps) {
     const addressComplete = `${address.number} ${address.street}, ${address.district}, ${address.provinces}, ${address.department}`;
 
     const handleSelect = () => {
-        console.log('address', address);
+        console.log('address', address),
     }
     return (
         <li className='bg-gray-100 py-4 px-8 flex justify-between  gap-2 mb-4 last-of-type:mb-0'>
